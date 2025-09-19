@@ -82,6 +82,17 @@ const FeaturesSection = () => {
             </Button>
           </div>
         </div>
+
+        {/* CTA */}
+        <div className="text-center mt-16">
+          <Button
+            size="lg"
+            className="hero-button"
+            onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
+          >
+            Quero essas funcionalidades!
+          </Button>
+        </div>
       </div>
     </section>
   );

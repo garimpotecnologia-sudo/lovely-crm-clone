@@ -9,17 +9,22 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
           <div className="text-center mb-16 fade-in-up">
+            <div className="inline-flex items-center px-4 py-2 bg-red-500/20 text-red-300 rounded-full text-sm font-medium mb-6">
+              🚨 Cansado de perder clientes por falta de organização?
+            </div>
+            
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">CRM</span> via WhatsApp
+              <span className="gradient-text">AgentPRO</span> resolve isso em minutos! 🚀
             </h1>
+            
             <h2 className="text-xl md:text-2xl lg:text-3xl font-light mb-8 max-w-4xl mx-auto">
-              Para as <span className="font-semibold text-brand-magenta">conversas</span> e o{" "}
-              <span className="font-semibold text-brand-magenta">negócio</span> andarem juntos
+              O único <span className="font-semibold text-brand-magenta">CRM integrado ao WhatsApp</span> que{" "}
+              <span className="font-semibold text-brand-magenta">aumenta sua produtividade</span> instantaneamente
             </h2>
             
             <p className="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-white/90">
-              <strong>Conecte</strong> suas equipes com clientes e leads através de uma{" "}
-              <strong>plataforma integrada ao WhatsApp</strong>, Instagram Direct e Facebook Messenger
+              <strong>Centralize todos os atendimentos</strong> do WhatsApp, Instagram e Facebook em uma única tela.{" "}
+              <strong>Nunca mais perca um cliente!</strong> Transforme conversas em vendas automaticamente.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
