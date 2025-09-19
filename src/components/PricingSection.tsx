@@ -5,7 +5,7 @@ const PricingSection = () => {
   const plans = [
     {
       name: "Essencial",
-      price: "R$ 97",
+      price: "R$ 197",
       period: "/mês",
       description: "Perfeito para pequenas empresas",
       features: [
@@ -13,15 +13,14 @@ const PricingSection = () => {
         "WhatsApp Business API",
         "Chat em tempo real",
         "Relatórios básicos",
-        "Suporte via chat",
-        "Integração básica CRM"
+        "Suporte via chat"
       ],
-      buttonText: "Quero este plano",
+      buttonText: "Teste Grátis 14 Dias",
       popular: false
     },
     {
       name: "Profissional",
-      price: "R$ 197",
+      price: "R$ 297",
       period: "/mês",
       description: "Mais escolhido pelos nossos clientes",
       features: [
@@ -29,17 +28,14 @@ const PricingSection = () => {
         "WhatsApp + Instagram + Messenger",
         "Chatbot inteligente",
         "Relatórios avançados",
-        "Suporte prioritário 24/7",
-        "Integração completa CRM",
-        "Automações personalizadas",
-        "Dashboard executivo"
+        "Suporte prioritário 24/7"
       ],
-      buttonText: "Quero este plano",
+      buttonText: "Teste Grátis 14 Dias",
       popular: true
     },
     {
       name: "Enterprise",
-      price: "R$ 397",
+      price: "R$ 497",
       period: "/mês",
       description: "Solução completa para grandes empresas",
       features: [
@@ -47,12 +43,9 @@ const PricingSection = () => {
         "Todas as integrações",
         "IA personalizada",
         "Relatórios customizados",
-        "Gerente de sucesso dedicado",
-        "API personalizada",
-        "White label disponível",
-        "Onboarding VIP"
+        "Gerente de sucesso dedicado"
       ],
-      buttonText: "Quero este plano",
+      buttonText: "Teste Grátis 14 Dias",
       popular: false
     }
   ];

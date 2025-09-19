@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Play, MessageCircle, Instagram } from "lucide-react";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
+import logoHorizontal from "@/assets/logo-horizontal-light.png";
 
 const HeroSection = () => {
   return (
@@ -13,18 +14,24 @@ const HeroSection = () => {
               🚨 Cansado de perder clientes por falta de organização?
             </div>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">AgentPRO</span> resolve isso em minutos! 🚀
+            <div className="flex justify-center mb-6">
+              <img 
+                src={logoHorizontal} 
+                alt="AgentPRO Logo" 
+                className="h-16 md:h-20"
+              />
+            </div>
+            
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <span className="gradient-text">Resolve isso em minutos!</span> 🚀
             </h1>
             
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-light mb-8 max-w-4xl mx-auto">
-              O único <span className="font-semibold text-brand-magenta">CRM integrado ao WhatsApp</span> que{" "}
-              <span className="font-semibold text-brand-magenta">aumenta sua produtividade</span> instantaneamente
+            <h2 className="text-lg md:text-xl lg:text-2xl font-light mb-8 max-w-3xl mx-auto">
+              O único <span className="font-semibold text-brand-magenta">CRM integrado ao WhatsApp</span> que aumenta sua produtividade instantaneamente
             </h2>
             
-            <p className="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-white/90">
-              <strong>Centralize todos os atendimentos</strong> do WhatsApp, Instagram e Facebook em uma única tela.{" "}
-              <strong>Nunca mais perca um cliente!</strong> Transforme conversas em vendas automaticamente.
+            <p className="text-base md:text-lg mb-10 max-w-2xl mx-auto text-white/90">
+              Centralize atendimentos do WhatsApp, Instagram e Facebook em uma única tela. Nunca mais perca um cliente!
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -34,7 +41,7 @@ const HeroSection = () => {
                 onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Assistir Demonstração
+                Teste Grátis 14 Dias
               </Button>
             </div>
           </div>

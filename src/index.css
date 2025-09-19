@@ -204,3 +204,17 @@
     transform: scale(1);
   }
 }
+
+/* Section Spacing for better readability */
+section {
+  margin-bottom: 4rem;
+}
+
+section:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a {
+  transition: var(--transition-smooth);
+}

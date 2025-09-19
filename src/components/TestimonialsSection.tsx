@@ -20,15 +20,6 @@ const TestimonialsSection = () => {
       testimonial: "Nunca mais perdemos um cliente! O sistema integrado nos deu total controle sobre todos os atendimentos.",
       result: "0% perda de leads",
       rating: 5
-    },
-    {
-      name: "Roberto Santos",
-      company: "AutoMax Veículos",
-      role: "Gerente de Vendas",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      testimonial: "A automação do WhatsApp nos permitiu atender 3x mais clientes com a mesma equipe. Incrível!",
-      result: "+200% produtividade",
-      rating: 5
     }
   ];
 
@@ -56,7 +47,7 @@ const TestimonialsSection = () => {
           </div>
 
           {/* Testimonials Grid */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="feature-card text-center">
                 {/* Quote Icon */}
@@ -127,7 +118,7 @@ const TestimonialsSection = () => {
               className="hero-button"
               onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
             >
-              Começar Agora
+              Teste Grátis 14 Dias
             </Button>
           </div>
         </div>
