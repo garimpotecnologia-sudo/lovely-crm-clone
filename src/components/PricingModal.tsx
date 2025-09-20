@@ -8,176 +8,214 @@ interface PricingModalProps {
 }
 
 const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
-  const plans = [
-    {
-      name: "Essential",
-      users: "3 usuários",
-      price: "R$ 487",
-      period: "/mês",
-      activationFee: "R$ 1.090,00",
-      features: [
-        "3 usuários inclusos",
-        "WhatsApp Business API",
-        "Dashboard básico",
-        "Suporte por chat",
-        "Relatórios básicos"
-      ],
-      buttonText: "Quero este plano",
-      popular: false
-    },
-    {
-      name: "Pro",
-      users: "5 usuários",
-      price: "R$ 687",
-      period: "/mês",
-      activationFee: "R$ 1.490,00",
-      features: [
-        "5 usuários inclusos",
-        "WhatsApp + Instagram + Messenger",
-        "Automações avançadas",
-        "Suporte prioritário",
-        "Relatórios completos"
-      ],
-      buttonText: "Quero este plano",
-      popular: true
-    },
-    {
-      name: "Plus+",
-      users: "10 usuários",
-      price: "R$ 987",
-      period: "/mês",
-      activationFee: "R$ 1.990,00",
-      features: [
-        "10 usuários inclusos",
-        "Todas as integrações",
-        "IA personalizada",
-        "Onboarding dedicado",
-        "API customizada"
-      ],
-      buttonText: "Quero este plano",
-      popular: false
-    },
-    {
-      name: "Advanced",
-      users: "20 usuários",
-      price: "R$ 1.487",
-      period: "/mês",
-      activationFee: "R$ 2.499,00",
-      features: [
-        "20 usuários inclusos",
-        "Funcionalidades ilimitadas",
-        "Gerente de sucesso",
-        "Suporte 24/7",
-        "Treinamentos exclusivos"
-      ],
-      buttonText: "Quero este plano",
-      popular: false
-    }
-  ];
-
   const handlePlanClick = (planName: string) => {
     const message = `oi, quero contratar o plano ${planName} do CRM. Pode me explicar mais sobre?`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5547984147016?text=${encodedMessage}`, "_blank");
   };
 
+  const plans = ["Essential", "Pro", "Plus+", "Advanced"];
+
+  const renderCheckOrValue = (value: any) => {
+    if (value === true) return <CheckCircle className="h-4 w-4 text-green-500 mx-auto" />;
+    if (value === false || value === "—" || value === null) return <span className="text-muted-foreground text-center">—</span>;
+    return <span className="text-center text-sm font-medium">{value}</span>;
+  };
+
+  const features = [
+    {
+      category: "CANAIS",
+      items: [
+        { name: "Usuários Inclusos", values: ["03", "05", "10", "20"] },
+        { name: "Canais", values: ["WhatsApp", "WhatsApp + Instagram + Messenger", "Todos os canais", "Todos os canais"] }
+      ]
+    },
+    {
+      category: "ADICIONAIS",
+      items: [
+        { name: "Usuário Adicional", values: ["R$ 107/mês", "R$ 87/mês", "R$ 57/mês", "R$ 47/mês"] },
+        { name: "WhatsApp Adicional", values: ["R$ 89/mês", "R$ 89/mês", "R$ 89/mês", "R$ 89/mês"] },
+        { name: "Direct ou Messenger Adicional", values: ["R$ 69/mês", "R$ 69/mês", "R$ 69/mês", "R$ 69/mês"] },
+        { name: "Pagamentos", values: ["R$ 99/mês", "R$ 99/mês", "R$ 99/mês", "R$ 99/mês"] }
+      ]
+    },
+    {
+      category: "ATIVAÇÃO",
+      items: [
+        { name: "Taxa de Implantação", values: ["R$ 1.090,00", "R$ 1.490,00", "R$ 1.990,00", "R$ 2.499,00"] },
+        { name: "WhatsApp Adicional", values: ["R$ 99", "R$ 99", "R$ 99", "R$ 99"] },
+        { name: "Direct ou Messenger Adicional", values: ["R$ 69", "R$ 69", "R$ 69", "R$ 69"] }
+      ]
+    },
+    {
+      category: "INBOX",
+      items: [
+        { name: "Central de Atendimento", values: [true, true, true, true] },
+        { name: "Criação de Setores", values: [true, true, true, true] },
+        { name: "Fila de Espera", values: [true, true, true, true] },
+        { name: "Resultado dos atendimentos", values: [true, true, true, true] },
+        { name: "Modelo de Mensagens", values: [true, true, true, true] },
+        { name: "Respostas Rápidas", values: [true, true, true, true] },
+        { name: "Conclusão em massa de atendimento", values: [true, true, true, true] },
+        { name: "Tempo de segurança para envio de Mensagem", values: [true, true, true, true] },
+        { name: "Transferir Conversas", values: [true, true, true, true] },
+        { name: "Permissões específicas para usuários", values: [true, true, true, true] },
+        { name: "Supervisão de Conversas", values: [true, true, true, true] },
+        { name: "Distribuição automática de atendimento", values: [false, false, true, true] }
+      ]
+    },
+    {
+      category: "GESTÃO DE CONTATOS",
+      items: [
+        { name: "Etiquetas", values: ["10", "Ilimitado", "Ilimitado", "Ilimitado"] },
+        { name: "Campos Personalizados", values: [false, "Ilimitado", "Ilimitado", "Ilimitado"] },
+        { name: "Histórico de Conversas", values: [true, true, true, true] },
+        { name: "Importação de Contatos", values: [true, true, true, true] },
+        { name: "Rastrear Origem dos Leads", values: [true, true, true, true] },
+        { name: "Tracking de Navegação do Site", values: [true, true, true, true] },
+        { name: "Carteiras de Cliente", values: [false, false, true, true] }
+      ]
+    },
+    {
+      category: "GESTÃO DE RESULTADOS",
+      items: [
+        { name: "Relatórios de Atendimento", values: [true, true, true, true] },
+        { name: "Monitoramento em tempo real", values: [true, true, true, true] },
+        { name: "Dashboard de Indicadores", values: [true, true, true, true] }
+      ]
+    },
+    {
+      category: "CRM",
+      items: [
+        { name: "Funis (Kanban)", values: [false, "2", "5", "10"] },
+        { name: "Etapas Personalizadas", values: [false, true, true, true] },
+        { name: "Exportação de Dados", values: [false, true, true, true] },
+        { name: "Campos Personalizados", values: [false, true, true, true] },
+        { name: "Quantidade de Funis", values: [false, "2", "5", "10"] },
+        { name: "Base de Contatos", values: [false, "Ilimitada", "Ilimitada", "Ilimitada"] },
+        { name: "Disparo em Massa", values: [false, true, true, true] }
+      ]
+    },
+    {
+      category: "AUTOMAÇÃO E INTEGRAÇÕES",
+      items: [
+        { name: "Chatbot de Atendimento", values: ["2", "3", "5", "10"] },
+        { name: "Chatbot de Automação", values: ["1", "2", "2", "4"] },
+        { name: "Chatbot com Webhooks", values: [false, false, true, true] },
+        { name: "Sequência", values: ["1", "2", "2", "4"] },
+        { name: "Botão do WhatsApp", values: [true, true, true, true] },
+        { name: "Webhook", values: [false, false, true, true] },
+        { name: "API", values: [false, false, true, true] },
+        { name: "Componente Make.com", values: [false, false, true, true] }
+      ]
+    },
+    {
+      category: "AUTOMAÇÃO ILIMITADAS",
+      items: [
+        { name: "Chatbots, sequências e integrações ilimitadas", values: ["147/mês", "147/mês", "147/mês", "147/mês"] }
+      ]
+    },
+    {
+      category: "DISPARO EM MASSA",
+      items: [
+        { name: "Disparo de Campanhas", values: [false, true, true, true] },
+        { name: "Segmento de Público", values: [false, true, true, true] },
+        { name: "Disparo de Chatbot Ativos", values: [false, true, true, true] },
+        { name: "Efetividade da Base de Contatos", values: [false, true, true, true] },
+        { name: "Relatório", values: [false, true, true, true] }
+      ]
+    },
+    {
+      category: "SUPORTE",
+      items: [
+        { name: "Suporte por WhatsApp", values: [true, true, true, true] },
+        { name: "Sucesso do Cliente", values: [true, true, true, true] }
+      ]
+    }
+  ];
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-7xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl md:text-3xl font-bold mb-2">
-            <span className="gradient-text">Planos</span> e Preços
+          <DialogTitle className="text-center text-2xl font-bold mb-2">
+            <span className="gradient-text">Tabela Completa</span> de Funcionalidades
           </DialogTitle>
           <p className="text-center text-muted-foreground">
-            Escolha o plano ideal para sua empresa
+            Compare todos os recursos disponíveis em cada plano
           </p>
         </DialogHeader>
 
-        {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-4 gap-4 mt-6">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative bg-card rounded-xl border p-6 overflow-hidden ${
-                plan.popular ? 'ring-2 ring-brand-magenta scale-105' : ''
-              }`}
-            >
-              {/* Popular Badge */}
-              {plan.popular && (
-                <div className="absolute top-0 right-0 bg-brand-magenta text-white px-3 py-1 rounded-bl-xl">
-                  <div className="flex items-center space-x-1">
-                    <Crown className="h-3 w-3" />
-                    <span className="text-xs font-semibold">Mais Popular</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Plan Header */}
-              <div className="text-center mb-4">
-                <h3 className="text-lg font-bold mb-1 text-foreground">{plan.name}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{plan.users}</p>
-                <div className="mb-1">
-                  <span className="text-2xl font-bold text-brand-purple">{plan.price}</span>
-                  <span className="text-muted-foreground text-sm">{plan.period}</span>
-                </div>
-                <p className="text-xs text-muted-foreground">Taxa de ativação: {plan.activationFee}</p>
+        {/* Pricing Headers */}
+        <div className="grid grid-cols-5 gap-2 mb-6 bg-muted/50 p-4 rounded-lg">
+          <div className="text-sm font-semibold text-muted-foreground">Funcionalidades</div>
+          {plans.map((plan, index) => (
+            <div key={plan} className="text-center">
+              <div className={`font-bold text-lg ${index === 1 ? 'text-brand-magenta' : 'text-foreground'}`}>
+                {plan}
+                {index === 1 && <Crown className="h-4 w-4 inline ml-1 text-brand-magenta" />}
               </div>
-
-              {/* Features */}
-              <div className="space-y-2 mb-4">
-                {plan.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-start space-x-2">
-                    <CheckCircle className="h-3 w-3 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-xs text-muted-foreground">{feature}</span>
-                  </div>
-                ))}
+              <div className="text-xs text-muted-foreground">
+                {index === 0 && "R$ 487/mês"}
+                {index === 1 && "R$ 687/mês"}
+                {index === 2 && "R$ 987/mês"}
+                {index === 3 && "R$ 1.487/mês"}
               </div>
-
-              {/* CTA Button */}
-              <Button
-                className={`w-full py-2 text-sm ${
-                  plan.popular 
-                    ? 'hero-button' 
-                    : 'bg-brand-purple text-white hover:bg-brand-purple/90'
-                }`}
-                onClick={() => handlePlanClick(plan.name)}
-              >
-                {plan.buttonText}
-              </Button>
             </div>
           ))}
         </div>
 
-        {/* Adicionais */}
-        <div className="mt-6 bg-muted/50 rounded-lg p-4">
-          <details className="cursor-pointer">
-            <summary className="font-semibold text-foreground mb-3">
-              Adicionais e Taxas de Ativação
-            </summary>
-            <div className="space-y-3 text-sm text-muted-foreground">
-              <div>
-                <h4 className="font-medium text-foreground mb-1">Usuários Adicionais (por mês):</h4>
-                <p>• Essential: R$ 107/mês • Pro: R$ 87/mês • Plus+: R$ 57/mês • Advanced: R$ 47/mês</p>
+        {/* Features Table */}
+        <div className="space-y-4">
+          {features.map((section, sectionIndex) => (
+            <div key={sectionIndex} className="border rounded-lg overflow-hidden">
+              <div className="bg-brand-purple text-white p-3">
+                <h3 className="font-bold text-sm">{section.category}</h3>
               </div>
-              <div>
-                <h4 className="font-medium text-foreground mb-1">Canais Adicionais (por mês):</h4>
-                <p>• WhatsApp adicional: R$ 89/mês • Direct/Messenger adicional: R$ 69/mês • Integração de Pagamentos: R$ 99/mês</p>
-                <p>• Automação ilimitada (chatbots, sequências, integrações): R$ 147/mês</p>
-                <p>• Transcrição de áudio com IA: R$ 6,99/mês por usuário</p>
-              </div>
-              <div>
-                <h4 className="font-medium text-foreground mb-1">Ativação de Canais Extras:</h4>
-                <p>• WhatsApp adicional: R$ 99 • Direct/Messenger adicional: R$ 69</p>
-              </div>
-              <div>
-                <h4 className="font-medium text-foreground mb-1">Precificação de conversas (cobradas pela Meta):</h4>
-                <p>• Conversa receptiva: ilimitado</p>
-                <p>• Conversa de marketing: US$ 0,0625</p>
-                <p>• Conversa de utilidade: US$ 0,0068</p>
-                <p className="text-xs italic">Nota: Valores cobrados pela Meta; podem variar conforme política da Meta. Cada conversa é contabilizada em janelas de 24h.</p>
+              <div className="divide-y">
+                {section.items.map((item, itemIndex) => (
+                  <div key={itemIndex} className="grid grid-cols-5 gap-2 p-3 hover:bg-muted/50">
+                    <div className="text-sm font-medium text-foreground pr-4">
+                      {item.name}
+                    </div>
+                    {item.values.map((value, valueIndex) => (
+                      <div key={valueIndex} className="flex justify-center items-center">
+                        {renderCheckOrValue(value)}
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
             </div>
-          </details>
+          ))}
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="grid grid-cols-4 gap-4 mt-6">
+          {plans.map((planName, index) => (
+            <Button
+              key={planName}
+              className={`py-3 ${
+                index === 1 
+                  ? 'hero-button' 
+                  : 'bg-brand-purple text-white hover:bg-brand-purple/90'
+              }`}
+              onClick={() => handlePlanClick(planName)}
+            >
+              Quero {planName}
+            </Button>
+          ))}
+        </div>
+
+        {/* Additional Info */}
+        <div className="mt-6 bg-muted/50 rounded-lg p-4 text-sm text-muted-foreground">
+          <h4 className="font-semibold text-foreground mb-2">Precificação de conversas (cobradas pela Meta):</h4>
+          <div className="space-y-1">
+            <p>• Conversa receptiva: ilimitado</p>
+            <p>• Conversa de marketing: US$ 0,0625</p>
+            <p>• Conversa de utilidade: US$ 0,0068</p>
+            <p className="text-xs italic mt-2">Nota: Valores cobrados pela Meta; podem variar conforme política da Meta. Cada conversa é contabilizada em janelas de 24h.</p>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

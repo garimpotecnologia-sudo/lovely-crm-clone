@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Star, Crown } from "lucide-react";
+import { CheckCircle, Star, Crown, X } from "lucide-react";
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  onOpenPricing: () => void;
+}
+
+const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
   const plans = [
     {
       name: "Essential",
@@ -9,12 +13,18 @@ const PricingSection = () => {
       price: "R$ 487",
       period: "/mês",
       activationFee: "R$ 1.090,00",
+      channels: "WhatsApp",
       features: [
-        "3 usuários inclusos",
-        "WhatsApp Business API",
-        "Dashboard básico",
-        "Suporte por chat",
+        "Central de Atendimento básica",
+        "2 Chatbots de Atendimento", 
+        "1 Chatbot de Automação",
+        "10 Etiquetas",
         "Relatórios básicos"
+      ],
+      limitations: [
+        "Sem Funis (Kanban)",
+        "Sem Campos Personalizados",
+        "Sem Disparo em Massa"
       ],
       buttonText: "Quero este plano",
       popular: false
@@ -25,45 +35,60 @@ const PricingSection = () => {
       price: "R$ 687",
       period: "/mês",
       activationFee: "R$ 1.490,00",
+      channels: "WhatsApp + Instagram + Messenger",
       features: [
-        "5 usuários inclusos",
-        "WhatsApp + Instagram + Messenger",
-        "Automações avançadas",
-        "Suporte prioritário",
-        "Relatórios completos"
+        "Central de Atendimento completa",
+        "3 Chatbots de Atendimento",
+        "2 Chatbots de Automação", 
+        "Etiquetas ilimitadas",
+        "2 Funis (Kanban)",
+        "Campos Personalizados ilimitados",
+        "Disparo de Campanhas"
+      ],
+      limitations: [
+        "Sem Webhook",
+        "Sem API",
+        "Sem Make.com"
       ],
       buttonText: "Quero este plano",
       popular: true
     },
     {
       name: "Plus+",
-      users: "10 usuários",
+      users: "10 usuários", 
       price: "R$ 987",
       period: "/mês",
       activationFee: "R$ 1.990,00",
+      channels: "Todos os canais",
       features: [
-        "10 usuários inclusos",
-        "Todas as integrações",
-        "IA personalizada",
-        "Onboarding dedicado",
-        "API customizada"
+        "Tudo do Pro +",
+        "5 Chatbots de Atendimento",
+        "5 Funis (Kanban)",
+        "Webhook",
+        "API",
+        "Make.com",
+        "Carteiras de Cliente"
       ],
+      limitations: [],
       buttonText: "Quero este plano",
       popular: false
     },
     {
       name: "Advanced",
       users: "20 usuários",
-      price: "R$ 1.487",
+      price: "R$ 1.487", 
       period: "/mês",
       activationFee: "R$ 2.499,00",
+      channels: "Todos os canais",
       features: [
-        "20 usuários inclusos",
-        "Funcionalidades ilimitadas",
-        "Gerente de sucesso",
-        "Suporte 24/7",
-        "Treinamentos exclusivos"
+        "Tudo do Plus+ +",
+        "10 Chatbots de Atendimento",
+        "4 Chatbots de Automação",
+        "10 Funis (Kanban)",
+        "Gerente de sucesso dedicado",
+        "Suporte prioritário 24/7"
       ],
+      limitations: [],
       buttonText: "Quero este plano",
       popular: false
     }
@@ -76,7 +101,7 @@ const PricingSection = () => {
   };
 
   return (
-    <section id="precos" className="py-20 bg-background">
+    <section id="precos" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -84,9 +109,16 @@ const PricingSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
               <span className="gradient-text">Planos</span> e Preços
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
               Escolha o plano ideal para sua empresa
             </p>
+            <Button 
+              variant="outline" 
+              onClick={onOpenPricing}
+              className="mb-8"
+            >
+              Ver Tabela Completa de Funcionalidades
+            </Button>
           </div>
 
           {/* Pricing Cards */}
@@ -111,7 +143,8 @@ const PricingSection = () => {
                 {/* Plan Header */}
                 <div className="text-center mb-6">
                   <h3 className="text-xl font-bold mb-1 text-foreground">{plan.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{plan.users}</p>
+                  <p className="text-sm text-muted-foreground mb-2">{plan.users}</p>
+                  <p className="text-xs text-brand-purple font-medium mb-3">{plan.channels}</p>
                   <div className="mb-2">
                     <span className="text-3xl font-bold text-brand-purple">{plan.price}</span>
                     <span className="text-muted-foreground">{plan.period}</span>
@@ -120,7 +153,7 @@ const PricingSection = () => {
                 </div>
 
                 {/* Features */}
-                <div className="space-y-3 mb-6">
+                <div className="space-y-2 mb-4">
                   {plan.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-start space-x-2">
                       <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
@@ -128,6 +161,19 @@ const PricingSection = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* Limitations */}
+                {plan.limitations.length > 0 && (
+                  <div className="space-y-2 mb-4 bg-muted/30 p-3 rounded-lg">
+                    <h4 className="text-xs font-medium text-muted-foreground uppercase">Limitações:</h4>
+                    {plan.limitations.map((limitation, limitIndex) => (
+                      <div key={limitIndex} className="flex items-start space-x-2">
+                        <X className="h-3 w-3 text-red-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-xs text-muted-foreground">{limitation}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* CTA Button */}
                 <Button
