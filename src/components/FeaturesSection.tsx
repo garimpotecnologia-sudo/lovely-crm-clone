@@ -1,27 +1,26 @@
-import { Button } from "@/components/ui/button";
-import { Users, Bot, BarChart3, Target } from "lucide-react";
+import { MessageSquare, Zap, BarChart3, Target } from "lucide-react";
 
 const FeaturesSection = () => {
   const features = [
     {
-      icon: Users,
+      icon: MessageSquare,
       title: "Centralize atendimentos",
-      description: "WhatsApp, Instagram e Messenger em uma única tela"
+      description: "Todos os canais em uma única plataforma integrada"
     },
     {
-      icon: Bot,
+      icon: Zap,
       title: "Automatize rotinas",
-      description: "Chatbot inteligente qualifica leads 24/7"
-    },
-    {
-      icon: Target,
-      title: "Acompanhe etapas",
-      description: "Pipeline visual para gerenciar seu funil de vendas"
+      description: "Respostas automáticas e fluxos inteligentes"
     },
     {
       icon: BarChart3,
+      title: "Acompanhe etapas",
+      description: "Visualize o funil de vendas em tempo real"
+    },
+    {
+      icon: Target,
       title: "Mensure resultados",
-      description: "Relatórios precisos de performance e conversão"
+      description: "Relatórios detalhados de performance"
     }
   ];
 

@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header, { MobileBottomBar } from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import PricingSection from "@/components/PricingSection";
@@ -9,7 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background pb-16 md:pb-0">
       <Header />
       <HeroSection />
       <FeaturesSection />
@@ -18,6 +18,7 @@ const Index = () => {
       <FAQSection />
       <Footer />
       <WhatsAppButton />
+      <MobileBottomBar />
     </main>
   );
 };

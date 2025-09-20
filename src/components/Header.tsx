@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import logoHorizontalDark from "@/assets/logo-horizontal-dark.png";
 import logoHorizontalLight from "@/assets/logo-horizontal-light.png";
 
@@ -98,3 +98,34 @@ const Header = () => {
 };
 
 export default Header;
+
+// Mobile bottom bar component
+export const MobileBottomBar = () => {
+  const handleWhatsAppClick = () => {
+    window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank");
+  };
+
+  const scrollToPlans = () => {
+    document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border z-40 md:hidden">
+      <div className="grid grid-cols-2 gap-1 p-2">
+        <button
+          onClick={handleWhatsAppClick}
+          className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors"
+        >
+          <MessageCircle className="h-4 w-4" />
+          <span className="text-sm font-medium">WhatsApp</span>
+        </button>
+        <button
+          onClick={scrollToPlans}
+          className="flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-purple/90 text-white py-3 px-4 rounded-lg transition-colors"
+        >
+          <span className="text-sm font-medium">Ver Planos</span>
+        </button>
+      </div>
+    </div>
+  );
+};

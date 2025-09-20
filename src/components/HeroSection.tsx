@@ -18,16 +18,15 @@ const HeroSection = () => {
               <img 
                 src={logoHorizontal} 
                 alt="AgentPRO Logo" 
-                className="h-12 md:h-16"
+                className="h-10 md:h-12"
               />
+              <h1 className="text-2xl md:text-4xl font-bold leading-tight">
+                <span className="gradient-text">Centralize seus atendimentos</span>
+              </h1>
             </div>
             
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-              <span className="gradient-text">Centralize seus atendimentos em minutos!</span>
-            </h1>
-            
             <h2 className="text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto">
-              O CRM integrado ao WhatsApp que aumenta sua produtividade instantaneamente
+              CRM integrado ao WhatsApp que aumenta sua produtividade instantaneamente
             </h2>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
