@@ -3,7 +3,11 @@ import { Play, MessageCircle, Instagram } from "lucide-react";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
 import logoHorizontal from "@/assets/logo-horizontal-light.png";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onOpenPricing: () => void;
+}
+
+const HeroSection = ({ onOpenPricing }: HeroSectionProps) => {
   return (
     <section id="home" className="pt-20 pb-16 hero-gradient text-white overflow-hidden">
       <div className="container mx-auto px-4">
@@ -33,7 +37,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 className="hero-button group"
-                onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
+                onClick={onOpenPricing}
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Teste Grátis 14 Dias

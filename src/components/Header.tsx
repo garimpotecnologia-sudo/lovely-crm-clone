@@ -4,17 +4,18 @@ import { Menu, X, MessageCircle } from "lucide-react";
 import logoHorizontalDark from "@/assets/logo-horizontal-dark.png";
 import logoHorizontalLight from "@/assets/logo-horizontal-light.png";
 
-const Header = () => {
+interface HeaderProps {
+  onOpenPricing: () => void;
+}
+
+const Header = ({ onOpenPricing }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
     { label: "Home", href: "#home" },
-    { label: "Soluções", href: "#solucoes" },
     { label: "Funcionalidades", href: "#funcionalidades" },
-    { label: "Integrações", href: "#integracoes" },
-    { label: "Demonstrações", href: "#demonstracoes" },
-    { label: "Blog", href: "#blog" },
-    { label: "Planos", href: "#planos" },
+    { label: "Depoimentos", href: "#depoimentos" },
+    { label: "FAQ", href: "#faq" },
   ];
 
   return (
@@ -50,11 +51,13 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" asChild>
-              <a href="#teste-gratis">Teste Grátis</a>
+            <Button variant="outline" onClick={onOpenPricing}>
+              Ver Planos
             </Button>
             <Button variant="default" asChild>
-              <a href="#contato">Falar com Especialista</a>
+              <a href="https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F" target="_blank">
+                Falar no WhatsApp
+              </a>
             </Button>
           </div>
 
@@ -82,11 +85,13 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" asChild>
-                  <a href="#teste-gratis">Teste Grátis</a>
+                <Button variant="outline" onClick={() => { onOpenPricing(); setIsMenuOpen(false); }}>
+                  Ver Planos
                 </Button>
                 <Button variant="default" asChild>
-                  <a href="#contato">Falar com Especialista</a>
+                  <a href="https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F" target="_blank">
+                    Falar no WhatsApp
+                  </a>
                 </Button>
               </div>
             </nav>
@@ -100,13 +105,13 @@ const Header = () => {
 export default Header;
 
 // Mobile bottom bar component
-export const MobileBottomBar = () => {
+interface MobileBottomBarProps {
+  onOpenPricing: () => void;
+}
+
+export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
   const handleWhatsAppClick = () => {
     window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank");
-  };
-
-  const scrollToPlans = () => {
-    document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -120,7 +125,7 @@ export const MobileBottomBar = () => {
           <span className="text-sm font-medium">WhatsApp</span>
         </button>
         <button
-          onClick={scrollToPlans}
+          onClick={onOpenPricing}
           className="flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-purple/90 text-white py-3 px-4 rounded-lg transition-colors"
         >
           <span className="text-sm font-medium">Ver Planos</span>
