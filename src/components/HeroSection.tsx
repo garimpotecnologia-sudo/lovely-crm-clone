@@ -13,7 +13,7 @@ const HeroSection = ({
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
           <div className="text-center mb-18 fade-in-up">
-            <div className="inline-flex items-center px-4 py-2 bg-red-500/20 text-red-300 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 text-red-300 rounded-full text-sm font-medium mb-6 bg-slate-50">
               🚨 Cansado de perder clientes por falta de organização?
             </div>
             
