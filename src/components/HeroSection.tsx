@@ -13,9 +13,7 @@ const HeroSection = ({
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
           <div className="text-center mb-18 fade-in-up">
-            <div className="inline-flex items-center px-4 py-2 text-red-300 rounded-full text-sm font-medium mb-6 bg-slate-50">
-              🚨 Cansado de perder clientes por falta de organização?
-            </div>
+            <div className="inline-flex items-center px-4 py-2 text-red-300 rounded-full text-sm font-medium mb-6 bg-slate-50">🚨 Você ainda usa o Whatsapp Business na Web?</div>
             
             <div className="flex justify-center items-center gap-4 mb-6">
               <img src={logoHorizontal} alt="AgentPRO Logo" className="h-10 md:h-12" />
