@@ -27,9 +27,7 @@ const TestimonialsSection = () => {
     "TechSolutions",
     "Fashionista Store", 
     "AutoMax Veículos",
-    "InnovaCorp",
-    "DigitalPlus",
-    "MegaStore"
+    "InnovaCorp"
   ];
 
   return (
@@ -94,11 +92,11 @@ const TestimonialsSection = () => {
             <h3 className="text-2xl font-bold mb-8 text-foreground">
               Empresas que confiam no AgentPRO
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-8 items-center opacity-60">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center opacity-60">
               {partners.map((partner, index) => (
                 <div
                   key={index}
-                  className="bg-card rounded-lg p-4 text-center border border-border/50"
+                  className="bg-card rounded-lg p-3 text-center border border-border/50"
                 >
                   <span className="text-sm font-semibold text-muted-foreground">
                     {partner}

@@ -8,28 +8,20 @@ import {
 const FAQSection = () => {
   const faqs = [
     {
-      question: "Como funciona o teste grátis de 14 dias?",
-      answer: "Você tem acesso completo a todas as funcionalidades do AgentPRO por 14 dias, sem compromisso. Não cobramos cartão de crédito antecipadamente."
+      question: "Quais integrações estão disponíveis?",
+      answer: "Integramos WhatsApp Business API, Instagram, Messenger, além de sistemas de pagamento e APIs customizadas conforme o plano."
     },
     {
-      question: "Posso integrar com meu WhatsApp Business atual?",
-      answer: "Sim! O AgentPRO se conecta facilmente com sua conta do WhatsApp Business API, mantendo seu número atual e histórico de conversas."
-    },
-    {
-      question: "Quantos atendentes podem usar o sistema?",
-      answer: "Depende do plano escolhido. O Essencial permite até 3 atendentes, o Profissional até 10, e o Enterprise é ilimitado."
-    },
-    {
-      question: "Os dados dos meus clientes ficam seguros?",
-      answer: "Absolutamente. Utilizamos criptografia de ponta e seguimos todas as normas de segurança e LGPD para proteger os dados dos seus clientes."
+      question: "Vocês oferecem suporte para implantação?",
+      answer: "Sim! Todos os planos incluem suporte para configuração inicial e treinamento da equipe."
     },
     {
       question: "Posso cancelar a qualquer momento?",
       answer: "Sim, não há fidelidade. Você pode cancelar sua assinatura a qualquer momento através do painel administrativo."
     },
     {
-      question: "Vocês oferecem suporte para implantação?",
-      answer: "Sim! Todos os planos incluem suporte para configuração inicial. O plano Enterprise inclui onboarding VIP com gerente dedicado."
+      question: "Os dados ficam seguros e em conformidade com a LGPD?",
+      answer: "Absolutamente. Utilizamos criptografia de ponta e seguimos todas as normas de segurança e LGPD para proteger os dados."
     }
   ];
 

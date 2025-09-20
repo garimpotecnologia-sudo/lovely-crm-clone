@@ -14,25 +14,21 @@ const HeroSection = () => {
               🚨 Cansado de perder clientes por falta de organização?
             </div>
             
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center items-center gap-4 mb-6">
               <img 
                 src={logoHorizontal} 
                 alt="AgentPRO Logo" 
-                className="h-16 md:h-20"
+                className="h-12 md:h-16"
               />
             </div>
             
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">Resolve isso em minutos!</span> 🚀
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+              <span className="gradient-text">Centralize seus atendimentos em minutos!</span>
             </h1>
             
-            <h2 className="text-lg md:text-xl lg:text-2xl font-light mb-8 max-w-3xl mx-auto">
-              O único <span className="font-semibold text-brand-magenta">CRM integrado ao WhatsApp</span> que aumenta sua produtividade instantaneamente
+            <h2 className="text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto">
+              O CRM integrado ao WhatsApp que aumenta sua produtividade instantaneamente
             </h2>
-            
-            <p className="text-base md:text-lg mb-10 max-w-2xl mx-auto text-white/90">
-              Centralize atendimentos do WhatsApp, Instagram e Facebook em uma única tela. Nunca mais perca um cliente!
-            </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
               <Button 
@@ -42,6 +38,16 @@ const HeroSection = () => {
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Teste Grátis 14 Dias
+              </Button>
+              
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="text-white border-white/30 hover:bg-white/10"
+                onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
+              >
+                <MessageCircle className="mr-2 h-5 w-5" />
+                Falar no WhatsApp
               </Button>
             </div>
           </div>
