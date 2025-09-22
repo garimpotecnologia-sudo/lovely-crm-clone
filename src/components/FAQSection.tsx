@@ -26,7 +26,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="faq" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -45,7 +45,7 @@ const FAQSection = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="feature-card border-none"
+                className="feature-card border-none faq-item"
               >
                 <AccordionTrigger className="text-left hover:no-underline">
                   <span className="font-semibold text-foreground">{faq.question}</span>
@@ -65,7 +65,7 @@ const FAQSection = () => {
               Não encontrou sua dúvida? Fale conosco!
             </p>
             <button
-              onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20tenho%20algumas%20dúvidas%20sobre%20o%20AgentPRO.%20Podem%20me%20ajudar%3F", "_blank")}
+              onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Vim da seção de FAQ do site e tenho algumas dúvidas sobre o AgentPRO. Podem me ajudar?", "_blank")}
               className="bg-brand-purple hover:bg-brand-purple/90 text-white px-6 py-3 rounded-lg transition-colors"
             >
               Tirar Dúvidas no WhatsApp

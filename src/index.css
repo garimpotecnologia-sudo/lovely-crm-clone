@@ -205,6 +205,18 @@
   }
 }
 
+/* WhatsApp Button Blink Animation - 20 times per minute (every 3 seconds) */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
 /* Section Spacing for better readability */
 section {
   margin-bottom: 4rem;

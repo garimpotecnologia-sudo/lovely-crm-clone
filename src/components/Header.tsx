@@ -43,6 +43,10 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                 key={item.href}
                 href={item.href}
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {item.label}
               </a>
@@ -55,7 +59,7 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
               Ver Planos
             </Button>
             <Button variant="default" asChild>
-              <a href="https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F" target="_blank">
+              <a href="https://wa.me/5547984147016?text=Olá! Cliquei no botão 'Falar no WhatsApp' no cabeçalho do site. Quero saber mais sobre o CRM AgentPRO!" target="_blank">
                 Falar no WhatsApp
               </a>
             </Button>
@@ -79,7 +83,11 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   key={item.href}
                   href={item.href}
                   className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   {item.label}
                 </a>
@@ -89,7 +97,7 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   Ver Planos
                 </Button>
                 <Button variant="default" asChild>
-                  <a href="https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F" target="_blank">
+                  <a href="https://wa.me/5547984147016?text=Olá! Cliquei no botão 'Falar no WhatsApp' no menu mobile. Quero saber mais sobre o CRM AgentPRO!" target="_blank">
                     Falar no WhatsApp
                   </a>
                 </Button>
@@ -111,7 +119,7 @@ interface MobileBottomBarProps {
 
 export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank");
+    window.open("https://wa.me/5547984147016?text=Olá! Cliquei no botão 'WhatsApp' na barra inferior mobile. Quero saber mais sobre o CRM AgentPRO!", "_blank");
   };
 
   return (

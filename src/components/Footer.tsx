@@ -38,17 +38,29 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-6">Links Rápidos</h3>
               <div className="space-y-3">
-                <a href="#home" className="block text-white/80 hover:text-white transition-colors">
+                <a href="#home" className="block text-white/80 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
                   Home
                 </a>
-                <a href="#solucoes" className="block text-white/80 hover:text-white transition-colors">
-                  Soluções
-                </a>
-                <a href="#funcionalidades" className="block text-white/80 hover:text-white transition-colors">
+                <a href="#funcionalidades" className="block text-white/80 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#funcionalidades')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
                   Funcionalidades
                 </a>
-                <a href="#integracoes" className="block text-white/80 hover:text-white transition-colors">
-                  Integrações
+                <a href="#depoimentos" className="block text-white/80 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#depoimentos')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Depoimentos
                 </a>
               </div>
             </div>
@@ -58,20 +70,35 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-6">Contato</h3>
               <div className="space-y-3">
                 <button
-                  onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
+                  onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Cliquei no link do WhatsApp no rodapé do site. Quero saber mais sobre o CRM AgentPRO!", "_blank")}
                   className="flex items-center space-x-3 text-white/80 hover:text-white transition-colors"
                 >
                   <MessageCircle className="h-5 w-5 text-green-500" />
                   <span>WhatsApp</span>
                 </button>
-                <a href="#teste-gratis" className="block text-white/80 hover:text-white transition-colors">
-                  Teste Grátis
+                <a href="#depoimentos" className="block text-white/80 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#depoimentos')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Depoimentos
                 </a>
-                <a href="#demonstracao" className="block text-white/80 hover:text-white transition-colors">
-                  Demonstração
+                <a href="#faq" className="block text-white/80 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#faq')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  FAQ
                 </a>
-                <a href="#suporte" className="block text-white/80 hover:text-white transition-colors">
-                  Suporte
+                <a href="#precos" className="block text-white/80 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#precos')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Preços
                 </a>
               </div>
             </div>

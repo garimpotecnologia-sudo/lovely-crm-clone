@@ -33,7 +33,7 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="depoimentos" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -49,7 +49,7 @@ const TestimonialsSection = () => {
           {/* Testimonials Grid */}
           <div className="grid md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="feature-card text-center">
+              <div key={index} className="feature-card text-center testimonial-card">
                 {/* Quote Icon */}
                 <Quote className="h-8 w-8 text-brand-magenta mx-auto mb-6" />
                 
@@ -116,9 +116,9 @@ const TestimonialsSection = () => {
             <Button
               size="lg"
               className="hero-button"
-              onClick={() => window.open("https://wa.me/5547984147016?text=oi%2C%20quero%20contratar%20o%20CRM.%20Pode%20me%20explicar%20mais%20sobre%3F", "_blank")}
+              onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Cliquei no botão da seção de depoimentos. Quero saber mais sobre o CRM AgentPRO e ver como posso ter os mesmos resultados!", "_blank")}
             >
-              Teste Grátis 14 Dias
+              Falar no WhatsApp
             </Button>
           </div>
         </div>

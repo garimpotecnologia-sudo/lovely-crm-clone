@@ -9,7 +9,7 @@ interface PricingModalProps {
 
 const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
   const handlePlanClick = (planName: string) => {
-    const message = `oi, quero contratar o plano ${planName} do CRM. Pode me explicar mais sobre?`;
+    const message = `Olá! Cliquei no plano ${planName} no modal de funcionalidades completas. Quero saber mais sobre este plano e como contratar!`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5547984147016?text=${encodedMessage}`, "_blank");
   };

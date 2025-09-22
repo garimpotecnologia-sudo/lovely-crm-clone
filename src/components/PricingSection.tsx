@@ -95,7 +95,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
   ];
 
   const handlePlanClick = (planName: string) => {
-    const message = `oi, quero contratar o plano ${planName} do CRM. Pode me explicar mais sobre?`;
+    const message = `Olá! Cliquei no plano ${planName} na seção de preços do site. Quero saber mais sobre este plano e como contratar!`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5547984147016?text=${encodedMessage}`, "_blank");
   };
