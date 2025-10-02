@@ -27,12 +27,12 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
             <img 
               src={logoHorizontalDark} 
               alt="AgentPRO CRM" 
-              className="h-8 w-auto dark:hidden"
+              className="h-32 w-auto dark:hidden"
             />
             <img 
               src={logoHorizontalLight} 
               alt="AgentPRO CRM" 
-              className="h-8 w-auto hidden dark:block"
+              className="h-32 w-auto hidden dark:block"
             />
           </div>
 

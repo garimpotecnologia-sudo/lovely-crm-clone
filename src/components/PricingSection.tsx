@@ -14,17 +14,18 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
       period: "/mês",
       activationFee: "R$ 1.090,00",
       channels: "WhatsApp",
-      features: [
-        "Central de Atendimento básica",
-        "2 Chatbots de Atendimento", 
-        "1 Chatbot de Automação",
-        "10 Etiquetas",
-        "Relatórios básicos"
-      ],
-      limitations: [
-        "Sem Funis (Kanban)",
-        "Sem Campos Personalizados",
-        "Sem Disparo em Massa"
+      allFeatures: [
+        { name: "Central de Atendimento básica", included: true },
+        { name: "2 Chatbots de Atendimento", included: true },
+        { name: "1 Chatbot de Automação", included: true },
+        { name: "10 Etiquetas", included: true },
+        { name: "Relatórios básicos", included: true },
+        { name: "Funis (Kanban)", included: false },
+        { name: "Campos Personalizados", included: false },
+        { name: "Disparo em Massa", included: false },
+        { name: "Webhook", included: false },
+        { name: "API", included: false },
+        { name: "Make.com", included: false }
       ],
       buttonText: "Quero este plano",
       popular: false
@@ -36,19 +37,17 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
       period: "/mês",
       activationFee: "R$ 1.490,00",
       channels: "WhatsApp + Instagram + Messenger",
-      features: [
-        "Central de Atendimento completa",
-        "3 Chatbots de Atendimento",
-        "2 Chatbots de Automação", 
-        "Etiquetas ilimitadas",
-        "2 Funis (Kanban)",
-        "Campos Personalizados ilimitados",
-        "Disparo de Campanhas"
-      ],
-      limitations: [
-        "Sem Webhook",
-        "Sem API",
-        "Sem Make.com"
+      allFeatures: [
+        { name: "Central de Atendimento completa", included: true },
+        { name: "3 Chatbots de Atendimento", included: true },
+        { name: "2 Chatbots de Automação", included: true },
+        { name: "Etiquetas ilimitadas", included: true },
+        { name: "2 Funis (Kanban)", included: true },
+        { name: "Campos Personalizados ilimitados", included: true },
+        { name: "Disparo de Campanhas", included: true },
+        { name: "Webhook", included: false },
+        { name: "API", included: false },
+        { name: "Make.com", included: false }
       ],
       buttonText: "Quero este plano",
       popular: true
@@ -60,16 +59,18 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
       period: "/mês",
       activationFee: "R$ 1.990,00",
       channels: "Todos os canais",
-      features: [
-        "Tudo do Pro +",
-        "5 Chatbots de Atendimento",
-        "5 Funis (Kanban)",
-        "Webhook",
-        "API",
-        "Make.com",
-        "Carteiras de Cliente"
+      allFeatures: [
+        { name: "Central de Atendimento completa", included: true },
+        { name: "5 Chatbots de Atendimento", included: true },
+        { name: "3 Chatbots de Automação", included: true },
+        { name: "5 Funis (Kanban)", included: true },
+        { name: "Campos Personalizados ilimitados", included: true },
+        { name: "Disparo de Campanhas", included: true },
+        { name: "Webhook", included: true },
+        { name: "API", included: true },
+        { name: "Make.com", included: true },
+        { name: "Carteiras de Cliente", included: true }
       ],
-      limitations: [],
       buttonText: "Quero este plano",
       popular: false
     },
@@ -80,15 +81,20 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
       period: "/mês",
       activationFee: "R$ 2.499,00",
       channels: "Todos os canais",
-      features: [
-        "Tudo do Plus+ +",
-        "10 Chatbots de Atendimento",
-        "4 Chatbots de Automação",
-        "10 Funis (Kanban)",
-        "Gerente de sucesso dedicado",
-        "Suporte prioritário 24/7"
+      allFeatures: [
+        { name: "Central de Atendimento completa", included: true },
+        { name: "10 Chatbots de Atendimento", included: true },
+        { name: "4 Chatbots de Automação", included: true },
+        { name: "10 Funis (Kanban)", included: true },
+        { name: "Campos Personalizados ilimitados", included: true },
+        { name: "Disparo de Campanhas", included: true },
+        { name: "Webhook", included: true },
+        { name: "API", included: true },
+        { name: "Make.com", included: true },
+        { name: "Carteiras de Cliente", included: true },
+        { name: "Gerente de sucesso dedicado", included: true },
+        { name: "Suporte prioritário 24/7", included: true }
       ],
-      limitations: [],
       buttonText: "Quero este plano",
       popular: false
     }
@@ -152,28 +158,21 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
                   <p className="text-xs text-muted-foreground">Taxa de ativação: {plan.activationFee}</p>
                 </div>
 
-                {/* Features */}
+                {/* All Features */}
                 <div className="space-y-2 mb-4">
-                  {plan.features.map((feature, featureIndex) => (
+                  {plan.allFeatures.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-start space-x-2">
-                      <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-muted-foreground">{feature}</span>
+                      {feature.included ? (
+                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      ) : (
+                        <X className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                      )}
+                      <span className={`text-sm ${feature.included ? 'text-muted-foreground' : 'text-muted-foreground/60'}`}>
+                        {feature.name}
+                      </span>
                     </div>
                   ))}
                 </div>
-
-                {/* Limitations */}
-                {plan.limitations.length > 0 && (
-                  <div className="space-y-2 mb-4 bg-muted/30 p-3 rounded-lg">
-                    <h4 className="text-xs font-medium text-muted-foreground uppercase">Limitações:</h4>
-                    {plan.limitations.map((limitation, limitIndex) => (
-                      <div key={limitIndex} className="flex items-start space-x-2">
-                        <X className="h-3 w-3 text-red-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-xs text-muted-foreground">{limitation}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
 
                 {/* CTA Button */}
                 <Button
