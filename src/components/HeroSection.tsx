@@ -3,6 +3,7 @@ import { Play, MessageCircle, Instagram } from "lucide-react";
 import crmInterface from "@/assets/crm-interface-new.png";
 import plataformaAtendimento from "@/assets/plataforma-atendimento.png";
 import crmFunilVendas from "@/assets/crm-funil-vendas.png";
+import automationFlow from "@/assets/automation-flow.png";
 import logoHorizontal from "@/assets/logo-horizontal-light.png";
 interface HeroSectionProps {
   onOpenPricing: () => void;
@@ -43,7 +44,7 @@ const HeroSection = ({
 
           {/* Dashboard Preview */}
           <div className="relative max-w-6xl mx-auto bounce-in">
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
                 <img src={crmInterface} alt="Central de Atendimento AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
                 
@@ -68,9 +69,17 @@ const HeroSection = ({
               </div>
               
               <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
-                <img src={crmFunilVendas} alt="Funil de Vendas CRM AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
+                <img src={automationFlow} alt="Automação de Fluxos AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
                 
                 <div className="absolute top-1/4 -right-4 bg-purple-500 rounded-full p-3 shadow-lg animate-pulse delay-300">
+                  <MessageCircle className="h-6 w-6 text-white" />
+                </div>
+              </div>
+              
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
+                <img src={crmFunilVendas} alt="Funil de Vendas CRM AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
+                
+                <div className="absolute -top-4 left-1/4 bg-orange-500 rounded-full p-3 shadow-lg animate-bounce delay-500">
                   <MessageCircle className="h-6 w-6 text-white" />
                 </div>
               </div>
