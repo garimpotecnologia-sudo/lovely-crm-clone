@@ -25,7 +25,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
         { name: "Disparo em Massa", included: false },
         { name: "Webhook", included: false },
         { name: "API", included: false },
-        { name: "Make.com", included: false }
+        { name: "Make e N8N", included: false }
       ],
       buttonText: "Quero este plano",
       popular: false
@@ -47,7 +47,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
         { name: "Disparo de Campanhas", included: true },
         { name: "Webhook", included: false },
         { name: "API", included: false },
-        { name: "Make.com", included: false }
+        { name: "Make e N8N", included: false }
       ],
       buttonText: "Quero este plano",
       popular: true
@@ -68,7 +68,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
         { name: "Disparo de Campanhas", included: true },
         { name: "Webhook", included: true },
         { name: "API", included: true },
-        { name: "Make.com", included: true },
+        { name: "Make e N8N", included: true },
         { name: "Carteiras de Cliente", included: true }
       ],
       buttonText: "Quero este plano",
@@ -90,7 +90,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
         { name: "Disparo de Campanhas", included: true },
         { name: "Webhook", included: true },
         { name: "API", included: true },
-        { name: "Make.com", included: true },
+        { name: "Make e N8N", included: true },
         { name: "Carteiras de Cliente", included: true },
         { name: "Gerente de sucesso dedicado", included: true },
         { name: "Suporte prioritário 24/7", included: true }
