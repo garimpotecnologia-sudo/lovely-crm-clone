@@ -1,9 +1,22 @@
 import { MessageCircle, Mail, MapPin, Phone } from "lucide-react";
 import logoHorizontalLight from "@/assets/logo-horizontal-light.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const scrollToSection = (sectionId: string) => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   return (
-    <footer className="bg-brand-navy text-white py-16">
+    <footer className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -15,91 +28,64 @@ const Footer = () => {
                 className="h-10 w-auto mb-6"
               />
               <p className="text-white/80 mb-6 leading-relaxed">
-                Conecte suas equipes com clientes e leads através de uma plataforma 
-                integrada ao WhatsApp, Instagram Direct e Facebook Messenger.
+                Automatize seu atendimento com CRM inteligente integrado ao WhatsApp. 
+                Gerencie clientes, venda mais e economize tempo com automação.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-brand-magenta" />
+                  <Phone className="h-5 w-5 text-primary" />
                   <span>+55 47 98414-7016</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Mail className="h-5 w-5 text-brand-magenta" />
+                  <Mail className="h-5 w-5 text-primary" />
                   <span>contato@agentpro.com.br</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="h-5 w-5 text-brand-magenta" />
+                  <MapPin className="h-5 w-5 text-primary" />
                   <span>Brasil</span>
                 </div>
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* Products */}
             <div>
-              <h3 className="text-lg font-semibold mb-6">Links Rápidos</h3>
+              <h3 className="text-lg font-semibold mb-6">Produtos</h3>
               <div className="space-y-3">
-                <a href="#home" className="block text-white/80 hover:text-white transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Home
-                </a>
-                <a href="#funcionalidades" className="block text-white/80 hover:text-white transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#funcionalidades')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Funcionalidades
-                </a>
-                <a href="#depoimentos" className="block text-white/80 hover:text-white transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#depoimentos')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Depoimentos
-                </a>
+                <Link to="/produtos" className="block text-white/80 hover:text-white transition-colors">
+                  Todos os Produtos
+                </Link>
+                <button onClick={() => scrollToSection("features")} className="block text-white/80 hover:text-white transition-colors text-left">
+                  CRM Inteligente
+                </button>
+                <button onClick={() => scrollToSection("features")} className="block text-white/80 hover:text-white transition-colors text-left">
+                  WhatsApp Multicanal
+                </button>
+                <button onClick={() => scrollToSection("features")} className="block text-white/80 hover:text-white transition-colors text-left">
+                  Automação
+                </button>
               </div>
             </div>
 
-            {/* Contact */}
+            {/* Company */}
             <div>
-              <h3 className="text-lg font-semibold mb-6">Contato</h3>
+              <h3 className="text-lg font-semibold mb-6">Empresa</h3>
               <div className="space-y-3">
-                <button
-                  onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Cliquei no link do WhatsApp no rodapé do site. Quero saber mais sobre o CRM AgentPRO!", "_blank")}
-                  className="flex items-center space-x-3 text-white/80 hover:text-white transition-colors"
-                >
-                  <MessageCircle className="h-5 w-5 text-green-500" />
-                  <span>WhatsApp</span>
+                <Link to="/sobre" className="block text-white/80 hover:text-white transition-colors">
+                  Sobre nós
+                </Link>
+                <button onClick={() => scrollToSection("pricing")} className="block text-white/80 hover:text-white transition-colors text-left">
+                  Planos e Preços
                 </button>
-                <a href="#depoimentos" className="block text-white/80 hover:text-white transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#depoimentos')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Depoimentos
-                </a>
-                <a href="#faq" className="block text-white/80 hover:text-white transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#faq')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
+                <button onClick={() => scrollToSection("faq")} className="block text-white/80 hover:text-white transition-colors text-left">
                   FAQ
-                </a>
-                <a href="#precos" className="block text-white/80 hover:text-white transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#precos')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                </button>
+                <button
+                  onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")}
+                  className="flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
                 >
-                  Preços
-                </a>
+                  <MessageCircle className="h-4 w-4 text-green-500" />
+                  <span>Contato</span>
+                </button>
               </div>
             </div>
           </div>

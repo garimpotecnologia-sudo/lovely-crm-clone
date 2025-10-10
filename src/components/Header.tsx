@@ -1,8 +1,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MessageCircle } from "lucide-react";
-import logoHorizontalDark from "@/assets/logo-horizontal-dark.png";
+import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import logoHorizontalLight from "@/assets/logo-horizontal-light.png";
+import logoHorizontalDark from "@/assets/logo-horizontal-dark.png";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 interface HeaderProps {
   onOpenPricing: () => void;
@@ -10,103 +19,195 @@ interface HeaderProps {
 
 const Header = ({ onOpenPricing }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const scrollToSection = (sectionId: string) => {
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setIsMenuOpen(false);
+      }
+    }, 100);
+  };
 
   const menuItems = [
-    { label: "Home", href: "#home" },
-    { label: "Funcionalidades", href: "#funcionalidades" },
-    { label: "Depoimentos", href: "#depoimentos" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Início", section: "home" },
+    { label: "Recursos", section: "features" },
+    { label: "Planos", section: "pricing" },
+    { label: "FAQ", section: "faq" }
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border/50">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <img 
-              src={logoHorizontalDark} 
-              alt="AgentPRO CRM" 
-              className="h-32 w-auto dark:hidden"
-            />
-            <img 
-              src={logoHorizontalLight} 
-              alt="AgentPRO CRM" 
-              className="h-32 w-auto hidden dark:block"
-            />
-          </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link 
+              to="/"
+              className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src={logoHorizontalDark} 
+                alt="AgentPRO Logo" 
+                className="h-16 dark:hidden"
+              />
+              <img 
+                src={logoHorizontalLight} 
+                alt="AgentPRO Logo" 
+                className="h-16 hidden dark:block"
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <a 
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-1">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Produtos</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="w-[400px] p-4">
+                        <div className="grid gap-3">
+                          <Link to="/produtos" className="block p-3 hover:bg-accent rounded-lg transition-colors">
+                            <div className="font-medium mb-1">Todos os Produtos</div>
+                            <p className="text-sm text-muted-foreground">Conheça nossas soluções completas</p>
+                          </Link>
+                          <div className="h-px bg-border" />
+                          <button onClick={() => scrollToSection("features")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
+                            <div className="font-medium mb-1">CRM Inteligente</div>
+                            <p className="text-sm text-muted-foreground">Gerencie clientes e vendas</p>
+                          </button>
+                          <button onClick={() => scrollToSection("features")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
+                            <div className="font-medium mb-1">WhatsApp Multicanal</div>
+                            <p className="text-sm text-muted-foreground">Atenda múltiplos números</p>
+                          </button>
+                          <button onClick={() => scrollToSection("features")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
+                            <div className="font-medium mb-1">Automação Inteligente</div>
+                            <p className="text-sm text-muted-foreground">Automatize seus processos</p>
+                          </button>
+                        </div>
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
 
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" onClick={onOpenPricing}>
-              Ver Planos
-            </Button>
-            <Button variant="default" asChild>
-              <a href="https://wa.me/5547984147016?text=Olá! Cliquei no botão 'Falar no WhatsApp' no cabeçalho do site. Quero saber mais sobre o CRM AgentPRO!" target="_blank">
-                Falar no WhatsApp
-              </a>
-            </Button>
-          </div>
+                  <NavigationMenuItem>
+                    <button
+                      onClick={() => scrollToSection("features")}
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      Funcionalidades
+                    </button>
+                  </NavigationMenuItem>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+                  <NavigationMenuItem>
+                    <button
+                      onClick={() => scrollToSection("pricing")}
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      Planos
+                    </button>
+                  </NavigationMenuItem>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border/50">
-            <nav className="flex flex-col space-y-4">
-              {menuItems.map((item) => (
-                <a 
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsMenuOpen(false);
-                    document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" onClick={() => { onOpenPricing(); setIsMenuOpen(false); }}>
-                  Ver Planos
-                </Button>
-                <Button variant="default" asChild>
-                  <a href="https://wa.me/5547984147016?text=Olá! Cliquei no botão 'Falar no WhatsApp' no menu mobile. Quero saber mais sobre o CRM AgentPRO!" target="_blank">
-                    Falar no WhatsApp
-                  </a>
-                </Button>
-              </div>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Empresa</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="w-[250px] p-4">
+                        <div className="grid gap-3">
+                          <Link to="/sobre" className="block p-3 hover:bg-accent rounded-lg transition-colors">
+                            <div className="font-medium mb-1">Sobre nós</div>
+                            <p className="text-sm text-muted-foreground">Conheça nossa história</p>
+                          </Link>
+                          <button onClick={() => scrollToSection("faq")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
+                            <div className="font-medium mb-1">FAQ</div>
+                            <p className="text-sm text-muted-foreground">Dúvidas frequentes</p>
+                          </button>
+                        </div>
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
             </nav>
+
+            {/* Desktop CTA Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
+              <Button 
+                variant="ghost"
+                onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")}
+              >
+                Falar com consultor
+              </Button>
+              <Button onClick={onOpenPricing} className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Testar grátis
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-        )}
-      </div>
-    </header>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden py-4 border-t">
+              <nav className="flex flex-col space-y-4">
+                <Link 
+                  to="/produtos"
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Produtos
+                </Link>
+                {menuItems.map((item) => (
+                  <button
+                    key={item.section}
+                    onClick={() => {
+                      scrollToSection(item.section);
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-sm font-medium text-foreground hover:text-primary transition-colors text-left"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <Link 
+                  to="/sobre"
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sobre nós
+                </Link>
+                <div className="flex flex-col space-y-2 pt-4">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank");
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Falar com consultor
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      onOpenPricing();
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Testar grátis
+                  </Button>
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+    </>
   );
 };
 
@@ -119,7 +220,7 @@ interface MobileBottomBarProps {
 
 export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5547984147016?text=Olá! Cliquei no botão 'WhatsApp' na barra inferior mobile. Quero saber mais sobre o CRM AgentPRO!", "_blank");
+    window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o CRM AgentPRO!", "_blank");
   };
 
   return (
@@ -134,7 +235,7 @@ export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
         </button>
         <button
           onClick={onOpenPricing}
-          className="flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-purple/90 text-white py-3 px-4 rounded-lg transition-colors"
+          className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-4 rounded-lg transition-colors"
         >
           <span className="text-sm font-medium">Ver Planos</span>
         </button>

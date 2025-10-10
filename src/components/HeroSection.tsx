@@ -1,45 +1,53 @@
 import { Button } from "@/components/ui/button";
-import { Play, MessageCircle, Instagram } from "lucide-react";
+import { MessageCircle, Instagram } from "lucide-react";
 import crmInterface from "@/assets/crm-interface-new.png";
 import plataformaAtendimento from "@/assets/plataforma-atendimento.png";
 import crmFunilVendas from "@/assets/crm-funil-vendas.png";
 import automationFlow from "@/assets/automation-flow.png";
-import logoHorizontal from "@/assets/logo-horizontal-light.png";
 interface HeroSectionProps {
   onOpenPricing: () => void;
 }
 const HeroSection = ({
   onOpenPricing
 }: HeroSectionProps) => {
-  return <section id="home" className="pt-20 pb-16 hero-gradient text-white overflow-hidden">
+  return <section id="home" className="pt-32 pb-20 hero-gradient text-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
-          <div className="text-center mb-18 fade-in-up">
-            <div className="inline-flex items-center px-4 py-2 text-red-300 rounded-full text-sm font-medium mb-6 bg-slate-50">🚨 Você ainda usa o Whatsapp Business na Web?</div>
+          <div className="text-center mb-16 fade-in-up">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
+              Automatize seu atendimento<br />
+              <span className="text-white/90">e venda mais com IA</span>
+            </h1>
             
-            <div className="flex justify-center items-center gap-4 mb-6">
-              <img src={logoHorizontal} alt="AgentPRO Logo" className="h-10 md:h-12" />
-              <h1 className="text-2xl md:text-4xl font-bold leading-tight">
-                <span className="text-white">Centralize seus atendimentos</span>
-              </h1>
-            </div>
-            
-            <h2 className="text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto">
-              CRM integrado ao WhatsApp que aumenta sua produtividade instantaneamente
-            </h2>
+            <p className="text-xl md:text-2xl font-light mb-10 max-w-3xl mx-auto text-white/90">
+              CRM inteligente integrado ao WhatsApp que centraliza seus atendimentos, 
+              automatiza processos e aumenta suas vendas
+            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button size="lg" onClick={onOpenPricing} className="hero-button group bg-emerald-950 hover:bg-emerald-800">
-                <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Ver Planos
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+              <Button 
+                size="lg" 
+                onClick={onOpenPricing} 
+                className="hero-button group bg-white text-primary hover:bg-gray-100 text-lg px-10 py-6 h-auto"
+              >
+                Agendar demonstração
               </Button>
               
-              <Button size="lg" variant="outline" onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Cliquei no botão 'Falar no WhatsApp' no hero do site. Quero saber mais sobre o CRM AgentPRO!", "_blank")} className="text-white border-white/30 bg-green-950 hover:bg-green-800">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")} 
+                className="text-white border-white/30 hover:bg-white/10 text-lg px-10 py-6 h-auto"
+              >
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Falar no WhatsApp
+                Falar com consultor
               </Button>
             </div>
+            
+            <p className="text-sm text-white/70">
+              ✨ Teste grátis por 7 dias • Sem cartão de crédito
+            </p>
           </div>
 
           {/* Dashboard Preview */}

@@ -8,20 +8,28 @@ import {
 const FAQSection = () => {
   const faqs = [
     {
+      question: "Como funciona o período de teste grátis?",
+      answer: "Você tem 7 dias para testar todas as funcionalidades do AgentPRO gratuitamente, sem precisar cadastrar cartão de crédito. Após o período, basta escolher o plano ideal para continuar."
+    },
+    {
+      question: "Preciso ter conhecimento técnico para usar?",
+      answer: "Não! O AgentPRO foi desenvolvido para ser intuitivo e fácil de usar. Além disso, oferecemos treinamento completo para sua equipe e suporte sempre que precisar."
+    },
+    {
+      question: "Quantos números de WhatsApp posso conectar?",
+      answer: "Depende do plano escolhido. No plano Starter você pode conectar até 2 números, no Business até 5, e no Enterprise números ilimitados."
+    },
+    {
       question: "Quais integrações estão disponíveis?",
-      answer: "Integramos WhatsApp Business API, Instagram, Messenger, além de sistemas de pagamento e APIs customizadas conforme o plano."
-    },
-    {
-      question: "Vocês oferecem suporte para implantação?",
-      answer: "Sim! Todos os planos incluem suporte para configuração inicial e treinamento da equipe."
-    },
-    {
-      question: "Posso cancelar a qualquer momento?",
-      answer: "Sim, não há fidelidade. Você pode cancelar sua assinatura a qualquer momento através do painel administrativo."
+      answer: "Integramos WhatsApp Business API, Instagram, Messenger, além de Make, N8N e APIs customizadas. Novos integrações são adicionadas regularmente."
     },
     {
       question: "Os dados ficam seguros e em conformidade com a LGPD?",
-      answer: "Absolutamente. Utilizamos criptografia de ponta e seguimos todas as normas de segurança e LGPD para proteger os dados."
+      answer: "Sim! Utilizamos criptografia de ponta a ponta e seguimos todas as normas de segurança e LGPD para proteger seus dados e de seus clientes."
+    },
+    {
+      question: "Posso cancelar a qualquer momento?",
+      answer: "Sim, não há fidelidade. Você pode cancelar sua assinatura a qualquer momento através do painel administrativo, sem burocracia."
     }
   ];
 
@@ -31,8 +39,8 @@ const FAQSection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-              Dúvidas <span className="gradient-text">Frequentes</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Dúvidas <span className="text-primary">Frequentes</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               Tire suas dúvidas sobre o AgentPRO
@@ -65,8 +73,8 @@ const FAQSection = () => {
               Não encontrou sua dúvida? Fale conosco!
             </p>
             <button
-              onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Vim da seção de FAQ do site e tenho algumas dúvidas sobre o AgentPRO. Podem me ajudar?", "_blank")}
-              className="bg-brand-purple hover:bg-brand-purple/90 text-white px-6 py-3 rounded-lg transition-colors"
+              onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Vim da seção de FAQ do site e tenho algumas dúvidas sobre o AgentPRO.", "_blank")}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg transition-colors"
             >
               Tirar Dúvidas no WhatsApp
             </button>
