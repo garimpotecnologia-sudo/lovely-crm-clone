@@ -1,4 +1,5 @@
 import { CheckCircle2, TrendingUp, Clock, Users, Zap, Shield } from "lucide-react";
+import logoHorizontal from "@/assets/logo-horizontal-dark.png";
 
 const BenefitsSection = () => {
   const benefits = [
@@ -63,7 +64,7 @@ const BenefitsSection = () => {
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Por que escolher o <span className="text-primary">AgentPRO</span>?
+            Por que escolher o <img src={logoHorizontal} alt="AgentPRO" className="inline-block h-12 align-middle" />?
           </h2>
           <p className="text-xl text-muted-foreground">
             Mais do que um CRM, uma plataforma completa para transformar seu atendimento
