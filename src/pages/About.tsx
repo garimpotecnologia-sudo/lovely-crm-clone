@@ -37,24 +37,35 @@ const About = () => {
       <Header onOpenPricing={() => setIsPricingModalOpen(true)} />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <section className="pt-32 pb-12 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Somos seu <span className="text-primary">verdadeiro parceiro</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-4">
+            <p className="text-xl text-muted-foreground mb-8">
               No AgentPRO você encontra o parceiro que resolve os desafios do seu negócio com as soluções simples que você precisa
             </p>
-            <p className="text-lg text-muted-foreground">
-              Fazemos parte de um grupo com mais de <span className="font-semibold text-primary">14 anos no mercado de tecnologia</span>, com sede em <span className="font-semibold text-primary">Joinville - SC</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Info Section */}
+      <section className="py-12 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-lg md:text-xl text-muted-foreground">
+              Fazemos parte de um grupo com mais de <span className="text-2xl md:text-3xl font-bold text-primary block mt-2">14 anos no mercado de tecnologia</span>
+            </p>
+            <p className="text-lg md:text-xl text-muted-foreground mt-4">
+              com sede em <span className="text-2xl md:text-3xl font-bold text-primary">Joinville - SC</span>
             </p>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {values.map((value, idx) => (
@@ -71,7 +82,7 @@ const About = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 bg-muted/50">
+      <section className="py-12 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
@@ -108,7 +119,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Vamos crescer juntos?
