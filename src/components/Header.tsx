@@ -75,12 +75,12 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <button
-                      onClick={() => scrollToSection("ai-agents")}
+                    <Link
+                      to="/agentes-inteligentes"
                       className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
                       Agentes Inteligentes
-                    </button>
+                    </Link>
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
@@ -140,15 +140,13 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <nav className="flex flex-col space-y-4">
-                <button 
-                  onClick={() => {
-                    scrollToSection("ai-agents");
-                    setIsMenuOpen(false);
-                  }}
-                  className="text-sm font-medium text-foreground hover:text-primary transition-colors text-left"
+                <Link 
+                  to="/agentes-inteligentes"
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Agentes Inteligentes
-                </button>
+                </Link>
                 {menuItems.map((item) => (
                   <button
                     key={item.section}
