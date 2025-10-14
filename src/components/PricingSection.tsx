@@ -107,7 +107,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
   };
 
   return (
-    <section id="precos" className="py-16 bg-background">
+    <section id="pricing" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -165,7 +165,7 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
                       {feature.included ? (
                         <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
                       ) : (
-                        <X className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground/60 flex-shrink-0 mt-0.5">-</span>
                       )}
                       <span className={`text-sm ${feature.included ? 'text-muted-foreground' : 'text-muted-foreground/60'}`}>
                         {feature.name}

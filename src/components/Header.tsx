@@ -66,6 +66,15 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
+                    <button
+                      onClick={() => scrollToSection("home")}
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      Home
+                    </button>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
                     <NavigationMenuTrigger>Produtos</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <div className="w-[400px] p-4">
@@ -111,21 +120,21 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger>Empresa</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="w-[250px] p-4">
-                        <div className="grid gap-3">
-                          <Link to="/sobre" className="block p-3 hover:bg-accent rounded-lg transition-colors">
-                            <div className="font-medium mb-1">Sobre nós</div>
-                            <p className="text-sm text-muted-foreground">Conheça nossa história</p>
-                          </Link>
-                          <button onClick={() => scrollToSection("faq")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
-                            <div className="font-medium mb-1">FAQ</div>
-                            <p className="text-sm text-muted-foreground">Dúvidas frequentes</p>
-                          </button>
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
+                    <button
+                      onClick={() => scrollToSection("faq")}
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      FAQ
+                    </button>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link
+                      to="/sobre"
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      Empresa
+                    </Link>
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>

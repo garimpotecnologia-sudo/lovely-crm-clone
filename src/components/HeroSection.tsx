@@ -16,16 +16,12 @@ const HeroSection = ({
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
           <div className="text-center fade-in-up">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6">
               Um CRM inteligente que conecta sua equipe, seus clientes e seu WhatsApp em um único fluxo automatizado.
             </h1>
             
-            <p className="text-base md:text-lg lg:text-xl font-light mb-3 max-w-3xl mx-auto text-white/90">
+            <p className="text-base md:text-lg lg:text-xl font-light mb-10 max-w-3xl mx-auto text-white/90">
               Centralize mensagens, agendamentos e funil de vendas com Inteligência Artificial.
-            </p>
-            
-            <p className="text-sm md:text-base lg:text-lg mb-10 max-w-3xl mx-auto text-white/80">
-              Mais produtividade, menos esforço — crescimento garantido.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
@@ -33,7 +29,7 @@ const HeroSection = ({
                 size="lg" 
                 onClick={onOpenPricing} 
                 variant="hero"
-                className="text-base md:text-lg px-8 md:px-10 py-5 md:py-6 h-auto font-semibold"
+                className="text-sm md:text-base px-6 md:px-8 py-4 md:py-5 h-auto font-semibold"
               >
                 Agendar demonstração
               </Button>
@@ -42,7 +38,7 @@ const HeroSection = ({
                 size="lg" 
                 onClick={onOpenPricing} 
                 variant="hero"
-                className="text-base md:text-lg px-8 md:px-10 py-5 md:py-6 h-auto font-semibold"
+                className="text-sm md:text-base px-6 md:px-8 py-4 md:py-5 h-auto font-semibold"
               >
                 Falar com consultor
               </Button>

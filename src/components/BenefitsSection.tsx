@@ -1,12 +1,4 @@
 import { CheckCircle2, TrendingUp, Clock, Users, Zap, Shield } from "lucide-react";
-import logoHorizontal from "@/assets/logo-horizontal-dark.png";
-import logoClinicaOlhos from "@/assets/logo-clinica-olhos.avif";
-import logoClinicaViddas from "@/assets/logo-clinica-viddas.png";
-import logoAngioclinica from "@/assets/logo-angioclinica.png";
-import logoClimma from "@/assets/logo-climma.png";
-import logoClinicare from "@/assets/logo-clinicare.png";
-import logoRacaoFacil from "@/assets/logo-racaofacil.svg";
-import logoUbarana from "@/assets/logo-ubarana.png";
 
 const BenefitsSection = () => {
   const benefits = [
@@ -70,10 +62,8 @@ const BenefitsSection = () => {
 
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 flex flex-wrap items-center justify-center gap-2">
-            <span>Por que escolher o</span>
-            <img src={logoHorizontal} alt="AgentPRO" className="h-10 md:h-12 inline-block" />
-            <span>?</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Porque escolher a nossa empresa
           </h2>
           <p className="text-xl text-muted-foreground">
             Mais do que um CRM, uma plataforma completa para transformar seu atendimento
@@ -94,24 +84,6 @@ const BenefitsSection = () => {
               <p className="text-muted-foreground">{benefit.description}</p>
             </div>
           ))}
-        </div>
-
-        {/* Social Proof */}
-        <div className="mt-20 text-center">
-          <p className="text-xl font-semibold mb-8">Empresas que confiam no AgentPRO 🚀</p>
-          <div className="overflow-hidden">
-            <div className="flex animate-scroll gap-12 items-center justify-center opacity-70">
-              <img src={logoClinicaOlhos} alt="Clínica Olhos" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoClinicaViddas} alt="Clínica Viddas" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoAngioclinica} alt="Angioclínica" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoClimma} alt="Climma" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoClinicare} alt="Clinicare" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoRacaoFacil} alt="Ração Fácil" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoUbarana} alt="Hospital Ubarana" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoClinicaOlhos} alt="Clínica Olhos" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoClinicaViddas} alt="Clínica Viddas" className="h-12 md:h-16 whitespace-nowrap" />
-            </div>
-          </div>
         </div>
       </div>
     </section>
