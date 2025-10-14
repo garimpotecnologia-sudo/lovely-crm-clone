@@ -14,8 +14,7 @@ const About = () => {
     {
       icon: Target,
       title: "14 anos de mercado",
-      description: "14 anos entregando soluções tecnológicas que geram impacto real. Vamos levar seu CRM a um novo nível.",
-      image: scMap
+      description: "14 anos entregando soluções tecnológicas que geram impacto real. Vamos levar seu CRM a um novo nível."
     },
     {
       icon: Heart,
@@ -55,13 +54,20 @@ const About = () => {
       {/* Company Info Section */}
       <section className="py-12 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-lg md:text-xl text-muted-foreground">
-              Fazemos parte de um grupo com mais de <span className="text-2xl md:text-3xl font-bold text-primary block mt-2">14 anos no mercado de tecnologia</span>
-            </p>
-            <p className="text-lg md:text-xl text-muted-foreground mt-4">
-              com sede em <span className="text-2xl md:text-3xl font-bold text-primary">Joinville - SC</span>
-            </p>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+              <div className="w-48 h-48 md:w-64 md:h-64">
+                <img src={scMap} alt="Mapa de Santa Catarina - Joinville" className="w-full h-full object-contain" />
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-lg md:text-xl text-muted-foreground">
+                  Fazemos parte de um grupo com mais de <span className="text-2xl md:text-3xl font-bold text-primary block mt-2">14 anos no mercado de tecnologia</span>
+                </p>
+                <p className="text-lg md:text-xl text-muted-foreground mt-4">
+                  com sede em <span className="text-2xl md:text-3xl font-bold text-primary">Joinville - SC</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -72,15 +78,9 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {values.map((value, idx) => (
               <div key={idx} className="text-center p-8">
-                {value.image ? (
-                  <div className="w-32 h-32 mx-auto mb-6">
-                    <img src={value.image} alt={value.title} className="w-full h-full object-contain" />
-                  </div>
-                ) : (
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <value.icon className="w-10 h-10 text-primary" />
-                  </div>
-                )}
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+                  <value.icon className="w-10 h-10 text-primary" />
+                </div>
                 <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
                 <p className="text-muted-foreground">{value.description}</p>
               </div>
