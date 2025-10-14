@@ -5,40 +5,40 @@ const BenefitsSection = () => {
   const benefits = [
     {
       icon: TrendingUp,
-      title: "Aumente suas vendas em até 300%",
-      description: "Nunca mais perca uma oportunidade. Atenda mais rápido, qualifique melhor e feche mais negócios."
+      title: "Aumente suas vendas com IA",
+      description: "Com nossa Inteligência Artificial comercial, você identifica leads quentes, responde automaticamente e converte mais clientes."
     },
     {
       icon: Clock,
-      title: "Economize 15 horas por semana",
-      description: "Automatize tarefas repetitivas e foque no que realmente importa: vender e crescer."
+      title: "Automatize tarefas repetitivas",
+      description: "Tarefas manuais? Deixe que a IA cuide de atendimentos, follow-ups e integração com seu ERP. Ganhe eficiência total."
     },
     {
       icon: Users,
-      title: "Organize toda sua equipe",
-      description: "Gerencie atendimentos, distribua leads e acompanhe a performance em tempo real."
+      title: "Organize sua operação com integração ERP",
+      description: "Centralize atendimento, distribua tarefas e monitore resultados em tempo real dentro do seu sistema empresarial."
     },
     {
       icon: Zap,
-      title: "Resposta em segundos",
-      description: "Chatbots inteligentes que atendem 24/7 e qualificam leads automaticamente."
+      title: "Respostas instantâneas",
+      description: "Chatbots com IA generativa entendem a intenção e respondem de forma natural 24/7."
     },
     {
       icon: CheckCircle2,
-      title: "Integração completa",
-      description: "Conecte com suas ferramentas favoritas: Make, N8N, Instagram, Facebook e mais."
+      title: "Ecossistema integrado",
+      description: "WhatsApp, Instagram, Facebook e ERP conectados em um painel unificado. Tudo sincronizado, sem falhas."
     },
     {
       icon: Shield,
-      title: "Dados seguros e protegidos",
-      description: "Criptografia de ponta a ponta e backup automático. Seus dados sempre seguros."
+      title: "Segurança e confiabilidade",
+      description: "Criptografia ponta a ponta + backups automáticos. Seus dados sempre protegidos no AgentPRO."
     }
   ];
 
   const stats = [
-    { value: "500+", label: "Empresas atendidas" },
-    { value: "1M+", label: "Mensagens enviadas/mês" },
-    { value: "98%", label: "Satisfação dos clientes" },
+    { value: "2.800+", label: "Empresas atendidas" },
+    { value: "20M+", label: "Mensagens trocadas" },
+    { value: "+70%", label: "Atendimentos automatizados por IA" },
     { value: "24/7", label: "Suporte disponível" }
   ];
 
@@ -91,13 +91,17 @@ const BenefitsSection = () => {
 
         {/* Social Proof */}
         <div className="mt-20 text-center">
-          <p className="text-muted-foreground mb-8">Empresas que confiam no AgentPRO</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            <div className="text-2xl font-bold">Empresa A</div>
-            <div className="text-2xl font-bold">Empresa B</div>
-            <div className="text-2xl font-bold">Empresa C</div>
-            <div className="text-2xl font-bold">Empresa D</div>
-            <div className="text-2xl font-bold">Empresa E</div>
+          <p className="text-xl font-semibold mb-8">Empresas que confiam no AgentPRO 🚀</p>
+          <div className="overflow-hidden">
+            <div className="flex animate-scroll gap-12 items-center justify-center opacity-70">
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa A</div>
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa B</div>
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa C</div>
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa D</div>
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa E</div>
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa A</div>
+              <div className="text-2xl font-bold whitespace-nowrap">Empresa B</div>
+            </div>
           </div>
         </div>
       </div>

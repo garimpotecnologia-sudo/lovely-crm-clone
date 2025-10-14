@@ -164,6 +164,10 @@
   .bounce-in {
     @apply animate-[bounceIn_0.8s_ease-out_forwards];
   }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
 }
 
 @layer utilities {
@@ -202,6 +206,15 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

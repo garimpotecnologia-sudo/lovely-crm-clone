@@ -17,12 +17,16 @@ const HeroSection = ({
           {/* Hero Content */}
           <div className="text-center fade-in-up">
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              Gestão de conversas, gestão de funil, agendamentos.<br />
-              <span className="text-white/90">Um CRM inteligente integrado ao seu WhatsApp.</span>
+              Um CRM inteligente que transforma o seu WhatsApp<br />
+              <span className="text-white/90">em uma central de vendas, agendamentos e funil automatizado.</span>
             </h1>
             
-            <p className="text-lg md:text-xl font-light mb-10 max-w-3xl mx-auto text-white/90">
-              Quem usa ferramenta de auxílio no WhatsApp aumenta a performance de produtividade digital em no mínimo 35%.
+            <p className="text-lg md:text-xl font-light mb-4 max-w-3xl mx-auto text-white/90">
+              Gerencie conversas, acompanhe seu funil e automatize agendamentos com Inteligência Artificial.
+            </p>
+            
+            <p className="text-base md:text-lg mb-10 max-w-3xl mx-auto text-white/80">
+              Empresas que utilizam ferramentas de automação no WhatsApp aumentam sua produtividade digital em pelo menos 35%.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
@@ -31,16 +35,15 @@ const HeroSection = ({
                 onClick={onOpenPricing} 
                 className="bg-white text-brand-purple hover:bg-gray-100 text-lg px-10 py-6 h-auto font-semibold"
               >
-                Agendar demonstração
+                Teste gratuitamente
               </Button>
               
               <Button 
                 size="lg" 
-                onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")} 
+                onClick={onOpenPricing} 
                 className="bg-white text-brand-purple hover:bg-gray-100 text-lg px-10 py-6 h-auto font-semibold"
               >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Falar com consultor
+                Ver planos
               </Button>
             </div>
             
