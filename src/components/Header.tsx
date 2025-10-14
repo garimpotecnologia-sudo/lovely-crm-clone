@@ -103,15 +103,6 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
 
                   <NavigationMenuItem>
                     <button
-                      onClick={() => scrollToSection("features")}
-                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    >
-                      Funcionalidades
-                    </button>
-                  </NavigationMenuItem>
-
-                  <NavigationMenuItem>
-                    <button
                       onClick={() => scrollToSection("pricing")}
                       className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                     >
@@ -142,12 +133,6 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button 
-                variant="ghost"
-                onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")}
-              >
-                Falar com consultor
-              </Button>
               <Button onClick={onOpenPricing} className="bg-primary text-primary-foreground hover:bg-primary/90">
                 Testar grátis
               </Button>
@@ -193,15 +178,6 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   Sobre nós
                 </Link>
                 <div className="flex flex-col space-y-2 pt-4">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => {
-                      window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Falar com consultor
-                  </Button>
                   <Button 
                     onClick={() => {
                       onOpenPricing();

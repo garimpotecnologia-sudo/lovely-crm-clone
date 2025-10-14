@@ -16,12 +16,12 @@ const FAQSection = () => {
       answer: "Não! O AgentPRO foi desenvolvido para ser intuitivo e fácil de usar. Além disso, oferecemos treinamento completo para sua equipe e suporte sempre que precisar."
     },
     {
-      question: "Quantos números de WhatsApp posso conectar?",
+      question: "Quantos canais de atendimento posso conectar?",
       answer: "Depende do plano escolhido. No plano Starter você pode conectar até 2 números, no Business até 5, e no Enterprise números ilimitados."
     },
     {
       question: "Quais integrações estão disponíveis?",
-      answer: "Integramos WhatsApp Business API, Instagram, Messenger, além de Make, N8N e APIs customizadas. Novos integrações são adicionadas regularmente."
+      answer: "Integramos WhatsApp Business API, Instagram, Messenger e APIs customizadas. Novos integrações são adicionadas regularmente."
     },
     {
       question: "Os dados ficam seguros e em conformidade com a LGPD?",
