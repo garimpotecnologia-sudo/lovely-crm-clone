@@ -28,7 +28,7 @@ const HeroSection = ({
               <Button 
                 size="lg" 
                 onClick={() => {
-                  const message = "O cliente quer agendar demonstração";
+                  const message = "Olá, vim do site e gostaria de *agendar demonstração*!";
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
                 }}
@@ -36,19 +36,6 @@ const HeroSection = ({
                 className="text-sm md:text-base px-6 md:px-8 py-4 md:py-5 h-auto font-semibold"
               >
                 Agendar demonstração
-              </Button>
-              
-              <Button 
-                size="lg" 
-                onClick={() => {
-                  const message = "O cliente quer falar com consultor";
-                  const encodedMessage = encodeURIComponent(message);
-                  window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
-                }}
-                variant="hero"
-                className="text-sm md:text-base px-6 md:px-8 py-4 md:py-5 h-auto font-semibold"
-              >
-                Falar com consultor
               </Button>
             </div>
             

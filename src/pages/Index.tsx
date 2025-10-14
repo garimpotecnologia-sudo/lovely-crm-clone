@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header, { MobileBottomBar } from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import SocialProofSection from "@/components/SocialProofSection";
+import AIAgentsSection from "@/components/AIAgentsSection";
 import BenefitsSection from "@/components/BenefitsSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import PricingSection from "@/components/PricingSection";
@@ -20,6 +21,7 @@ const Index = () => {
       <Header onOpenPricing={() => setIsPricingModalOpen(true)} />
       <HeroSection onOpenPricing={() => setIsPricingModalOpen(true)} />
       <SocialProofSection />
+      <AIAgentsSection />
       <BenefitsSection />
       <FeaturesSection />
       <PricingSection onOpenPricing={() => setIsPricingModalOpen(true)} />

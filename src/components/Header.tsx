@@ -75,30 +75,12 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger>Produtos</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="w-[400px] p-4">
-                        <div className="grid gap-3">
-                          <Link to="/produtos" className="block p-3 hover:bg-accent rounded-lg transition-colors">
-                            <div className="font-medium mb-1">Todos os Produtos</div>
-                            <p className="text-sm text-muted-foreground">Conheça nossas soluções completas</p>
-                          </Link>
-                          <div className="h-px bg-border" />
-                          <button onClick={() => scrollToSection("features")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
-                            <div className="font-medium mb-1">CRM Inteligente</div>
-                            <p className="text-sm text-muted-foreground">Gerencie clientes e vendas</p>
-                          </button>
-                          <button onClick={() => scrollToSection("features")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
-                            <div className="font-medium mb-1">WhatsApp Multicanal</div>
-                            <p className="text-sm text-muted-foreground">Atenda múltiplos números</p>
-                          </button>
-                          <button onClick={() => scrollToSection("features")} className="block p-3 hover:bg-accent rounded-lg transition-colors text-left">
-                            <div className="font-medium mb-1">Automação Inteligente</div>
-                            <p className="text-sm text-muted-foreground">Automatize seus processos</p>
-                          </button>
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
+                    <button
+                      onClick={() => scrollToSection("ai-agents")}
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      Agentes Inteligentes
+                    </button>
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
@@ -135,7 +117,7 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
             <div className="hidden md:flex items-center space-x-4">
               <Button 
                 onClick={() => {
-                  const message = "O cliente quer testar grátis";
+                  const message = "Olá, vim do site e gostaria de *testar grátis*!";
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
                 }}
@@ -158,13 +140,15 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <nav className="flex flex-col space-y-4">
-                <Link 
-                  to="/produtos"
-                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                <button 
+                  onClick={() => {
+                    scrollToSection("ai-agents");
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors text-left"
                 >
-                  Produtos
-                </Link>
+                  Agentes Inteligentes
+                </button>
                 {menuItems.map((item) => (
                   <button
                     key={item.section}
@@ -187,7 +171,7 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                 <div className="flex flex-col space-y-2 pt-4">
                   <Button 
                     onClick={() => {
-                      const message = "O cliente quer testar grátis";
+                      const message = "Olá, vim do site e gostaria de *testar grátis*!";
                       const encodedMessage = encodeURIComponent(message);
                       window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
                       setIsMenuOpen(false);
@@ -213,15 +197,15 @@ interface MobileBottomBarProps {
 }
 
 export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
-  const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o CRM AgentPRO!", "_blank");
-  };
-
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border z-40 md:hidden">
       <div className="grid grid-cols-2 gap-1 p-2">
         <button
-          onClick={handleWhatsAppClick}
+          onClick={() => {
+            const message = "Olá, vim do site e gostaria de *falar no WhatsApp*!";
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+          }}
           className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors"
         >
           <MessageCircle className="h-4 w-4" />
@@ -229,7 +213,7 @@ export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
         </button>
         <button
           onClick={() => {
-            const message = "O cliente quer ver planos";
+            const message = "Olá, vim do site e gostaria de *ver planos*!";
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
           }}

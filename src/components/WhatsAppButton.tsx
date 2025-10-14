@@ -2,7 +2,9 @@ import { MessageCircle } from "lucide-react";
 
 const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5547984147016?text=Olá! Cliquei no botão flutuante do WhatsApp. Quero saber mais sobre o CRM AgentPRO!", "_blank");
+    const message = "Olá, vim do site e gostaria de *falar no WhatsApp*!";
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
   };
 
   return (

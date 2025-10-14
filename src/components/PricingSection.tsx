@@ -97,9 +97,9 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
   ];
 
   const handlePlanClick = (planName: string) => {
-    const message = `Olá! Cliquei no plano ${planName} na seção de preços do site. Quero saber mais sobre este plano e como contratar!`;
+    const message = `Olá, vim do site e gostaria de *contratar o plano ${planName}*!`;
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5547984147016?text=${encodedMessage}`, "_blank");
+    window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
   };
 
   return (
