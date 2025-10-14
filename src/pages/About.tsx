@@ -43,8 +43,11 @@ const About = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Somos seu <span className="text-primary">verdadeiro parceiro</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground mb-4">
               No AgentPRO você encontra o parceiro que resolve os desafios do seu negócio com as soluções simples que você precisa
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Fazemos parte de um grupo com mais de <span className="font-semibold text-primary">14 anos no mercado de tecnologia</span>, com sede em <span className="font-semibold text-primary">Joinville - SC</span>
             </p>
           </div>
         </div>
