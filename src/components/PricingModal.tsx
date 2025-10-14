@@ -34,7 +34,7 @@ const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
       category: "ADICIONAIS",
       items: [
         { name: "Usuário Adicional", values: ["R$ 107/mês", "R$ 87/mês", "R$ 57/mês", "R$ 47/mês"] },
-        { name: "WhatsApp Adicional", values: ["R$ 89/mês", "R$ 89/mês", "R$ 89/mês", "R$ 89/mês"] },
+        { name: "WhatsApp Adicional", values: ["R$ 99/mês", "R$ 99/mês", "R$ 99/mês", "R$ 99/mês"] },
         { name: "Direct ou Messenger Adicional", values: ["R$ 69/mês", "R$ 69/mês", "R$ 69/mês", "R$ 69/mês"] },
         { name: "Pagamentos", values: ["R$ 99/mês", "R$ 99/mês", "R$ 99/mês", "R$ 99/mês"] }
       ]
@@ -209,7 +209,7 @@ const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
 
         {/* Additional Info */}
         <div className="mt-6 bg-muted/50 rounded-lg p-4 text-sm text-muted-foreground">
-          <h4 className="font-semibold text-foreground mb-2">Precificação de conversas (cobradas pela Meta):</h4>
+          <h4 className="font-semibold text-foreground mb-2">Precificação de conversas (cobradas pela Meta) - APLICA-SE A QUEM USA API OFICIAL:</h4>
           <div className="space-y-1">
             <p>• Conversa receptiva: ilimitado</p>
             <p>• Conversa de marketing: US$ 0,0625</p>
