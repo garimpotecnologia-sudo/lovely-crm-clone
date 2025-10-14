@@ -1,5 +1,12 @@
 import { CheckCircle2, TrendingUp, Clock, Users, Zap, Shield } from "lucide-react";
 import logoHorizontal from "@/assets/logo-horizontal-dark.png";
+import logoClinicaOlhos from "@/assets/logo-clinica-olhos.avif";
+import logoClinicaViddas from "@/assets/logo-clinica-viddas.png";
+import logoAngioclinica from "@/assets/logo-angioclinica.png";
+import logoClimma from "@/assets/logo-climma.png";
+import logoClinicare from "@/assets/logo-clinicare.png";
+import logoRacaoFacil from "@/assets/logo-racaofacil.svg";
+import logoUbarana from "@/assets/logo-ubarana.png";
 
 const BenefitsSection = () => {
   const benefits = [
@@ -49,11 +56,11 @@ const BenefitsSection = () => {
         <div className="max-w-5xl mx-auto mb-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+              <div key={idx} className="bg-primary rounded-2xl p-6 text-center">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-white/90">
                   {stat.label}
                 </div>
               </div>
@@ -64,9 +71,7 @@ const BenefitsSection = () => {
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Por que escolher o
-            <br />
-            <img src={logoHorizontal} alt="AgentPRO" className="h-16 md:h-20 mx-auto mt-4" />?
+            Por que escolher o <img src={logoHorizontal} alt="AgentPRO" className="h-16 md:h-20 mx-auto mt-2 mb-2" />?
           </h2>
           <p className="text-xl text-muted-foreground">
             Mais do que um CRM, uma plataforma completa para transformar seu atendimento
@@ -94,13 +99,15 @@ const BenefitsSection = () => {
           <p className="text-xl font-semibold mb-8">Empresas que confiam no AgentPRO 🚀</p>
           <div className="overflow-hidden">
             <div className="flex animate-scroll gap-12 items-center justify-center opacity-70">
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa A</div>
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa B</div>
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa C</div>
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa D</div>
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa E</div>
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa A</div>
-              <div className="text-2xl font-bold whitespace-nowrap">Empresa B</div>
+              <img src={logoClinicaOlhos} alt="Clínica Olhos" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoClinicaViddas} alt="Clínica Viddas" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoAngioclinica} alt="Angioclínica" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoClimma} alt="Climma" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoClinicare} alt="Clinicare" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoRacaoFacil} alt="Ração Fácil" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoUbarana} alt="Hospital Ubarana" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoClinicaOlhos} alt="Clínica Olhos" className="h-12 md:h-16 whitespace-nowrap" />
+              <img src={logoClinicaViddas} alt="Clínica Viddas" className="h-12 md:h-16 whitespace-nowrap" />
             </div>
           </div>
         </div>
