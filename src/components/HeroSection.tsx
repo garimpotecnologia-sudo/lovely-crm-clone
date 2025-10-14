@@ -10,35 +10,34 @@ interface HeroSectionProps {
 const HeroSection = ({
   onOpenPricing
 }: HeroSectionProps) => {
-  return <section id="home" className="pt-32 pb-20 hero-gradient text-white overflow-hidden">
+  return <>
+    <section id="home" className="pt-32 pb-12 hero-gradient text-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
-          <div className="text-center mb-16 fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-              Automatize seu atendimento<br />
-              <span className="text-white/90">e venda mais com IA</span>
+          <div className="text-center fade-in-up">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+              Gestão de conversas, gestão de funil, agendamentos.<br />
+              <span className="text-white/90">Um CRM inteligente integrado ao seu WhatsApp.</span>
             </h1>
             
-            <p className="text-xl md:text-2xl font-light mb-10 max-w-3xl mx-auto text-white/90">
-              CRM inteligente integrado ao WhatsApp que centraliza seus atendimentos, 
-              automatiza processos e aumenta suas vendas
+            <p className="text-lg md:text-xl font-light mb-10 max-w-3xl mx-auto text-white/90">
+              Quem usa ferramenta de auxílio no WhatsApp aumenta a performance de produtividade digital em no mínimo 35%.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <Button 
                 size="lg" 
                 onClick={onOpenPricing} 
-                className="hero-button group bg-white text-primary hover:bg-gray-100 text-lg px-10 py-6 h-auto"
+                className="bg-white text-brand-purple hover:bg-gray-100 text-lg px-10 py-6 h-auto font-semibold"
               >
                 Agendar demonstração
               </Button>
               
               <Button 
                 size="lg" 
-                variant="outline" 
                 onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")} 
-                className="text-white border-white/30 hover:bg-white/10 text-lg px-10 py-6 h-auto"
+                className="bg-white text-brand-purple hover:bg-gray-100 text-lg px-10 py-6 h-auto font-semibold"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Falar com consultor
@@ -49,29 +48,30 @@ const HeroSection = ({
               ✨ Teste grátis por 7 dias • Sem cartão de crédito
             </p>
           </div>
+        </div>
+      </div>
+    </section>
 
-          {/* Dashboard Preview */}
-          <div className="relative max-w-6xl mx-auto bounce-in">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
-                <img src={crmInterface} alt="Central de Atendimento AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
-              </div>
-              
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
-                <img src={plataformaAtendimento} alt="Plataforma de Atendimento AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
-              </div>
-              
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
-                <img src={automationFlow} alt="Automação de Fluxos AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
-              </div>
-              
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
-                <img src={crmFunilVendas} alt="Funil de Vendas CRM AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
-              </div>
+    {/* Dashboard Preview - Outside gradient background */}
+    <section className="py-12 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto bounce-in">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
+              <img src={crmInterface} alt="Central de Atendimento AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
+            </div>
+            
+            <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl">
+              <img src={automationFlow} alt="Automação de Fluxos AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
+            </div>
+            
+            <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl p-4 shadow-2xl md:col-span-2">
+              <img src={crmFunilVendas} alt="Funil de Vendas CRM AgentPRO" className="w-full h-auto rounded-2xl shadow-xl" />
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  </>;
 };
 export default HeroSection;
