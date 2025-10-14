@@ -16,34 +16,35 @@ const HeroSection = ({
         <div className="max-w-7xl mx-auto">
           {/* Hero Content */}
           <div className="text-center fade-in-up">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              Um CRM inteligente que transforma o seu WhatsApp<br />
-              <span className="text-white/90">em uma central de vendas, agendamentos e funil automatizado.</span>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              Um CRM inteligente que conecta sua equipe, seus clientes e seu WhatsApp em um único fluxo automatizado.
             </h1>
             
-            <p className="text-lg md:text-xl font-light mb-4 max-w-3xl mx-auto text-white/90">
-              Gerencie conversas, acompanhe seu funil e automatize agendamentos com Inteligência Artificial.
+            <p className="text-base md:text-lg lg:text-xl font-light mb-3 max-w-3xl mx-auto text-white/90">
+              Centralize mensagens, agendamentos e funil de vendas com Inteligência Artificial.
             </p>
             
-            <p className="text-base md:text-lg mb-10 max-w-3xl mx-auto text-white/80">
-              Empresas que utilizam ferramentas de automação no WhatsApp aumentam sua produtividade digital em pelo menos 35%.
+            <p className="text-sm md:text-base lg:text-lg mb-10 max-w-3xl mx-auto text-white/80">
+              Mais produtividade, menos esforço — crescimento garantido.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <Button 
                 size="lg" 
                 onClick={onOpenPricing} 
-                className="bg-white text-brand-purple hover:bg-gray-100 text-lg px-10 py-6 h-auto font-semibold"
+                variant="hero"
+                className="text-base md:text-lg px-8 md:px-10 py-5 md:py-6 h-auto font-semibold"
               >
-                Teste gratuitamente
+                Agendar demonstração
               </Button>
               
               <Button 
                 size="lg" 
                 onClick={onOpenPricing} 
-                className="bg-white text-brand-purple hover:bg-gray-100 text-lg px-10 py-6 h-auto font-semibold"
+                variant="hero"
+                className="text-base md:text-lg px-8 md:px-10 py-5 md:py-6 h-auto font-semibold"
               >
-                Ver planos
+                Falar com consultor
               </Button>
             </div>
             

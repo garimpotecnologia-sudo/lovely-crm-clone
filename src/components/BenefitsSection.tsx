@@ -70,8 +70,10 @@ const BenefitsSection = () => {
 
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Por que escolher o <img src={logoHorizontal} alt="AgentPRO" className="h-16 md:h-20 mx-auto mt-2 mb-2" />?
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 flex flex-wrap items-center justify-center gap-2">
+            <span>Por que escolher o</span>
+            <img src={logoHorizontal} alt="AgentPRO" className="h-10 md:h-12 inline-block" />
+            <span>?</span>
           </h2>
           <p className="text-xl text-muted-foreground">
             Mais do que um CRM, uma plataforma completa para transformar seu atendimento
