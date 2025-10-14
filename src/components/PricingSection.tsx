@@ -155,9 +155,9 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
                 </div>
 
                 {/* All Features */}
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 mb-4 text-center">
                   {plan.allFeatures.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-start space-x-2">
+                    <div key={featureIndex} className="flex items-center justify-center space-x-2">
                       {feature.included ? (
                         <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
                       ) : (
@@ -183,6 +183,17 @@ const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
                 </Button>
               </div>
             ))}
+          </div>
+
+          {/* Botão Diferença entre Planos */}
+          <div className="mt-12 text-center">
+            <Button 
+              variant="outline" 
+              onClick={onOpenPricing}
+              className="text-lg px-8 py-6 h-auto font-semibold"
+            >
+              DIFERENÇA ENTRE PLANOS
+            </Button>
           </div>
 
           {/* Adicionais */}

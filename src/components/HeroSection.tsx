@@ -27,7 +27,11 @@ const HeroSection = ({
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
               <Button 
                 size="lg" 
-                onClick={onOpenPricing} 
+                onClick={() => {
+                  const message = "O cliente quer agendar demonstração";
+                  const encodedMessage = encodeURIComponent(message);
+                  window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+                }}
                 variant="hero"
                 className="text-sm md:text-base px-6 md:px-8 py-4 md:py-5 h-auto font-semibold"
               >
@@ -36,7 +40,11 @@ const HeroSection = ({
               
               <Button 
                 size="lg" 
-                onClick={onOpenPricing} 
+                onClick={() => {
+                  const message = "O cliente quer falar com consultor";
+                  const encodedMessage = encodeURIComponent(message);
+                  window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+                }}
                 variant="hero"
                 className="text-sm md:text-base px-6 md:px-8 py-4 md:py-5 h-auto font-semibold"
               >

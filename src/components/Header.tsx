@@ -133,7 +133,14 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button onClick={onOpenPricing} className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button 
+                onClick={() => {
+                  const message = "O cliente quer testar grátis";
+                  const encodedMessage = encodeURIComponent(message);
+                  window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+                }}
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+              >
                 Testar grátis
               </Button>
             </div>
@@ -180,7 +187,9 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                 <div className="flex flex-col space-y-2 pt-4">
                   <Button 
                     onClick={() => {
-                      onOpenPricing();
+                      const message = "O cliente quer testar grátis";
+                      const encodedMessage = encodeURIComponent(message);
+                      window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
                       setIsMenuOpen(false);
                     }}
                   >
@@ -219,7 +228,11 @@ export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
           <span className="text-sm font-medium">WhatsApp</span>
         </button>
         <button
-          onClick={onOpenPricing}
+          onClick={() => {
+            const message = "O cliente quer ver planos";
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+          }}
           className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-4 rounded-lg transition-colors"
         >
           <span className="text-sm font-medium">Ver Planos</span>
