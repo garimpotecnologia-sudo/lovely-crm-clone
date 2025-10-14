@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useState } from "react";
 import PricingModal from "@/components/PricingModal";
+import scMap from "@/assets/sc-map.png";
 
 const About = () => {
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
@@ -12,8 +13,9 @@ const About = () => {
   const values = [
     {
       icon: Target,
-      title: "Foco no cliente",
-      description: "Antes de pensar em tecnologia, entendemos suas necessidades e criamos soluções que realmente funcionam para você"
+      title: "14 anos de mercado",
+      description: "14 anos entregando soluções tecnológicas que geram impacto real. Vamos levar seu CRM a um novo nível.",
+      image: scMap
     },
     {
       icon: Heart,
@@ -70,9 +72,15 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {values.map((value, idx) => (
               <div key={idx} className="text-center p-8">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-                  <value.icon className="w-10 h-10 text-primary" />
-                </div>
+                {value.image ? (
+                  <div className="w-32 h-32 mx-auto mb-6">
+                    <img src={value.image} alt={value.title} className="w-full h-full object-contain" />
+                  </div>
+                ) : (
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+                    <value.icon className="w-10 h-10 text-primary" />
+                  </div>
+                )}
                 <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
                 <p className="text-muted-foreground">{value.description}</p>
               </div>
