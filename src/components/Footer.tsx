@@ -1,32 +1,26 @@
 import { MessageCircle, Mail, MapPin, Phone } from "lucide-react";
 import logoHorizontalLight from "@/assets/logo-horizontal-light.png";
 import { Link, useNavigate } from "react-router-dom";
-
 const Footer = () => {
   const navigate = useNavigate();
-
   const scrollToSection = (sectionId: string) => {
     navigate('/');
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({
+          behavior: "smooth"
+        });
       }
     }, 100);
   };
-
-  return (
-    <footer className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
+  return <footer className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <img 
-                src={logoHorizontalLight} 
-                alt="AgentPRO CRM" 
-                className="h-10 w-auto mb-6"
-              />
+              <img src={logoHorizontalLight} alt="AgentPRO CRM" className="h-10 w-auto mb-6" />
               <p className="text-white/80 mb-6 leading-relaxed">
                 Automatize seu atendimento com CRM inteligente integrado ao WhatsApp. 
                 Gerencie clientes, venda mais e economize tempo com automação.
@@ -34,7 +28,7 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5 text-primary" />
-                  <span>+55 47 98414-7016</span>
+                  <span>+55 47 9 8859- 4022</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
@@ -51,9 +45,7 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-6">Produtos</h3>
               <div className="space-y-3">
-                <Link to="/produtos" className="block text-white/80 hover:text-white transition-colors">
-                  Todos os Produtos
-                </Link>
+                
                 <button onClick={() => scrollToSection("features")} className="block text-white/80 hover:text-white transition-colors text-left">
                   CRM Inteligente
                 </button>
@@ -79,13 +71,7 @@ const Footer = () => {
                 <button onClick={() => scrollToSection("faq")} className="block text-white/80 hover:text-white transition-colors text-left">
                   FAQ
                 </button>
-                <button
-                  onClick={() => window.open("https://wa.me/5547984147016?text=Olá! Quero saber mais sobre o AgentPRO!", "_blank")}
-                  className="flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
-                >
-                  <MessageCircle className="h-4 w-4 text-green-500" />
-                  <span>Contato</span>
-                </button>
+                
               </div>
             </div>
           </div>
@@ -98,8 +84,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
