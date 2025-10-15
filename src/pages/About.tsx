@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Target, Heart, Rocket, Shield } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Target, Heart, Rocket, Shield, Ban, Sparkles, Focus } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -90,37 +91,64 @@ const About = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-12 bg-muted/50">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold text-center mb-4">
               Deixamos o que é velho e sem sentido no passado
             </h2>
+            <p className="text-center text-muted-foreground mb-16 text-lg">
+              Uma nova forma de fazer negócios, sem amarras e sem surpresas
+            </p>
             
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="text-5xl mb-4">🚫</div>
-                <h3 className="font-bold mb-3">Anuidades deveriam ser proibidas</h3>
-                <p className="text-sm text-muted-foreground">
-                  Talvez você ainda ache normal ser refém de planos de mensalidade
-                </p>
-              </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                <CardHeader>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-destructive/10 flex items-center justify-center">
+                    <Ban className="w-8 h-8 text-destructive" />
+                  </div>
+                  <CardTitle className="text-center text-xl">
+                    Anuidades deveriam ser proibidas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-muted-foreground">
+                    Talvez você ainda ache normal ser refém de planos de mensalidade
+                  </p>
+                </CardContent>
+              </Card>
               
-              <div className="text-center">
-                <div className="text-5xl mb-4">✨</div>
-                <h3 className="font-bold mb-3">Sem truques ou asteriscos</h3>
-                <p className="text-sm text-muted-foreground">
-                  Não enganamos você na renovação de serviços como outras empresas fazem
-                </p>
-              </div>
+              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                <CardHeader>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Sparkles className="w-8 h-8 text-primary" />
+                  </div>
+                  <CardTitle className="text-center text-xl">
+                    Sem truques ou asteriscos
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-muted-foreground">
+                    Não enganamos você na renovação de serviços como outras empresas fazem
+                  </p>
+                </CardContent>
+              </Card>
               
-              <div className="text-center">
-                <div className="text-5xl mb-4">🎯</div>
-                <h3 className="font-bold mb-3">Não faz sentido perder seu foco</h3>
-                <p className="text-sm text-muted-foreground">
-                  Não fique na fila do suporte quando o site do seu cliente está fora do ar
-                </p>
-              </div>
+              <Card className="border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+                <CardHeader>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-accent/20 flex items-center justify-center">
+                    <Focus className="w-8 h-8 text-accent-foreground" />
+                  </div>
+                  <CardTitle className="text-center text-xl">
+                    Não faz sentido perder seu foco
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-muted-foreground">
+                    Não fique na fila do suporte quando o site do seu cliente está fora do ar
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
