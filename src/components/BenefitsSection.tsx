@@ -63,7 +63,7 @@ const BenefitsSection = () => {
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Porque escolher a nossa empresa
+            Por que escolher a nossa empresa
           </h2>
           <p className="text-xl text-muted-foreground">
             Mais do que um CRM, uma plataforma completa para transformar seu atendimento
