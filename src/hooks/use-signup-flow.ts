@@ -11,6 +11,7 @@ import {
   createSubscription,
   getPaymentDetails,
 } from "@/services/asaas";
+import { createTrialAccount } from "@/services/trial";
 import { resetPixPollCount } from "@/services/mock-data";
 import { stripMask } from "@/lib/masks";
 import { saveTrialInfo } from "@/lib/trial";
@@ -61,68 +62,36 @@ export function useSignupFlow() {
     companyMutation.mutate(data);
   };
 
-  // Trial finalization - create account, create Asaas subscription with future date, activate
+  // Trial finalization - calls Supabase Edge Function that handles everything
   const trialFinalizeMutation = useMutation({
     mutationFn: async () => {
       dispatch({ type: "SET_LOADING", isLoading: true });
 
-      const companyId = state.helenaCompanyId!;
       const companyData = state.companyData!;
       const plan = state.selectedPlan!;
 
-      // Activate account for trial
-      await activateCompany(companyId);
-      const tokenResult = await createToken(companyId);
-      dispatch({ type: "SET_HELENA_TOKEN", token: tokenResult.token });
+      const result = await createTrialAccount(companyData, plan.name);
 
-      await createAgent({
-        name: companyData.contactPerson.name,
-        email: companyData.contactPerson.email,
-        companyId,
-      });
+      dispatch({ type: "SET_HELENA_COMPANY", companyId: result.companyId });
+      dispatch({ type: "SET_HELENA_TOKEN", token: result.token });
+      dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: result.asaasCustomerId });
+      dispatch({ type: "SET_ASAAS_SUBSCRIPTION", subscriptionId: result.asaasSubscriptionId });
 
-      // Create Asaas customer + subscription with nextDueDate = today + 7 days
-      const customer = await createCustomer({
-        name: companyData.contactPerson.name,
-        email: companyData.email,
-        cpfCnpj: stripMask(companyData.cpfCnpj),
-        phone: stripMask(companyData.phone),
-      });
-      dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: customer.id });
-
-      const trialEndDate = new Date();
-      trialEndDate.setDate(trialEndDate.getDate() + 7);
-      const nextDueDate = trialEndDate.toISOString().split("T")[0];
-
-      const subscription = await createSubscription({
-        customer: customer.id,
-        billingType: "PIX",
-        value: plan.price,
-        nextDueDate,
-        description: `CRM AGENTPRO - Plano ${plan.name} (Trial 7 dias)`,
-      });
-      dispatch({
-        type: "SET_ASAAS_SUBSCRIPTION",
-        subscriptionId: subscription.id,
-      });
-
-      // Save trial info locally
-      const trialStart = new Date().toISOString();
-      const trialEnd = trialEndDate.toISOString();
+      // Save trial info locally for the banner
       saveTrialInfo({
         isActive: true,
-        startDate: trialStart,
-        endDate: trialEnd,
+        startDate: new Date().toISOString(),
+        endDate: result.trialEndDate,
         daysRemaining: 7,
-        companyId,
-        email: companyData.contactPerson.email,
+        companyId: result.companyId,
+        email: result.loginEmail,
         plan: plan.name,
       });
 
       dispatch({
         type: "SET_LOGIN_INFO",
-        url: "https://app.agentpro.com.br",
-        email: companyData.contactPerson.email,
+        url: result.loginUrl,
+        email: result.loginEmail,
       });
       dispatch({ type: "SET_LOADING", isLoading: false });
       dispatch({ type: "SET_STEP", step: 4 });
