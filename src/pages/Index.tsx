@@ -12,6 +12,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PricingModal from "@/components/PricingModal";
 import SignupDialog from "@/components/signup/SignupDialog";
 import TrialBanner from "@/components/TrialBanner";
+import UpgradeDialog from "@/components/UpgradeDialog";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import type { Plan } from "@/types/plans";
 import type { SignupMode } from "@/types/signup";
@@ -19,6 +20,7 @@ import type { SignupMode } from "@/types/signup";
 const Index = () => {
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [isUpgradeOpen, setIsUpgradeOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [signupMode, setSignupMode] = useState<SignupMode>("purchase");
 
@@ -34,9 +36,13 @@ const Index = () => {
     setIsSignupOpen(true);
   };
 
+  const handleUpgrade = () => {
+    setIsUpgradeOpen(true);
+  };
+
   return (
     <main className="min-h-screen bg-background pb-16 md:pb-0">
-      <TrialBanner onUpgrade={() => { setSignupMode("purchase"); setIsSignupOpen(true); }} />
+      <TrialBanner onUpgrade={handleUpgrade} />
       <ScrollAnimations />
       <Header
         onOpenPricing={() => setIsPricingModalOpen(true)}
@@ -68,6 +74,10 @@ const Index = () => {
         onClose={() => setIsSignupOpen(false)}
         initialPlan={selectedPlan}
         mode={signupMode}
+      />
+      <UpgradeDialog
+        isOpen={isUpgradeOpen}
+        onClose={() => setIsUpgradeOpen(false)}
       />
     </main>
   );
