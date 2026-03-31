@@ -181,7 +181,7 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "CRM AGENTPRO <noreply@agentpro.com.br>",
+          from: "CRM AGENTPRO <onboarding@resend.dev>",
           to: body.contactEmail,
           subject: "Bem-vindo ao CRM AGENTPRO! Seu trial de 7 dias começou",
           html: `
