@@ -15,9 +15,10 @@ import {
 
 interface HeaderProps {
   onOpenPricing: () => void;
+  onStartTrial?: () => void;
 }
 
-const Header = ({ onOpenPricing }: HeaderProps) => {
+const Header = ({ onOpenPricing, onStartTrial }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -124,12 +125,8 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button 
-                onClick={() => {
-                  const message = "Olá, vim do site e gostaria de *testar grátis*!";
-                  const encodedMessage = encodeURIComponent(message);
-                  window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
-                }}
+              <Button
+                onClick={() => onStartTrial?.()}
                 className="bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 Testar grátis
@@ -183,11 +180,9 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                   Contato
                 </Link>
                 <div className="flex flex-col space-y-2 pt-4">
-                  <Button 
+                  <Button
                     onClick={() => {
-                      const message = "Olá, vim do site e gostaria de *testar grátis*!";
-                      const encodedMessage = encodeURIComponent(message);
-                      window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+                      onStartTrial?.();
                       setIsMenuOpen(false);
                     }}
                   >

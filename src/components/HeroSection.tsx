@@ -6,9 +6,10 @@ import automationFlow from "@/assets/automation-flow.png";
 
 interface HeroSectionProps {
   onOpenPricing: () => void;
+  onStartTrial?: () => void;
 }
 
-const HeroSection = ({ onOpenPricing }: HeroSectionProps) => {
+const HeroSection = ({ onOpenPricing, onStartTrial }: HeroSectionProps) => {
   return (
     <>
       <section id="home" className="pt-32 pb-16 hero-gradient text-white overflow-hidden relative">
@@ -42,15 +43,11 @@ const HeroSection = ({ onOpenPricing }: HeroSectionProps) => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 animate-fadeInUp" style={{ animationDelay: '300ms' }}>
                 <Button
                   size="lg"
-                  onClick={() => {
-                    const message = "Olá, vim do site e gostaria de *agendar demonstração*!";
-                    const encodedMessage = encodeURIComponent(message);
-                    window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
-                  }}
+                  onClick={() => onStartTrial?.()}
                   variant="hero"
                   className="text-sm md:text-base px-8 py-5 h-auto font-semibold hero-button"
                 >
-                  Agendar demonstração
+                  Testar grátis por 7 dias
                 </Button>
                 <Button
                   size="lg"
@@ -67,7 +64,7 @@ const HeroSection = ({ onOpenPricing }: HeroSectionProps) => {
               </div>
 
               <p className="text-sm text-white/50 animate-fadeInUp" style={{ animationDelay: '400ms' }}>
-                Teste grátis por 7 dias · Sem cartão de crédito
+                Sem cartão de crédito · Cancele quando quiser
               </p>
             </div>
           </div>

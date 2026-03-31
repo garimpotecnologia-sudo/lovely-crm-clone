@@ -2,6 +2,8 @@ import type { Plan } from "./plans";
 
 export type SignupStep = 1 | 2 | 3 | 4;
 
+export type SignupMode = "purchase" | "trial";
+
 export type PaymentMethod = "pix" | "credit-card";
 
 export interface CompanyAddress {
@@ -43,7 +45,18 @@ export interface PaymentFormData {
   creditCard?: CreditCardData;
 }
 
+export interface TrialInfo {
+  isActive: boolean;
+  startDate: string;
+  endDate: string;
+  daysRemaining: number;
+  companyId: string;
+  email: string;
+  plan: string;
+}
+
 export interface SignupState {
+  mode: SignupMode;
   currentStep: SignupStep;
   selectedPlan: Plan | null;
   companyData: CompanyFormData | null;
@@ -61,6 +74,7 @@ export interface SignupState {
 }
 
 export type SignupAction =
+  | { type: "SET_MODE"; mode: SignupMode }
   | { type: "SET_STEP"; step: SignupStep }
   | { type: "SET_PLAN"; plan: Plan }
   | { type: "SET_COMPANY_DATA"; data: CompanyFormData }
@@ -76,6 +90,7 @@ export type SignupAction =
   | { type: "RESET" };
 
 export const initialSignupState: SignupState = {
+  mode: "purchase",
   currentStep: 1,
   selectedPlan: null,
   companyData: null,

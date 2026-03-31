@@ -13,11 +13,16 @@ import {
 } from "@/services/asaas";
 import { resetPixPollCount } from "@/services/mock-data";
 import { stripMask } from "@/lib/masks";
+import { saveTrialInfo } from "@/lib/trial";
 import type { Plan } from "@/types/plans";
-import type { CompanyFormData, PaymentFormData } from "@/types/signup";
+import type { CompanyFormData, PaymentFormData, SignupMode } from "@/types/signup";
 
 export function useSignupFlow() {
   const { state, dispatch } = useSignupContext();
+
+  const setMode = (mode: SignupMode) => {
+    dispatch({ type: "SET_MODE", mode });
+  };
 
   const selectPlan = (plan: Plan) => {
     dispatch({ type: "SET_PLAN", plan });
@@ -36,7 +41,12 @@ export function useSignupFlow() {
     },
     onSuccess: () => {
       dispatch({ type: "SET_LOADING", isLoading: false });
-      dispatch({ type: "SET_STEP", step: 3 });
+      if (state.mode === "trial") {
+        // Trial: skip payment, go straight to finalization
+        trialFinalizeMutation.mutate();
+      } else {
+        dispatch({ type: "SET_STEP", step: 3 });
+      }
     },
     onError: (error: Error) => {
       dispatch({
@@ -51,6 +61,80 @@ export function useSignupFlow() {
     companyMutation.mutate(data);
   };
 
+  // Trial finalization - create account, create Asaas subscription with future date, activate
+  const trialFinalizeMutation = useMutation({
+    mutationFn: async () => {
+      dispatch({ type: "SET_LOADING", isLoading: true });
+
+      const companyId = state.helenaCompanyId!;
+      const companyData = state.companyData!;
+      const plan = state.selectedPlan!;
+
+      // Activate account for trial
+      await activateCompany(companyId);
+      const tokenResult = await createToken(companyId);
+      dispatch({ type: "SET_HELENA_TOKEN", token: tokenResult.token });
+
+      await createAgent({
+        name: companyData.contactPerson.name,
+        email: companyData.contactPerson.email,
+        companyId,
+      });
+
+      // Create Asaas customer + subscription with nextDueDate = today + 7 days
+      const customer = await createCustomer({
+        name: companyData.contactPerson.name,
+        email: companyData.email,
+        cpfCnpj: stripMask(companyData.cpfCnpj),
+        phone: stripMask(companyData.phone),
+      });
+      dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: customer.id });
+
+      const trialEndDate = new Date();
+      trialEndDate.setDate(trialEndDate.getDate() + 7);
+      const nextDueDate = trialEndDate.toISOString().split("T")[0];
+
+      const subscription = await createSubscription({
+        customer: customer.id,
+        billingType: "PIX",
+        value: plan.price,
+        nextDueDate,
+        description: `CRM AGENTPRO - Plano ${plan.name} (Trial 7 dias)`,
+      });
+      dispatch({
+        type: "SET_ASAAS_SUBSCRIPTION",
+        subscriptionId: subscription.id,
+      });
+
+      // Save trial info locally
+      const trialStart = new Date().toISOString();
+      const trialEnd = trialEndDate.toISOString();
+      saveTrialInfo({
+        isActive: true,
+        startDate: trialStart,
+        endDate: trialEnd,
+        daysRemaining: 7,
+        companyId,
+        email: companyData.contactPerson.email,
+        plan: plan.name,
+      });
+
+      dispatch({
+        type: "SET_LOGIN_INFO",
+        url: "https://app.agentpro.com.br",
+        email: companyData.contactPerson.email,
+      });
+      dispatch({ type: "SET_LOADING", isLoading: false });
+      dispatch({ type: "SET_STEP", step: 4 });
+    },
+    onError: (error: Error) => {
+      dispatch({
+        type: "SET_ERROR",
+        error: error.message || "Erro ao ativar trial. Tente novamente.",
+      });
+    },
+  });
+
   const paymentMutation = useMutation({
     mutationFn: async (data: PaymentFormData) => {
       dispatch({ type: "SET_LOADING", isLoading: true });
@@ -59,7 +143,6 @@ export function useSignupFlow() {
       const companyData = state.companyData!;
       const plan = state.selectedPlan!;
 
-      // Create Asaas customer
       const customer = await createCustomer({
         name: companyData.contactPerson.name,
         email: companyData.email,
@@ -117,7 +200,6 @@ export function useSignupFlow() {
         return { requiresPolling: true };
       }
 
-      // Credit card - payment is immediate, finalize account
       await finalizeAccount();
       return { requiresPolling: false };
     },
@@ -187,6 +269,7 @@ export function useSignupFlow() {
 
   return {
     state,
+    setMode,
     selectPlan,
     goToStep,
     submitCompanyInfo,

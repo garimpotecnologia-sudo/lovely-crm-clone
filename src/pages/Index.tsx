@@ -11,24 +11,41 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PricingModal from "@/components/PricingModal";
 import SignupDialog from "@/components/signup/SignupDialog";
+import TrialBanner from "@/components/TrialBanner";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import type { Plan } from "@/types/plans";
+import type { SignupMode } from "@/types/signup";
 
 const Index = () => {
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const [signupMode, setSignupMode] = useState<SignupMode>("purchase");
 
   const handleSelectPlan = (plan: Plan) => {
     setSelectedPlan(plan);
+    setSignupMode("purchase");
+    setIsSignupOpen(true);
+  };
+
+  const handleStartTrial = () => {
+    setSelectedPlan(null);
+    setSignupMode("trial");
     setIsSignupOpen(true);
   };
 
   return (
     <main className="min-h-screen bg-background pb-16 md:pb-0">
+      <TrialBanner onUpgrade={() => { setSignupMode("purchase"); setIsSignupOpen(true); }} />
       <ScrollAnimations />
-      <Header onOpenPricing={() => setIsPricingModalOpen(true)} />
-      <HeroSection onOpenPricing={() => setIsPricingModalOpen(true)} />
+      <Header
+        onOpenPricing={() => setIsPricingModalOpen(true)}
+        onStartTrial={handleStartTrial}
+      />
+      <HeroSection
+        onOpenPricing={() => setIsPricingModalOpen(true)}
+        onStartTrial={handleStartTrial}
+      />
       <SocialProofSection />
       <AIAgentsSection />
       <BenefitsSection />
@@ -50,6 +67,7 @@ const Index = () => {
         isOpen={isSignupOpen}
         onClose={() => setIsSignupOpen(false)}
         initialPlan={selectedPlan}
+        mode={signupMode}
       />
     </main>
   );

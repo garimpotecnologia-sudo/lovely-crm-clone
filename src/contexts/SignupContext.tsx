@@ -7,6 +7,8 @@ import {
 
 function signupReducer(state: SignupState, action: SignupAction): SignupState {
   switch (action.type) {
+    case "SET_MODE":
+      return { ...state, mode: action.mode };
     case "SET_STEP":
       return { ...state, currentStep: action.step, error: null };
     case "SET_PLAN":

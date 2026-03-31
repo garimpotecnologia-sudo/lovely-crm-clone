@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ExternalLink, Mail, Shield } from "lucide-react";
+import { CheckCircle, ExternalLink, Mail, Shield, Clock } from "lucide-react";
 import { useSignupFlow } from "@/hooks/use-signup-flow";
 
 const StepConfirmation = () => {
   const { state, reset } = useSignupFlow();
+  const isTrial = state.mode === "trial";
+
+  const trialEndDate = new Date();
+  trialEndDate.setDate(trialEndDate.getDate() + 7);
 
   return (
     <div className="text-center space-y-6 px-1 py-4">
@@ -19,12 +23,29 @@ const StepConfirmation = () => {
 
       <div>
         <h3 className="text-2xl font-extrabold text-foreground tracking-tight">
-          Conta criada com sucesso!
+          {isTrial ? "Trial ativado com sucesso!" : "Conta criada com sucesso!"}
         </h3>
         <p className="text-muted-foreground mt-2">
-          Seu CRM AGENTPRO está pronto para uso
+          {isTrial
+            ? "Aproveite 7 dias grátis do CRM AGENTPRO"
+            : "Seu CRM AGENTPRO está pronto para uso"}
         </p>
       </div>
+
+      {/* Trial Badge */}
+      {isTrial && (
+        <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-2.5">
+          <Clock className="h-5 w-5 text-amber-500" />
+          <div className="text-left">
+            <p className="text-sm font-bold text-amber-700 dark:text-amber-300">
+              Trial válido até {trialEndDate.toLocaleDateString("pt-BR")}
+            </p>
+            <p className="text-xs text-amber-600/70 dark:text-amber-400/70">
+              Após o período, será necessário escolher um plano para continuar
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Account Details Card */}
       <div className="bg-muted/30 border border-border/50 rounded-2xl p-5 text-left space-y-4 max-w-md mx-auto">
@@ -38,6 +59,11 @@ const StepConfirmation = () => {
             <span className="text-muted-foreground">Plano</span>
             <span className="font-semibold text-foreground">
               {state.selectedPlan?.name}
+              {isTrial && (
+                <span className="ml-1.5 text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-bold">
+                  TRIAL
+                </span>
+              )}
             </span>
           </div>
 
@@ -48,17 +74,28 @@ const StepConfirmation = () => {
             </span>
           </div>
 
-          <div className="flex justify-between items-center py-1.5 border-b border-border/30">
-            <span className="text-muted-foreground">Próx. cobrança</span>
-            <span className="font-medium text-foreground">
-              {new Date(
-                Date.now() + 30 * 24 * 60 * 60 * 1000
-              ).toLocaleDateString("pt-BR")}
-            </span>
-          </div>
+          {isTrial ? (
+            <div className="flex justify-between items-center py-1.5 border-b border-border/30">
+              <span className="text-muted-foreground">Trial expira em</span>
+              <span className="font-medium text-amber-600">
+                {trialEndDate.toLocaleDateString("pt-BR")}
+              </span>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center py-1.5 border-b border-border/30">
+              <span className="text-muted-foreground">Próx. cobrança</span>
+              <span className="font-medium text-foreground">
+                {new Date(
+                  Date.now() + 30 * 24 * 60 * 60 * 1000
+                ).toLocaleDateString("pt-BR")}
+              </span>
+            </div>
+          )}
 
           <div className="flex justify-between items-center py-1.5">
-            <span className="text-muted-foreground">Valor mensal</span>
+            <span className="text-muted-foreground">
+              {isTrial ? "Valor após trial" : "Valor mensal"}
+            </span>
             <span className="font-bold text-brand-purple">
               {state.selectedPlan?.priceFormatted}/mês
             </span>
