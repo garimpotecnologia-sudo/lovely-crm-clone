@@ -8,34 +8,34 @@ import {
 const FAQSection = () => {
   const faqs = [
     {
-      question: "Como funciona o período de teste grátis?",
+      question: "O AgentPRO funciona para qualquer tipo de clínica?",
       answer:
-        "Você tem 7 dias para testar todas as funcionalidades do AgentPRO gratuitamente, sem precisar cadastrar cartão de crédito. Após o período, basta escolher o plano ideal para continuar.",
+        "Sim! Atendemos clínicas médicas, odontológicas, estéticas, veterinárias, psicológicas, fisioterapia e mais. A plataforma se adapta ao fluxo de atendimento da sua especialidade.",
     },
     {
-      question: "Preciso ter conhecimento técnico para usar?",
+      question: "Como funciona o agendamento pelo WhatsApp?",
       answer:
-        "Não! O AgentPRO foi desenvolvido para ser intuitivo e fácil de usar. Além disso, oferecemos treinamento completo para sua equipe e suporte sempre que precisar.",
+        "O paciente envia uma mensagem e o chatbot com IA identifica a intenção (agendar, remarcar, cancelar). Ele verifica a agenda em tempo real, sugere horários disponíveis e confirma automaticamente — sem intervenção da recepção.",
     },
     {
-      question: "Quantos canais de atendimento posso conectar?",
+      question: "Os dados dos pacientes ficam seguros?",
       answer:
-        "Depende do plano escolhido. No plano Essential você conecta WhatsApp, no Pro adiciona Instagram e Messenger, e nos planos Plus+ e Advanced todos os canais disponíveis.",
+        "Absolutamente. Utilizamos criptografia de ponta a ponta e seguimos todas as normas da LGPD. Os dados de saúde dos pacientes são tratados com o mais alto nível de segurança.",
     },
     {
-      question: "Quais integrações estão disponíveis?",
+      question: "Preciso de equipe técnica para implantar?",
       answer:
-        "Integramos WhatsApp Business API, Instagram, Messenger e APIs customizadas. Novos integrações são adicionadas regularmente.",
+        "Não. A implantação é guiada e nossa equipe de sucesso do cliente acompanha todo o processo. A maioria das clínicas está operando em menos de 48 horas.",
     },
     {
-      question: "Os dados ficam seguros e em conformidade com a LGPD?",
+      question: "Posso integrar com meu sistema de gestão ou prontuário?",
       answer:
-        "Sim! Utilizamos criptografia de ponta a ponta e seguimos todas as normas de segurança e LGPD para proteger seus dados e de seus clientes.",
+        "Sim! Oferecemos API e webhooks para integrar com sistemas como Totvs, MV, iClinic, Doctoralia e outros. Nos planos Plus+ e Advanced a integração é nativa.",
     },
     {
-      question: "Posso cancelar a qualquer momento?",
+      question: "Como funciona o trial de 7 dias?",
       answer:
-        "Sim, não há fidelidade. Você pode cancelar sua assinatura a qualquer momento, sem burocracia.",
+        "Você testa todas as funcionalidades gratuitamente por 7 dias, sem precisar de cartão de crédito. Se gostar, escolhe um plano. Se não, a conta é encerrada automaticamente sem cobrança.",
     },
   ];
 
@@ -53,7 +53,7 @@ const FAQSection = () => {
               Dúvidas <span className="gradient-text">Frequentes</span>
             </h2>
             <p className="text-muted-foreground">
-              Tire suas dúvidas sobre o AgentPRO
+              Tudo que você precisa saber antes de transformar o atendimento da sua clínica
             </p>
           </div>
 
@@ -82,18 +82,18 @@ const FAQSection = () => {
           {/* CTA */}
           <div className="text-center mt-14">
             <p className="text-muted-foreground mb-4 text-sm">
-              Não encontrou sua dúvida?
+              Ainda tem dúvidas? Fale com nosso time especializado em saúde
             </p>
             <button
               onClick={() =>
                 window.open(
-                  "https://wa.me/5547984147016?text=Olá! Vim da seção de FAQ do site e tenho algumas dúvidas sobre o AgentPRO.",
+                  "https://wa.me/5547984147016?text=Olá! Vim da seção de FAQ e tenho dúvidas sobre o AgentPRO para minha clínica.",
                   "_blank"
                 )
               }
               className="inline-flex items-center gap-2 bg-brand-purple hover:bg-brand-purple/90 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:-translate-y-0.5"
             >
-              Tirar Dúvidas no WhatsApp
+              Falar com especialista
             </button>
           </div>
         </div>

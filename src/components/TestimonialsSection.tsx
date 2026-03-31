@@ -4,36 +4,36 @@ import { Star, Quote } from "lucide-react";
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Carlos Mendes",
-      company: "TechSolutions Ltda",
-      role: "CEO",
+      name: "Dra. Ana Beatriz",
+      company: "Clínica Viddas",
+      role: "Diretora Clínica",
       image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
       testimonial:
-        "O AgentPRO revolucionou nosso atendimento. Aumentamos nossa conversão em 40% em apenas 2 meses!",
-      result: "+40% conversão",
+        "Reduzimos as faltas em 55% e a recepção ficou livre para cuidar dos pacientes presenciais. O agendamento pelo WhatsApp mudou nossa rotina.",
+      result: "-55% de faltas",
       rating: 5,
     },
     {
-      name: "Maria Silva",
-      company: "Fashionista Store",
-      role: "Diretora Comercial",
+      name: "Dr. Ricardo Mendes",
+      company: "Angioclínica",
+      role: "Diretor Médico",
       image:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face",
       testimonial:
-        "Nunca mais perdemos um cliente! O sistema integrado nos deu total controle sobre todos os atendimentos.",
-      result: "0% perda de leads",
+        "O follow-up automático pós-consulta aumentou nossos retornos em 40%. Os pacientes se sentem acompanhados e a clínica cresce de forma organizada.",
+      result: "+40% retornos",
       rating: 5,
     },
   ];
 
   const partners = [
-    "TechSolutions",
-    "Fashionista Store",
-    "AutoMax Veículos",
-    "InnovaCorp",
-    "Digital Plus",
-    "Sales Pro",
+    "Clínica de Olhos",
+    "Clínica Viddas",
+    "Angioclínica",
+    "Climma Saúde",
+    "Clinicare",
+    "Hospital Ubarana",
   ];
 
   return (
@@ -47,11 +47,11 @@ const TestimonialsSection = () => {
               Depoimentos
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-foreground tracking-tight">
-              Nossos Clientes{" "}
-              <span className="gradient-text">Aprovam</span>
+              Clínicas que{" "}
+              <span className="gradient-text">transformaram</span> seu atendimento
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Resultados reais que empresas como a sua estão alcançando
+              Resultados reais de profissionais da saúde que usam o AgentPRO
             </p>
           </div>
 
@@ -62,12 +62,10 @@ const TestimonialsSection = () => {
                 key={index}
                 className="feature-card group"
               >
-                {/* Quote Icon */}
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-purple/10 to-brand-magenta/10 flex items-center justify-center mb-5">
                   <Quote className="h-5 w-5 text-brand-magenta" />
                 </div>
 
-                {/* Rating */}
                 <div className="flex space-x-0.5 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star
@@ -77,12 +75,10 @@ const TestimonialsSection = () => {
                   ))}
                 </div>
 
-                {/* Testimonial */}
                 <p className="text-foreground/80 mb-6 leading-relaxed text-[15px]">
                   "{testimonial.testimonial}"
                 </p>
 
-                {/* Result Highlight */}
                 <div className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg px-3 py-1.5 mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                   <span className="text-green-700 dark:text-green-300 font-semibold text-sm">
@@ -90,7 +86,6 @@ const TestimonialsSection = () => {
                   </span>
                 </div>
 
-                {/* Author */}
                 <div className="flex items-center gap-3 pt-4 border-t border-border/50">
                   <img
                     src={testimonial.image}
@@ -113,7 +108,7 @@ const TestimonialsSection = () => {
           {/* Partners */}
           <div className="text-center mb-16">
             <p className="text-sm text-muted-foreground mb-6 font-medium">
-              Empresas que confiam no AgentPRO
+              Clínicas e hospitais que confiam no AgentPRO
             </p>
             <div className="grid grid-cols-3 md:grid-cols-6 gap-3 items-center max-w-3xl mx-auto">
               {partners.map((partner, index) => (
@@ -132,19 +127,19 @@ const TestimonialsSection = () => {
           {/* CTA */}
           <div className="text-center">
             <h4 className="text-xl font-bold mb-4 text-foreground">
-              Junte-se aos nossos clientes de sucesso
+              Junte-se às clínicas que já transformaram seu atendimento
             </h4>
             <Button
               size="lg"
               className="hero-button"
               onClick={() =>
                 window.open(
-                  "https://wa.me/5547984147016?text=Olá! Cliquei no botão da seção de depoimentos. Quero saber mais sobre o CRM AgentPRO!",
+                  "https://wa.me/5547984147016?text=Olá! Sou de uma clínica e gostaria de saber mais sobre o CRM AgentPRO para o setor de saúde.",
                   "_blank"
                 )
               }
             >
-              Falar no WhatsApp
+              Falar com especialista em saúde
             </Button>
           </div>
         </div>

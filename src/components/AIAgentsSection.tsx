@@ -4,67 +4,72 @@ const AIAgentsSection = () => {
   const features = [
     {
       icon: Users,
-      title: "Colabore com agentes especializados",
-      description: "Conecte múltiplos agentes, cada um com uma função específica (venda, suporte, qualificação de leads etc.), e deixe que eles atuem em conjunto dentro da mesma conversa."
+      title: "Agentes especializados por setor",
+      description: "Configure agentes para recepção, triagem, pós-consulta e cobrança. Cada um atua com expertise na sua função, dentro da mesma conversa com o paciente."
     },
     {
       icon: Bot,
-      title: "Supervisão automática de conversas",
-      description: "Um agente supervisor monitora em tempo real, identifica a intenção e redireciona para o agente ideal. Isso eleva a precisão e reduz erros (ou 'alucinações' de IA)."
+      title: "Triagem inteligente automatizada",
+      description: "O agente supervisor identifica a intenção do paciente (agendar, remarcar, tirar dúvida, emergência) e direciona automaticamente para o fluxo correto."
     },
     {
       icon: BookOpen,
-      title: "Treinamento com seu conteúdo real",
-      description: "Use sua base (manuais, catálogos, FAQs) para treinar os agentes e garantir respostas alinhadas à sua marca e à sua oferta."
+      title: "Treinado com os dados da sua clínica",
+      description: "Alimente o agente com protocolos, tabelas de convênios, horários e procedimentos. As respostas são precisas e alinhadas à sua operação."
     },
     {
       icon: Plug,
-      title: "Integração sem esforço",
-      description: "Conecte com seus sistemas via API ou importe sua base de conhecimento direto na plataforma. Fluxos contextuais garantem conversas inteligentes e escaláveis."
+      title: "Integração com sistemas de saúde",
+      description: "Conecte com seu sistema de gestão, prontuário eletrônico ou ERP via API. Os fluxos garantem conversas contextuais e escaláveis."
     },
     {
       icon: Settings,
-      title: "Você no controle das LLMs",
-      description: "Escolha ou experimente a LLM que melhor balanceia custo e performance — sem depender exclusivamente da nossa infraestrutura."
+      title: "Controle total da IA",
+      description: "Escolha o modelo de IA que melhor equilibra custo e qualidade para cada tipo de interação — consultas simples ou atendimentos complexos."
     },
     {
       icon: Clock,
-      title: "Atendimento 24/7 com contexto real",
-      description: "Com fluxos e base conectada, automatize o atendimento sem perder contexto, com precisão e personalização alinhadas à jornada do cliente."
+      title: "Atendimento 24/7 para pacientes",
+      description: "Seus pacientes podem agendar, confirmar e tirar dúvidas a qualquer hora. Sem espera, sem fila, com atendimento humanizado."
     },
     {
       icon: Zap,
-      title: "Comece rápido, evolua sempre",
-      description: "Configure agentes, conecte conhecimento e ative atendimentos inteligentes em minutos — dentro do seu CRM."
+      title: "Implantação rápida",
+      description: "Configure agentes, conecte sua base de conhecimento e comece a atender em minutos — sem precisar de equipe técnica."
     }
   ];
 
   return (
-    <section id="ai-agents" className="py-20 bg-gradient-to-br from-accent/5 via-background to-primary/5">
-      <div className="container mx-auto px-4">
+    <section id="ai-agents" className="py-24 relative overflow-hidden">
+      <div className="mesh-bg absolute inset-0 pointer-events-none" />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 gradient-text">
-              Agentes inteligentes nativos no seu CRM
+            <p className="text-sm font-semibold text-brand-purple uppercase tracking-widest mb-3">
+              Inteligência Artificial
+            </p>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">
+              Agentes inteligentes que{" "}
+              <span className="gradient-text">entendem sua clínica</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Monte uma equipe de IA dentro do seu CRM – sem depender de programadores.
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Monte uma equipe de IA especializada no atendimento ao paciente — sem depender de programadores.
             </p>
           </div>
 
           {/* Features Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-5 stagger-children">
             {features.map((feature, idx) => (
-              <div 
+              <div
                 key={idx}
-                className="bg-card border rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className="feature-card group"
               >
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <feature.icon className="w-7 h-7 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-purple/10 to-brand-magenta/10 flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110">
+                  <feature.icon className="w-6 h-6 text-brand-purple" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>

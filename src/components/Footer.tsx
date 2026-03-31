@@ -22,8 +22,8 @@ const Footer = () => {
             <div className="lg:col-span-2">
               <img src={logoHorizontalLight} alt="AgentPRO CRM" className="h-10 w-auto mb-6" />
               <p className="text-white/80 mb-6 leading-relaxed">
-                Automatize seu atendimento com CRM inteligente integrado ao WhatsApp. 
-                Gerencie clientes, venda mais e economize tempo com automação.
+                A plataforma de atendimento inteligente para clínicas e empresas de saúde.
+                Automatize agendamentos, centralize canais e fidelize pacientes com IA.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">

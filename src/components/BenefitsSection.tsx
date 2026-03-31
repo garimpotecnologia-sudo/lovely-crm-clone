@@ -1,44 +1,44 @@
-import { CheckCircle2, TrendingUp, Clock, Users, Zap, Shield } from "lucide-react";
+import { Calendar, Clock, Users, Zap, HeartPulse, Shield } from "lucide-react";
 
 const BenefitsSection = () => {
   const benefits = [
     {
-      icon: TrendingUp,
-      title: "Aumente suas vendas com IA",
-      description: "Identifique leads quentes, responda automaticamente e converta mais clientes com nossa IA comercial."
+      icon: Calendar,
+      title: "Agendamento inteligente",
+      description: "Pacientes agendam, confirmam e remarcam consultas automaticamente pelo WhatsApp, sem sobrecarregar sua recepção."
     },
     {
       icon: Clock,
-      title: "Automatize tarefas repetitivas",
-      description: "Deixe a IA cuidar de atendimentos, follow-ups e integração com seu ERP. Ganhe eficiência total."
+      title: "Reduza faltas em até 60%",
+      description: "Lembretes automáticos via WhatsApp e SMS antes da consulta. Reagendamento instantâneo em caso de cancelamento."
     },
     {
       icon: Users,
-      title: "Organize sua operação",
-      description: "Centralize atendimento, distribua tarefas e monitore resultados em tempo real."
+      title: "Gestão completa de pacientes",
+      description: "Histórico de atendimentos, preferências e dados centralizados. Cada profissional da equipe com visão completa do paciente."
     },
     {
       icon: Zap,
-      title: "Respostas instantâneas",
-      description: "Chatbots com IA generativa entendem a intenção e respondem de forma natural 24/7."
+      title: "Atendimento instantâneo 24/7",
+      description: "Chatbots com IA respondem dúvidas sobre convênios, horários, procedimentos e encaminham para o setor correto automaticamente."
     },
     {
-      icon: CheckCircle2,
-      title: "Ecossistema integrado",
-      description: "WhatsApp, Instagram, Facebook e ERP conectados em um painel unificado."
+      icon: HeartPulse,
+      title: "Pós-consulta automatizado",
+      description: "Follow-up automático, pesquisa de satisfação e lembretes de retorno. Fidelize pacientes sem esforço manual."
     },
     {
       icon: Shield,
-      title: "Segurança e confiabilidade",
-      description: "Criptografia ponta a ponta + backups automáticos. Seus dados sempre protegidos."
+      title: "Segurança e LGPD",
+      description: "Dados de pacientes protegidos com criptografia. Em total conformidade com a LGPD e normas do setor de saúde."
     }
   ];
 
   const stats = [
-    { value: "2.800+", label: "Empresas atendidas" },
-    { value: "20M+", label: "Mensagens trocadas" },
-    { value: "+70%", label: "Atendimentos automatizados" },
-    { value: "24/7", label: "Suporte disponível" }
+    { value: "2.800+", label: "Clínicas atendidas" },
+    { value: "20M+", label: "Pacientes impactados" },
+    { value: "-60%", label: "Redução de faltas" },
+    { value: "24/7", label: "Atendimento ao paciente" }
   ];
 
   return (
@@ -64,14 +64,14 @@ const BenefitsSection = () => {
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <p className="text-sm font-semibold text-brand-purple uppercase tracking-widest mb-3">
-            Por que o AgentPRO
+            Para sua clínica
           </p>
           <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">
-            Mais do que um CRM,{" "}
-            <span className="gradient-text">uma plataforma completa</span>
+            Tudo que sua clínica precisa{" "}
+            <span className="gradient-text">em uma plataforma</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Transforme seu atendimento e acelere resultados
+            Do agendamento ao pós-consulta, automatize e humanize o atendimento ao paciente
           </p>
         </div>
 

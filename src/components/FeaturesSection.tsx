@@ -1,29 +1,29 @@
-import { MessageSquare, Zap, BarChart3, Target } from "lucide-react";
+import { MessageSquare, CalendarCheck, BarChart3, UserCheck } from "lucide-react";
 
 const FeaturesSection = () => {
   const features = [
     {
       icon: MessageSquare,
-      title: "Centralize atendimentos",
-      description: "Todos os canais em uma única plataforma integrada",
+      title: "Centralize canais",
+      description: "WhatsApp, Instagram e telefone do paciente em um só lugar",
       accent: "from-violet-500 to-purple-600",
     },
     {
-      icon: Zap,
-      title: "Automatize rotinas",
-      description: "Respostas automáticas e fluxos inteligentes",
-      accent: "from-fuchsia-500 to-pink-600",
+      icon: CalendarCheck,
+      title: "Agende com IA",
+      description: "Agendamento, confirmação e reagendamento automáticos",
+      accent: "from-emerald-500 to-teal-600",
     },
     {
-      icon: BarChart3,
-      title: "Acompanhe etapas",
-      description: "Visualize o funil de vendas em tempo real",
+      icon: UserCheck,
+      title: "Acompanhe pacientes",
+      description: "Jornada completa do paciente no funil de atendimento",
       accent: "from-purple-500 to-indigo-600",
     },
     {
-      icon: Target,
-      title: "Mensure resultados",
-      description: "Relatórios detalhados de performance",
+      icon: BarChart3,
+      title: "Relatórios clínicos",
+      description: "Métricas de atendimento, taxa de faltas e satisfação",
       accent: "from-pink-500 to-rose-600",
     },
   ];
@@ -38,8 +38,8 @@ const FeaturesSection = () => {
               Funcionalidades
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-foreground tracking-tight">
-              Tudo que você precisa para{" "}
-              <span className="gradient-text">gerenciar atendimentos</span>
+              CRM especializado para{" "}
+              <span className="gradient-text">o setor de saúde</span>
             </h2>
           </div>
 
