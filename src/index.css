@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* AgentPRO CRM Design System - All colors, gradients, fonts, animations defined here */
+/* AgentPRO CRM Design System — Premium Tech SaaS */
 
 @layer base {
   :root {
     /* Core Brand Colors */
-    --brand-navy: 222 60% 15%;        /* #0c1c47 */
-    --brand-purple: 285 99% 35%;      /* #6a01b9 */
-    --brand-magenta: 295 100% 45%;    /* #c400e7 */
-    --brand-white: 0 0% 100%;         /* #ffffff */
+    --brand-navy: 222 60% 15%;
+    --brand-purple: 285 99% 35%;
+    --brand-magenta: 295 100% 45%;
+    --brand-white: 0 0% 100%;
 
     /* Design System Colors */
     --background: 0 0% 100%;
@@ -45,66 +45,54 @@
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--brand-purple)), hsl(var(--brand-magenta)));
-    --gradient-hero: linear-gradient(135deg, hsl(222 40% 25%) 0%, hsl(285 60% 40%) 50%, hsl(295 70% 50%) 100%);
+    --gradient-hero: linear-gradient(160deg, hsl(222 50% 12%) 0%, hsl(260 50% 18%) 30%, hsl(285 60% 25%) 60%, hsl(295 70% 35%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    --gradient-mesh: radial-gradient(ellipse at 20% 50%, hsl(285 80% 50% / 0.08) 0%, transparent 50%),
+                     radial-gradient(ellipse at 80% 20%, hsl(295 100% 50% / 0.06) 0%, transparent 50%),
+                     radial-gradient(ellipse at 50% 80%, hsl(222 60% 30% / 0.04) 0%, transparent 50%);
 
     /* Shadows */
     --shadow-elegant: 0 10px 30px -10px hsl(var(--brand-purple) / 0.2);
     --shadow-glow: 0 0 40px hsl(var(--brand-magenta) / 0.15);
-    --shadow-card: 0 4px 20px -4px hsl(var(--brand-navy) / 0.1);
+    --shadow-card: 0 1px 3px hsl(var(--brand-navy) / 0.06), 0 8px 24px hsl(var(--brand-navy) / 0.06);
+    --shadow-card-hover: 0 4px 12px hsl(var(--brand-navy) / 0.08), 0 16px 40px hsl(var(--brand-navy) / 0.1);
+    --shadow-glass: 0 8px 32px hsl(var(--brand-purple) / 0.08), inset 0 1px 0 hsl(0 0% 100% / 0.6);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222 60% 8%;
     --foreground: 0 0% 98%;
-
     --card: 222 50% 10%;
     --card-foreground: 0 0% 98%;
-
     --popover: 222 50% 10%;
     --popover-foreground: 0 0% 98%;
-
     --primary: 295 100% 45%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 222 40% 15%;
     --secondary-foreground: 0 0% 98%;
-
     --muted: 222 30% 12%;
     --muted-foreground: 222 15% 65%;
-
     --accent: 285 99% 35%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 222 30% 18%;
     --input: 222 30% 18%;
     --ring: 295 100% 45%;
-
-    /* Dark mode gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(222 40% 20%) 0%, hsl(285 60% 35%) 70%, hsl(295 70% 45%) 100%);
+    --gradient-hero: linear-gradient(160deg, hsl(222 50% 8%) 0%, hsl(260 50% 14%) 30%, hsl(285 60% 20%) 60%, hsl(295 70% 30%) 100%);
     --shadow-glow: 0 0 60px hsl(var(--brand-magenta) / 0.3);
   }
 }
@@ -119,31 +107,85 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-montserrat font-semibold;
+    @apply font-montserrat;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
-  /* Hero Section */
+  /* ─── Hero ─── */
   .hero-gradient {
     background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle 600px at 20% 60%, hsl(295 100% 50% / 0.12), transparent),
+      radial-gradient(circle 400px at 80% 30%, hsl(285 80% 60% / 0.10), transparent);
+    pointer-events: none;
+  }
+
+  .hero-gradient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
   }
 
   .hero-button {
-    @apply bg-white text-brand-purple font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+    @apply bg-white text-brand-purple font-semibold px-8 py-4 rounded-xl transition-all duration-300;
+    box-shadow: 0 4px 14px hsl(var(--brand-purple) / 0.2), 0 0 0 0 hsl(0 0% 100% / 0);
   }
 
-  /* Feature Cards */
+  .hero-button:hover {
+    box-shadow: 0 6px 20px hsl(var(--brand-purple) / 0.3), 0 0 0 3px hsl(0 0% 100% / 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* ─── Cards ─── */
   .feature-card {
-    @apply bg-card rounded-2xl p-8 transition-all duration-500 hover:-translate-y-2 border border-border/50;
+    @apply bg-card rounded-2xl p-8 transition-all duration-500 border border-border/50 relative overflow-hidden;
     box-shadow: var(--shadow-card);
   }
-  
-  .feature-card:hover {
-    box-shadow: var(--shadow-glow);
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--brand-purple) / 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.5s;
   }
 
-  /* Gradient Text */
+  .feature-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+    border-color: hsl(var(--brand-purple) / 0.15);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Glass card variant */
+  .glass-card {
+    @apply rounded-2xl p-8 transition-all duration-500 relative overflow-hidden;
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* ─── Gradient Text ─── */
   .gradient-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -151,12 +193,45 @@
     background-clip: text;
   }
 
-  /* WhatsApp Button */
+  /* ─── Stat Cards ─── */
+  .stat-card {
+    @apply rounded-2xl p-6 text-center relative overflow-hidden;
+    background: var(--gradient-primary);
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, hsl(0 0% 100% / 0.1), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ─── Section Mesh Background ─── */
+  .mesh-bg {
+    background-image: var(--gradient-mesh);
+  }
+
+  /* ─── Noise Texture Overlay ─── */
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ─── WhatsApp Button ─── */
   .whatsapp-button {
     @apply fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50;
   }
 
-  /* Animations */
+  /* ─── Animations ─── */
   .fade-in-up {
     @apply animate-[fadeInUp_0.6s_ease-out_forwards];
   }
@@ -167,6 +242,82 @@
 
   .animate-scroll {
     animation: scroll 30s linear infinite;
+  }
+
+  /* Staggered children */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+  .stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+  .stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+  .stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+  .stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+  .stagger-children > *:nth-child(7) { animation-delay: 480ms; }
+
+  /* ─── Pricing Card Glow ─── */
+  .pricing-popular {
+    position: relative;
+  }
+
+  .pricing-popular::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(8px);
+    transition: opacity 0.5s;
+  }
+
+  .pricing-popular:hover::after {
+    opacity: 0.9;
+  }
+
+  /* ─── Signup Dialog ─── */
+  .signup-step-active {
+    box-shadow: 0 0 0 2px hsl(var(--brand-purple)), 0 0 12px hsl(var(--brand-purple) / 0.2);
+  }
+
+  /* ─── Floating Orb Animation ─── */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 400px;
+    height: 400px;
+    background: hsl(285 80% 50% / 0.08);
+    top: 10%;
+    left: -5%;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 300px;
+    height: 300px;
+    background: hsl(295 100% 50% / 0.06);
+    top: 60%;
+    right: -5%;
+    animation-delay: -7s;
+  }
+
+  .orb-3 {
+    width: 250px;
+    height: 250px;
+    background: hsl(260 60% 40% / 0.05);
+    bottom: -5%;
+    left: 40%;
+    animation-delay: -14s;
   }
 }
 
@@ -179,11 +330,11 @@
   .bg-brand-magenta { background-color: hsl(var(--brand-magenta)); }
 }
 
-/* Keyframes */
+/* ─── Keyframes ─── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -201,7 +352,7 @@
     transform: scale(1.05);
   }
   70% {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
   100% {
     opacity: 1;
@@ -210,36 +361,61 @@
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* WhatsApp Button Blink Animation - 20 times per minute (every 3 seconds) */
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(40px, 30px) scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 @keyframes blink {
-  0%, 50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  25% {
-    opacity: 0.7;
-    transform: scale(1.1);
-  }
+  0%, 50% { opacity: 1; transform: scale(1); }
+  25% { opacity: 0.7; transform: scale(1.1); }
 }
 
-/* Section Spacing for better readability */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Section Spacing ─── */
 section {
-  margin-bottom: 2rem;
-}
-
-section:last-of-type {
   margin-bottom: 0;
 }
 
-/* Smooth transitions for all interactive elements */
+/* ─── Smooth transitions ─── */
 button, a {
   transition: var(--transition-smooth);
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--brand-purple) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--brand-purple) / 0.5);
 }

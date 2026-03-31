@@ -5,8 +5,16 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useState } from "react";
 import PricingModal from "@/components/PricingModal";
+import SignupDialog from "@/components/signup/SignupDialog";
+import type { Plan } from "@/types/plans";
 const AIAgents = () => {
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const handleSelectPlan = (plan: Plan) => {
+    setSelectedPlan(plan);
+    setIsSignupOpen(true);
+  };
   const features = [{
     icon: Users,
     title: "Colabore com agentes especializados",
@@ -102,7 +110,8 @@ const AIAgents = () => {
 
       <Footer />
       <WhatsAppButton />
-      <PricingModal isOpen={isPricingModalOpen} onClose={() => setIsPricingModalOpen(false)} />
+      <PricingModal isOpen={isPricingModalOpen} onClose={() => setIsPricingModalOpen(false)} onSelectPlan={handleSelectPlan} />
+      <SignupDialog isOpen={isSignupOpen} onClose={() => setIsSignupOpen(false)} initialPlan={selectedPlan} />
     </div>;
 };
 export default AIAgents;

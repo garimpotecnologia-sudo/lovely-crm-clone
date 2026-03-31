@@ -1,219 +1,208 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Star, Crown, X } from "lucide-react";
+import { CheckCircle, Crown, ChevronDown } from "lucide-react";
+import { PLANS, type Plan } from "@/types/plans";
 
 interface PricingSectionProps {
   onOpenPricing: () => void;
+  onSelectPlan: (plan: Plan) => void;
 }
 
-const PricingSection = ({ onOpenPricing }: PricingSectionProps) => {
-  const plans = [
-    {
-      name: "Essential",
-      users: "3 usuários",
-      price: "R$ 487",
-      period: "/mês",
-      activationFee: "R$ 1.090,00",
-      channels: "WhatsApp",
-      allFeatures: [
-        { name: "Central de Atendimento básica", included: true },
-        { name: "2 Chatbots de Atendimento", included: true },
-        { name: "1 Chatbot de Automação", included: true },
-        { name: "10 Etiquetas", included: true },
-        { name: "Relatórios básicos", included: true },
-        { name: "Funis (Kanban)", included: false },
-        { name: "Campos Personalizados", included: false },
-        { name: "Disparo em Massa", included: false },
-        { name: "Webhook", included: false },
-        { name: "API", included: false }
-      ],
-      buttonText: "Quero este plano",
-      popular: false
-    },
-    {
-      name: "Pro",
-      users: "5 usuários",
-      price: "R$ 687",
-      period: "/mês",
-      activationFee: "R$ 1.490,00",
-      channels: "WhatsApp + Instagram + Messenger",
-      allFeatures: [
-        { name: "Central de Atendimento completa", included: true },
-        { name: "3 Chatbots de Atendimento", included: true },
-        { name: "2 Chatbots de Automação", included: true },
-        { name: "Etiquetas ilimitadas", included: true },
-        { name: "2 Funis (Kanban)", included: true },
-        { name: "Campos Personalizados ilimitados", included: true },
-        { name: "Disparo de Campanhas", included: true },
-        { name: "Webhook", included: false },
-        { name: "API", included: false }
-      ],
-      buttonText: "Quero este plano",
-      popular: true
-    },
-    {
-      name: "Plus+",
-      users: "10 usuários", 
-      price: "R$ 987",
-      period: "/mês",
-      activationFee: "R$ 1.990,00",
-      channels: "Todos os canais",
-      allFeatures: [
-        { name: "Central de Atendimento completa", included: true },
-        { name: "5 Chatbots de Atendimento", included: true },
-        { name: "3 Chatbots de Automação", included: true },
-        { name: "5 Funis (Kanban)", included: true },
-        { name: "Campos Personalizados ilimitados", included: true },
-        { name: "Disparo de Campanhas", included: true },
-        { name: "Webhook", included: true },
-        { name: "API", included: true },
-        { name: "Carteiras de Cliente", included: true }
-      ],
-      buttonText: "Quero este plano",
-      popular: false
-    },
-    {
-      name: "Advanced",
-      users: "20 usuários",
-      price: "R$ 1.487", 
-      period: "/mês",
-      activationFee: "R$ 2.499,00",
-      channels: "Todos os canais",
-      allFeatures: [
-        { name: "Central de Atendimento completa", included: true },
-        { name: "10 Chatbots de Atendimento", included: true },
-        { name: "4 Chatbots de Automação", included: true },
-        { name: "10 Funis (Kanban)", included: true },
-        { name: "Campos Personalizados ilimitados", included: true },
-        { name: "Disparo de Campanhas", included: true },
-        { name: "Webhook", included: true },
-        { name: "API", included: true },
-        { name: "Carteiras de Cliente", included: true },
-        { name: "Gerente de sucesso dedicado", included: true },
-        { name: "Suporte prioritário 24/7", included: true }
-      ],
-      buttonText: "Quero este plano",
-      popular: false
+const PricingSection = ({ onOpenPricing, onSelectPlan }: PricingSectionProps) => {
+  const handlePlanClick = (planId: string) => {
+    const plan = PLANS.find((p) => p.id === planId);
+    if (plan) {
+      onSelectPlan(plan);
     }
-  ];
-
-  const handlePlanClick = (planName: string) => {
-    const message = `Olá, vim do site e gostaria de *contratar o plano ${planName}*!`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
   };
 
   return (
-    <section id="pricing" className="py-16 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="pricing" className="py-24 bg-background relative overflow-hidden">
+      <div className="mesh-bg absolute inset-0 pointer-events-none" />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-              <span className="gradient-text">Planos</span> e Preços
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-              Escolha o plano ideal para sua empresa
+          <div className="text-center mb-14">
+            <p className="text-sm font-semibold text-brand-purple uppercase tracking-widest mb-3">
+              Preços
             </p>
-            <Button 
-              variant="outline" 
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-foreground tracking-tight">
+              <span className="gradient-text">Planos</span> para cada fase do seu negócio
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto mb-6">
+              Escolha o plano ideal e comece a transformar seu atendimento hoje
+            </p>
+            <button
               onClick={onOpenPricing}
-              className="mb-8"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-purple hover:text-brand-magenta transition-colors"
             >
-              Ver Tabela Completa de Funcionalidades
-            </Button>
+              Ver tabela completa de funcionalidades
+              <ChevronDown className="h-4 w-4" />
+            </button>
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
-            {plans.map((plan, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto mb-12 stagger-children">
+            {PLANS.map((plan) => (
               <div
                 key={plan.name}
-                className={`feature-card relative overflow-hidden ${
-                  plan.popular ? 'ring-2 ring-brand-magenta scale-105' : ''
+                className={`relative rounded-2xl p-6 transition-all duration-500 border overflow-hidden group ${
+                  plan.popular
+                    ? "bg-gradient-to-b from-brand-purple to-brand-purple/90 text-white border-brand-purple/50 shadow-xl shadow-brand-purple/10 lg:scale-[1.04]"
+                    : "bg-card border-border/50 hover:border-brand-purple/20"
                 }`}
+                style={{
+                  boxShadow: plan.popular
+                    ? undefined
+                    : "var(--shadow-card)",
+                }}
               >
-                {/* Popular Badge */}
+                {/* Popular glow */}
                 {plan.popular && (
-                  <div className="absolute top-0 right-0 bg-brand-magenta text-white px-4 py-2 rounded-bl-xl">
-                    <div className="flex items-center space-x-1">
-                      <Crown className="h-4 w-4" />
-                      <span className="text-sm font-semibold">Mais Popular</span>
+                  <>
+                    <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                    <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <Crown className="h-3.5 w-3.5" />
+                      <span className="text-[11px] font-bold uppercase tracking-wide">
+                        Popular
+                      </span>
                     </div>
-                  </div>
+                  </>
                 )}
 
                 {/* Plan Header */}
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold mb-1 text-foreground">{plan.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{plan.users}</p>
-                  <p className="text-xs text-brand-purple font-medium mb-3">{plan.channels}</p>
-                  <div className="mb-2">
-                    <span className="text-3xl font-bold text-brand-purple">{plan.price}</span>
-                    <span className="text-muted-foreground">{plan.period}</span>
+                <div className="mb-6">
+                  <h3
+                    className={`text-lg font-bold mb-1 ${
+                      plan.popular ? "text-white" : "text-foreground"
+                    }`}
+                  >
+                    {plan.name}
+                  </h3>
+                  <p
+                    className={`text-xs mb-1 ${
+                      plan.popular ? "text-white/70" : "text-muted-foreground"
+                    }`}
+                  >
+                    {plan.users} · {plan.channels}
+                  </p>
+
+                  <div className="mt-4 mb-1">
+                    <span
+                      className={`text-4xl font-extrabold tracking-tight ${
+                        plan.popular ? "text-white" : "text-foreground"
+                      }`}
+                    >
+                      {plan.priceFormatted}
+                    </span>
+                    <span
+                      className={`text-sm ${
+                        plan.popular ? "text-white/60" : "text-muted-foreground"
+                      }`}
+                    >
+                      {plan.period}
+                    </span>
                   </div>
-                  <p className="text-xs text-muted-foreground">Taxa de ativação: {plan.activationFee}</p>
+                  <p
+                    className={`text-[11px] ${
+                      plan.popular ? "text-white/50" : "text-muted-foreground/60"
+                    }`}
+                  >
+                    Ativação: {plan.activationFeeFormatted}
+                  </p>
                 </div>
 
-                {/* All Features */}
-                <div className="space-y-2 mb-4 text-center">
-                  {plan.allFeatures.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center justify-center space-x-2">
+                {/* CTA Button */}
+                <Button
+                  className={`w-full py-2.5 mb-5 font-semibold ${
+                    plan.popular
+                      ? "bg-white text-brand-purple hover:bg-white/90"
+                      : "bg-brand-purple text-white hover:bg-brand-purple/90"
+                  }`}
+                  onClick={() => handlePlanClick(plan.id)}
+                >
+                  {plan.buttonText}
+                </Button>
+
+                {/* Features */}
+                <div className="space-y-2">
+                  {plan.allFeatures.map((feature, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2"
+                    >
                       {feature.included ? (
-                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircle
+                          className={`h-4 w-4 flex-shrink-0 ${
+                            plan.popular ? "text-green-300" : "text-green-500"
+                          }`}
+                        />
                       ) : (
-                        <span className="text-muted-foreground/60 flex-shrink-0 mt-0.5">-</span>
+                        <span
+                          className={`w-4 h-4 flex items-center justify-center flex-shrink-0 text-[10px] ${
+                            plan.popular
+                              ? "text-white/30"
+                              : "text-muted-foreground/40"
+                          }`}
+                        >
+                          —
+                        </span>
                       )}
-                      <span className={`text-sm ${feature.included ? 'text-muted-foreground' : 'text-muted-foreground/60'}`}>
+                      <span
+                        className={`text-xs ${
+                          feature.included
+                            ? plan.popular
+                              ? "text-white/80"
+                              : "text-foreground/70"
+                            : plan.popular
+                            ? "text-white/30"
+                            : "text-muted-foreground/40"
+                        }`}
+                      >
                         {feature.name}
                       </span>
                     </div>
                   ))}
                 </div>
-
-                {/* CTA Button */}
-                <Button
-                  className={`w-full py-3 ${
-                    plan.popular 
-                      ? 'hero-button' 
-                      : 'bg-brand-purple text-white hover:bg-brand-purple/90'
-                  }`}
-                  onClick={() => handlePlanClick(plan.name)}
-                >
-                  {plan.buttonText}
-                </Button>
               </div>
             ))}
           </div>
 
-          {/* Botão Diferença entre Planos */}
-          <div className="mt-12 text-center">
-            <Button 
-              variant="outline" 
+          {/* Compare button */}
+          <div className="text-center mt-10">
+            <Button
+              variant="outline"
               onClick={onOpenPricing}
-              className="text-lg px-8 py-6 h-auto font-semibold"
+              className="px-8 py-5 h-auto font-semibold text-base border-brand-purple/20 hover:border-brand-purple/40 hover:bg-brand-purple/5"
             >
-              DIFERENÇA ENTRE PLANOS
+              Comparar todos os planos
             </Button>
           </div>
 
           {/* Adicionais */}
-          <div className="mt-8">
-            <details className="feature-card">
-              <summary className="cursor-pointer font-semibold text-foreground mb-4">
+          <div className="mt-10">
+            <details className="feature-card cursor-pointer">
+              <summary className="font-semibold text-foreground flex items-center gap-2">
+                <ChevronDown className="h-4 w-4 text-muted-foreground transition-transform [details[open]_&]:rotate-180" />
                 Adicionais e Taxas de Ativação
               </summary>
-              <div className="space-y-4 text-sm text-muted-foreground">
+              <div className="space-y-4 text-sm text-muted-foreground mt-4 pt-4 border-t border-border/50">
                 <div>
-                  <h4 className="font-medium text-foreground mb-2">Usuários Adicionais (por mês):</h4>
-                  <p>• Essential: R$ 107/mês • Pro: R$ 87/mês • Plus+: R$ 57/mês • Advanced: R$ 47/mês</p>
+                  <h4 className="font-medium text-foreground mb-1">
+                    Usuários Adicionais:
+                  </h4>
+                  <p>
+                    Essential: R$ 107/mês · Pro: R$ 87/mês · Plus+: R$ 57/mês
+                    · Advanced: R$ 47/mês
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground mb-2">Canais Adicionais (por mês):</h4>
-                  <p>• WhatsApp adicional: R$ 89/mês • Direct/Messenger adicional: R$ 69/mês • Integração de Pagamentos: R$ 99/mês</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-foreground mb-2">Ativação de Canais Extras:</h4>
-                  <p>• WhatsApp adicional: R$ 99 • Direct/Messenger adicional: R$ 69</p>
+                  <h4 className="font-medium text-foreground mb-1">
+                    Canais Adicionais:
+                  </h4>
+                  <p>
+                    WhatsApp: R$ 89/mês · Direct/Messenger: R$ 69/mês ·
+                    Pagamentos: R$ 99/mês
+                  </p>
                 </div>
               </div>
             </details>

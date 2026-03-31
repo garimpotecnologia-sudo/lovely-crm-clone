@@ -109,6 +109,15 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                       Empresa
                     </Link>
                   </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link
+                      to="/contato"
+                      className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      Contato
+                    </Link>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </nav>
@@ -159,12 +168,19 @@ const Header = ({ onOpenPricing }: HeaderProps) => {
                     {item.label}
                   </button>
                 ))}
-                <Link 
+                <Link
                   to="/sobre"
                   className="text-sm font-medium text-foreground hover:text-primary transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sobre nós
+                </Link>
+                <Link
+                  to="/contato"
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Contato
                 </Link>
                 <div className="flex flex-col space-y-2 pt-4">
                   <Button 
@@ -211,9 +227,10 @@ export const MobileBottomBar = ({ onOpenPricing }: MobileBottomBarProps) => {
         </button>
         <button
           onClick={() => {
-            const message = "Olá, vim do site e gostaria de *ver planos*!";
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/5547988504022?text=${encodedMessage}`, "_blank");
+            const element = document.getElementById("pricing");
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
           }}
           className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-4 rounded-lg transition-colors"
         >

@@ -1,17 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { CheckCircle, Crown, X } from "lucide-react";
+import { PLANS } from "@/types/plans";
+import type { Plan } from "@/types/plans";
 
 interface PricingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSelectPlan: (plan: Plan) => void;
 }
 
-const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
+const PricingModal = ({ isOpen, onClose, onSelectPlan }: PricingModalProps) => {
   const handlePlanClick = (planName: string) => {
-    const message = `Olá! Cliquei no plano ${planName} no modal de funcionalidades completas. Quero saber mais sobre este plano e como contratar!`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5547984147016?text=${encodedMessage}`, "_blank");
+    const plan = PLANS.find((p) => p.name === planName);
+    if (plan) {
+      onClose();
+      onSelectPlan(plan);
+    }
   };
 
   const plans = ["Essential", "Pro", "Plus+", "Advanced"];

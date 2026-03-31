@@ -71,7 +71,15 @@ const Footer = () => {
                 <button onClick={() => scrollToSection("faq")} className="block text-white/80 hover:text-white transition-colors text-left">
                   FAQ
                 </button>
-                
+                <Link to="/contato" className="block text-white/80 hover:text-white transition-colors">
+                  Contato
+                </Link>
+                <Link to="/politica-de-privacidade" className="block text-white/80 hover:text-white transition-colors">
+                  Política de Privacidade
+                </Link>
+                <Link to="/termos-de-servico" className="block text-white/80 hover:text-white transition-colors">
+                  Termos de Serviço
+                </Link>
               </div>
             </div>
           </div>
@@ -79,7 +87,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="border-t border-white/20 mt-12 pt-8 text-center">
             <p className="text-white/60">
-              © 2024 AgentPRO CRM. Todos os direitos reservados.
+              © {new Date().getFullYear()} AgentPRO CRM. Todos os direitos reservados.
             </p>
           </div>
         </div>
