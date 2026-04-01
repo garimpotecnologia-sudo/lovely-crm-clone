@@ -99,6 +99,7 @@ const StepCompanyInfo = () => {
         name: data.contactPerson?.name ?? "",
         email: data.contactPerson?.email ?? "",
         phone: data.contactPerson?.phone ?? "",
+        role: (data.contactPerson as any)?.role ?? "",
       },
     });
   };
