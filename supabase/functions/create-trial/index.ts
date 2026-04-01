@@ -64,29 +64,51 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: body.companyName,
+          name: body.companyName.toUpperCase(),
           legalName: body.companyName,
           documentType: docType,
           documentId: cleanDoc,
           category: "COMERCIO",
           type: companyType,
-          email: body.email,
-          phoneNumber: `+55|${phoneClean}`,
+          status: "DEMO",
+          owner: {
+            name: body.contactName,
+            email: body.contactEmail,
+            phoneNumber: `+55${phoneClean}`,
+          },
+          apps: ["DIALOG"],
+          resourcers: [],
+          config: {
+            session: 1000,
+            agents: 3,
+            panels: 0,
+            chatBots: 2,
+            chatbotAutomations: 1,
+            whatsAppChannels: 1,
+            instagramChannels: 0,
+            messengerChannels: 0,
+            sequences: 1,
+            aiAgents: 0,
+          },
           address: {
             country: "br",
-            state: body.address?.state?.toLowerCase() || null,
-            city: body.address?.city || null,
-            neighborhood: body.address?.neighborhood || null,
-            zipcode: body.address?.zipCode?.replace(/\D/g, "") || null,
-            number: body.address?.number || null,
-            address1: body.address?.street || null,
-            address2: body.address?.complement || null,
+            state: (body.address?.state || "").toLowerCase(),
+            city: body.address?.city || "",
+            neighborhood: body.address?.neighborhood || "",
+            zipcode: (body.address?.zipCode || "").replace(/\D/g, ""),
+            number: body.address?.number || "",
+            address1: body.address?.street || "",
+            address2: body.address?.complement || "",
           },
         }),
       });
       const company = await companyRes.json();
-      const rawId = company.id;
-      helenaCompanyId = typeof rawId === "object" && rawId?.value ? rawId.value : String(rawId);
+
+      if (company.error === true) {
+        throw new Error(`Helena: ${company.text || company.key || "Erro ao criar empresa"}`);
+      }
+
+      helenaCompanyId = company.id;
 
       // Activate company
       await fetch(`${HELENA_API_URL}/company/${helenaCompanyId}/active`, {

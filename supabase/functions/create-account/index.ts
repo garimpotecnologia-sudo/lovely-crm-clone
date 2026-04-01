@@ -34,17 +34,32 @@ interface CreateAccountRequest {
   };
 }
 
+function getPlanConfig(plan: string) {
+  const configs: Record<string, any> = {
+    Essential: { session: 1000, agents: 3, panels: 0, chatBots: 2, chatbotAutomations: 1, whatsAppChannels: 1, instagramChannels: 0, messengerChannels: 0, sequences: 1, aiAgents: 0 },
+    Pro: { session: 1000, agents: 5, panels: 2, chatBots: 3, chatbotAutomations: 2, whatsAppChannels: 1, instagramChannels: 1, messengerChannels: 1, sequences: 2, aiAgents: 0 },
+    "Plus+": { session: 1000, agents: 10, panels: 5, chatBots: 5, chatbotAutomations: 3, whatsAppChannels: 2, instagramChannels: 1, messengerChannels: 1, sequences: 2, aiAgents: 0 },
+    Advanced: { session: 1000, agents: 20, panels: 10, chatBots: 10, chatbotAutomations: 4, whatsAppChannels: 3, instagramChannels: 1, messengerChannels: 1, sequences: 4, aiAgents: 0 },
+  };
+  return configs[plan] || configs.Pro;
+}
+
+function getPlanApps(plan: string): string[] {
+  const base = ["DIALOG"];
+  if (plan === "Pro" || plan === "Plus+" || plan === "Advanced") {
+    base.push("CAMPAIGN", "PANEL");
+  }
+  if (plan === "Plus+" || plan === "Advanced") {
+    base.push("WEBHOOK", "SEQUENCE");
+  }
+  return base;
+}
+
 async function safeJson(response: Response, label: string): Promise<any> {
   const text = await response.text();
   console.log(`[${label}] Status: ${response.status}, Body: ${text.slice(0, 500)}`);
-  if (!text) {
-    throw new Error(`${label} retornou resposta vazia (status ${response.status})`);
-  }
-  try {
-    return JSON.parse(text);
-  } catch {
-    throw new Error(`${label} retornou resposta inválida: ${text.slice(0, 200)}`);
-  }
+  if (!text) throw new Error(`${label} retornou resposta vazia (status ${response.status})`);
+  try { return JSON.parse(text); } catch { throw new Error(`${label} resposta inválida: ${text.slice(0, 200)}`); }
 }
 
 serve(async (req) => {
@@ -56,12 +71,12 @@ serve(async (req) => {
     const body: CreateAccountRequest = await req.json();
     console.log("[create-account] Request:", JSON.stringify({ companyName: body.companyName, plan: body.plan }));
 
-    // 1. Create company in Helena
     const cleanDoc = body.cpfCnpj.replace(/\D/g, "");
     const docType = cleanDoc.length <= 11 ? "CPF" : "CNPJ";
     const companyType = cleanDoc.length <= 11 ? "INDIVIDUAL" : "LIMITED";
     const phoneClean = body.phone.replace(/\D/g, "");
 
+    // 1. Create company in Helena with correct schema
     const companyRes = await fetch(`${HELENA_API_URL}/company`, {
       method: "POST",
       headers: {
@@ -69,40 +84,40 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: body.companyName,
+        name: body.companyName.toUpperCase(),
         legalName: body.companyName,
         documentType: docType,
         documentId: cleanDoc,
         category: "COMERCIO",
         type: companyType,
-        email: body.email,
-        phoneNumber: `+55|${phoneClean}`,
+        status: "DEMO",
+        owner: {
+          name: body.contactName,
+          email: body.contactEmail,
+          phoneNumber: `+55${phoneClean}`,
+        },
+        apps: getPlanApps(body.plan),
+        resourcers: [],
+        config: getPlanConfig(body.plan),
         address: {
           country: "br",
-          state: body.address.state?.toLowerCase() || null,
-          city: body.address.city || null,
-          neighborhood: body.address.neighborhood || null,
-          zipcode: body.address.zipCode?.replace(/\D/g, "") || null,
-          number: body.address.number || null,
-          address1: body.address.street || null,
-          address2: body.address.complement || null,
+          state: (body.address.state || "").toLowerCase(),
+          city: body.address.city || "",
+          neighborhood: body.address.neighborhood || "",
+          zipcode: (body.address.zipCode || "").replace(/\D/g, ""),
+          number: body.address.number || "",
+          address1: body.address.street || "",
+          address2: body.address.complement || "",
         },
       }),
     });
     const company = await safeJson(companyRes, "Helena CreateCompany");
 
-    // Helena returns error: true even with an ID when creation fails
     if (company.error === true) {
-      throw new Error(`Helena erro ao criar empresa: ${company.text || company.key || JSON.stringify(company)}`);
+      throw new Error(`Helena: ${company.text || company.key || "Erro desconhecido"}`);
     }
 
-    // Helena returns id as object {value, shortValue} or string
-    const rawId = company.id;
-    const helenaCompanyId = typeof rawId === "object" && rawId?.value ? rawId.value : String(rawId);
-
-    if (!helenaCompanyId) {
-      throw new Error(`Helena não retornou ID da empresa: ${JSON.stringify(company)}`);
-    }
+    const helenaCompanyId = company.id;
     console.log("[create-account] Company created:", helenaCompanyId);
 
     // 2. Create token
@@ -110,64 +125,37 @@ serve(async (req) => {
     try {
       const tokenRes = await fetch(`${HELENA_API_URL}/company/${helenaCompanyId}/tokens`, {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${HELENA_TOKEN}`,
-          "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${HELENA_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({}),
       });
       const tokenData = await safeJson(tokenRes, "Helena CreateToken");
-      helenaToken = tokenData.token || "";
+      helenaToken = tokenData.token || tokenData.key || "";
     } catch (e) {
-      console.error("[create-account] Token creation failed (non-blocking):", e.message);
+      console.error("[create-account] Token creation failed:", e.message);
     }
 
-    // 3. Create agent/user
-    try {
-      await fetch(`${HELENA_API_URL}/agent`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${HELENA_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: body.contactName,
-          email: body.contactEmail,
-          companyId: helenaCompanyId,
-        }),
-      });
-    } catch (e) {
-      console.error("[create-account] Agent creation failed (non-blocking):", e.message);
-    }
-
-    // 4. Create Asaas customer
+    // 3. Create Asaas customer
     let asaasCustomerId = "";
     try {
       const customerRes = await fetch(`${ASAAS_API_URL}/customers`, {
         method: "POST",
-        headers: {
-          "access_token": ASAAS_TOKEN,
-          "Content-Type": "application/json",
-        },
+        headers: { "access_token": ASAAS_TOKEN, "Content-Type": "application/json" },
         body: JSON.stringify({
           name: body.contactName,
           email: body.email,
-          cpfCnpj: body.cpfCnpj.replace(/\D/g, ""),
-          phone: body.phone.replace(/\D/g, ""),
+          cpfCnpj: cleanDoc,
+          phone: phoneClean,
         }),
       });
       const customer = await safeJson(customerRes, "Asaas CreateCustomer");
       asaasCustomerId = customer.id || "";
     } catch (e) {
-      console.error("[create-account] Asaas customer creation failed (non-blocking):", e.message);
+      console.error("[create-account] Asaas customer failed:", e.message);
     }
 
-    // 5. Save to database
+    // 4. Save to database
     try {
-      const supabase = createClient(
-        Deno.env.get("SUPABASE_URL")!,
-        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-      );
-
+      const supabase = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
       await supabase.from("trials").insert({
         company_id: helenaCompanyId,
         email: body.contactEmail,
@@ -180,7 +168,7 @@ serve(async (req) => {
         status: "paid",
       });
     } catch (e) {
-      console.error("[create-account] DB insert failed (non-blocking):", e.message);
+      console.error("[create-account] DB insert failed:", e.message);
     }
 
     return new Response(
