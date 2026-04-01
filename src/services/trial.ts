@@ -1,8 +1,7 @@
 import { IS_MOCK_MODE } from "./config";
 import type { CompanyFormData } from "@/types/signup";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "";
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/integrations/supabase/client";
 
 interface CreateTrialResponse {
   success: boolean;
