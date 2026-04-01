@@ -3,7 +3,7 @@ import logoClinicaViddas from "@/assets/logo-clinica-viddas.png";
 import logoAngioclinica from "@/assets/logo-angioclinica.png";
 import logoClimma from "@/assets/logo-climma.png";
 import logoClinicare from "@/assets/logo-clinicare.png";
-import logoRacaoFacil from "@/assets/logo-racaofacil.svg";
+
 import logoUbarana from "@/assets/logo-ubarana.png";
 
 const SocialProofSection = () => {
