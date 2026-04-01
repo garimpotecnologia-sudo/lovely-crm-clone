@@ -116,7 +116,7 @@ const About = () => {
 
       <Footer />
       <WhatsAppButton />
-      <PricingModal isOpen={isPricingModalOpen} onClose={() => setIsPricingModalOpen(false)} />
+      <PricingModal isOpen={isPricingModalOpen} onClose={() => setIsPricingModalOpen(false)} onSelectPlan={() => {}} />
     </div>;
 };
 export default About;

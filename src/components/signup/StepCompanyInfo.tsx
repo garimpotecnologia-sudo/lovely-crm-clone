@@ -81,7 +81,27 @@ const StepCompanyInfo = () => {
   };
 
   const onSubmit = (data: CompanyFormValues) => {
-    submitCompanyInfo(data);
+    submitCompanyInfo({
+      name: data.name ?? "",
+      cpfCnpj: data.cpfCnpj ?? "",
+      email: data.email ?? "",
+      phone: data.phone ?? "",
+      address: {
+        zipCode: data.address?.zipCode ?? "",
+        street: data.address?.street ?? "",
+        number: data.address?.number ?? "",
+        complement: data.address?.complement ?? "",
+        neighborhood: data.address?.neighborhood ?? "",
+        city: data.address?.city ?? "",
+        state: data.address?.state ?? "",
+      },
+      contactPerson: {
+        name: data.contactPerson?.name ?? "",
+        email: data.contactPerson?.email ?? "",
+        phone: data.contactPerson?.phone ?? "",
+        role: (data.contactPerson as any)?.role ?? "",
+      },
+    });
   };
 
   return (
