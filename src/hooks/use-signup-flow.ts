@@ -1,18 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { useSignupContext } from "@/contexts/SignupContext";
-import {
-  createCompany,
-  activateCompany,
-  createToken,
-  createAgent,
-} from "@/services/helena";
-import {
-  createCustomer,
-  createSubscription,
-  getPaymentDetails,
-} from "@/services/asaas";
+import { createAccount } from "@/services/account";
 import { createTrialAccount } from "@/services/trial";
-import { resetPixPollCount } from "@/services/mock-data";
+import { upgradeTrialAccount } from "@/services/upgrade";
 import { stripMask } from "@/lib/masks";
 import { saveTrialInfo } from "@/lib/trial";
 import type { Plan } from "@/types/plans";
@@ -33,144 +23,138 @@ export function useSignupFlow() {
     dispatch({ type: "SET_STEP", step });
   };
 
+  // Step 2 → creates company via Edge Function, then goes to step 3 (purchase) or step 4 (trial)
   const companyMutation = useMutation({
-    mutationFn: async (data: CompanyFormData) => {
+    mutationFn: async (data: CompanyFormData & { mode: SignupMode; plan: Plan }) => {
       dispatch({ type: "SET_LOADING", isLoading: true });
-      const company = await createCompany(data);
-      dispatch({ type: "SET_HELENA_COMPANY", companyId: company.id });
-      return company;
-    },
-    onSuccess: () => {
-      dispatch({ type: "SET_LOADING", isLoading: false });
-      if (state.mode === "trial") {
-        // Trial: skip payment, go straight to finalization
-        trialFinalizeMutation.mutate();
+
+      if (data.mode === "trial") {
+        // Trial: create account + Asaas subscription with 7-day delay via Edge Function
+        const result = await createTrialAccount(data, data.plan.name);
+        dispatch({ type: "SET_HELENA_COMPANY", companyId: result.companyId });
+        dispatch({ type: "SET_HELENA_TOKEN", token: result.token });
+        dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: result.asaasCustomerId });
+        dispatch({ type: "SET_ASAAS_SUBSCRIPTION", subscriptionId: result.asaasSubscriptionId });
+
+        saveTrialInfo({
+          isActive: true,
+          startDate: new Date().toISOString(),
+          endDate: result.trialEndDate,
+          daysRemaining: 7,
+          companyId: result.companyId,
+          email: result.loginEmail,
+          plan: data.plan.name,
+        });
+
+        dispatch({
+          type: "SET_LOGIN_INFO",
+          url: result.loginUrl,
+          email: result.loginEmail,
+        });
+
+        return { goToStep: 4 as const };
       } else {
-        dispatch({ type: "SET_STEP", step: 3 });
+        // Purchase: create company + Asaas customer via Edge Function, then go to payment
+        const result = await createAccount({
+          companyName: data.name,
+          cpfCnpj: stripMask(data.cpfCnpj),
+          email: data.email,
+          phone: stripMask(data.phone),
+          contactName: data.contactPerson.name,
+          contactEmail: data.contactPerson.email,
+          contactPhone: stripMask(data.contactPerson.phone),
+          contactRole: data.contactPerson.role,
+          plan: data.plan.name,
+          planPrice: data.plan.price,
+          activationFee: data.plan.activationFee,
+          address: data.address,
+        });
+
+        dispatch({ type: "SET_HELENA_COMPANY", companyId: result.companyId });
+        dispatch({ type: "SET_HELENA_TOKEN", token: result.token });
+        dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: result.asaasCustomerId });
+        dispatch({
+          type: "SET_LOGIN_INFO",
+          url: result.loginUrl,
+          email: result.loginEmail,
+        });
+
+        return { goToStep: 3 as const };
       }
+    },
+    onSuccess: (result) => {
+      dispatch({ type: "SET_LOADING", isLoading: false });
+      dispatch({ type: "SET_STEP", step: result.goToStep });
     },
     onError: (error: Error) => {
       dispatch({
         type: "SET_ERROR",
-        error: error.message || "Erro ao criar empresa. Tente novamente.",
+        error: error.message || "Erro ao criar conta. Tente novamente.",
       });
     },
   });
 
   const submitCompanyInfo = (data: CompanyFormData) => {
     dispatch({ type: "SET_COMPANY_DATA", data });
-    companyMutation.mutate(data);
+    companyMutation.mutate({
+      ...data,
+      mode: state.mode,
+      plan: state.selectedPlan!,
+    });
   };
 
-  // Trial finalization - calls Supabase Edge Function that handles everything
-  const trialFinalizeMutation = useMutation({
-    mutationFn: async () => {
-      dispatch({ type: "SET_LOADING", isLoading: true });
-
-      const companyData = state.companyData!;
-      const plan = state.selectedPlan!;
-
-      const result = await createTrialAccount(companyData, plan.name);
-
-      dispatch({ type: "SET_HELENA_COMPANY", companyId: result.companyId });
-      dispatch({ type: "SET_HELENA_TOKEN", token: result.token });
-      dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: result.asaasCustomerId });
-      dispatch({ type: "SET_ASAAS_SUBSCRIPTION", subscriptionId: result.asaasSubscriptionId });
-
-      // Save trial info locally for the banner
-      saveTrialInfo({
-        isActive: true,
-        startDate: new Date().toISOString(),
-        endDate: result.trialEndDate,
-        daysRemaining: 7,
-        companyId: result.companyId,
-        email: result.loginEmail,
-        plan: plan.name,
-      });
-
-      dispatch({
-        type: "SET_LOGIN_INFO",
-        url: result.loginUrl,
-        email: result.loginEmail,
-      });
-      dispatch({ type: "SET_LOADING", isLoading: false });
-      dispatch({ type: "SET_STEP", step: 4 });
-    },
-    onError: (error: Error) => {
-      dispatch({
-        type: "SET_ERROR",
-        error: error.message || "Erro ao ativar trial. Tente novamente.",
-      });
-    },
-  });
-
+  // Step 3 → process payment (PIX or credit card) via Asaas Edge Function
   const paymentMutation = useMutation({
     mutationFn: async (data: PaymentFormData) => {
       dispatch({ type: "SET_LOADING", isLoading: true });
       dispatch({ type: "SET_PAYMENT_DATA", data });
 
-      const companyData = state.companyData!;
+      const companyId = state.helenaCompanyId!;
       const plan = state.selectedPlan!;
 
-      const customer = await createCustomer({
-        name: companyData.contactPerson.name,
-        email: companyData.email,
-        cpfCnpj: stripMask(data.cpfCnpj),
-        phone: stripMask(companyData.phone),
-      });
-      dispatch({ type: "SET_ASAAS_CUSTOMER", customerId: customer.id });
-
-      const nextDueDate = new Date().toISOString().split("T")[0];
-      const billingType =
-        data.method === "pix" ? ("PIX" as const) : ("CREDIT_CARD" as const);
-
-      const subscriptionPayload: Parameters<typeof createSubscription>[0] = {
-        customer: customer.id,
-        billingType,
-        value: plan.price + plan.activationFee,
-        nextDueDate,
-        description: `CRM AGENTPRO - Plano ${plan.name}`,
-      };
-
-      if (data.method === "credit-card" && data.creditCard) {
-        const [expiryMonth, expiryYear] = data.creditCard.expiry.split("/");
-        subscriptionPayload.creditCard = {
-          holderName: data.creditCard.holder,
-          number: stripMask(data.creditCard.number),
-          expiryMonth,
-          expiryYear: `20${expiryYear}`,
-          ccv: data.creditCard.cvv,
-        };
-        subscriptionPayload.creditCardHolderInfo = {
-          name: data.creditCard.holder,
-          email: companyData.email,
-          cpfCnpj: stripMask(data.cpfCnpj),
-          phone: stripMask(companyData.phone),
-        };
-      }
-
-      const subscription = await createSubscription(subscriptionPayload);
-      dispatch({
-        type: "SET_ASAAS_SUBSCRIPTION",
-        subscriptionId: subscription.id,
-      });
-
       if (data.method === "pix") {
-        resetPixPollCount();
-        const payment = await getPaymentDetails(subscription.id, "pix");
-        if (payment.pixQrCode && payment.pixCopiaECola) {
+        // Generate PIX via upgrade function (reuses the same logic)
+        const result = await upgradeTrialAccount({
+          companyId,
+          paymentMethod: "pix",
+        });
+
+        if (result.pixQrCode && result.pixCopiaECola) {
           dispatch({
             type: "SET_PIX_DATA",
-            qrCodeUrl: payment.pixQrCode,
-            copiaECola: payment.pixCopiaECola,
+            qrCodeUrl: result.pixQrCode,
+            copiaECola: result.pixCopiaECola,
           });
         }
         dispatch({ type: "SET_LOADING", isLoading: false });
         return { requiresPolling: true };
-      }
+      } else {
+        // Credit card - immediate payment
+        const [expiryMonth, expiryYear] = data.creditCard!.expiry.split("/");
+        const result = await upgradeTrialAccount({
+          companyId,
+          paymentMethod: "credit-card",
+          creditCard: {
+            holderName: data.creditCard!.holder,
+            number: stripMask(data.creditCard!.number),
+            expiryMonth,
+            expiryYear: `20${expiryYear}`,
+            ccv: data.creditCard!.cvv,
+          },
+          creditCardHolderInfo: {
+            name: data.creditCard!.holder,
+            email: state.companyData!.email,
+            cpfCnpj: stripMask(data.cpfCnpj),
+            phone: stripMask(state.companyData!.phone),
+          },
+        });
 
-      await finalizeAccount();
-      return { requiresPolling: false };
+        if (result.paymentStatus === "CONFIRMED" || result.paymentStatus === "RECEIVED") {
+          dispatch({ type: "SET_LOADING", isLoading: false });
+          dispatch({ type: "SET_STEP", step: 4 });
+        }
+        return { requiresPolling: false };
+      }
     },
     onError: (error: Error) => {
       dispatch({
@@ -187,11 +171,16 @@ export function useSignupFlow() {
   const checkPixPaymentMutation = useMutation({
     mutationFn: async () => {
       dispatch({ type: "SET_LOADING", isLoading: true });
-      const subscriptionId = state.asaasSubscriptionId!;
-      const payment = await getPaymentDetails(subscriptionId, "pix");
+      const companyId = state.helenaCompanyId!;
 
-      if (payment.status === "CONFIRMED" || payment.status === "RECEIVED") {
-        await finalizeAccount();
+      const result = await upgradeTrialAccount({
+        companyId,
+        paymentMethod: "pix",
+      });
+
+      if (result.paymentStatus === "CONFIRMED" || result.paymentStatus === "RECEIVED") {
+        dispatch({ type: "SET_LOADING", isLoading: false });
+        dispatch({ type: "SET_STEP", step: 4 });
         return true;
       }
       dispatch({ type: "SET_LOADING", isLoading: false });
@@ -208,29 +197,6 @@ export function useSignupFlow() {
   const checkPixPayment = () => {
     checkPixPaymentMutation.mutate();
   };
-
-  async function finalizeAccount() {
-    const companyId = state.helenaCompanyId!;
-    const companyData = state.companyData!;
-
-    await activateCompany(companyId);
-    const tokenResult = await createToken(companyId);
-    dispatch({ type: "SET_HELENA_TOKEN", token: tokenResult.token });
-
-    await createAgent({
-      name: companyData.contactPerson.name,
-      email: companyData.contactPerson.email,
-      companyId,
-    });
-
-    dispatch({
-      type: "SET_LOGIN_INFO",
-      url: "https://app.agentpro.com.br",
-      email: companyData.contactPerson.email,
-    });
-    dispatch({ type: "SET_LOADING", isLoading: false });
-    dispatch({ type: "SET_STEP", step: 4 });
-  }
 
   const reset = () => {
     dispatch({ type: "RESET" });
