@@ -343,7 +343,7 @@ const UpgradeDialog = ({ isOpen, onClose }: UpgradeDialogProps) => {
                 <div className="space-y-3 max-w-xs mx-auto">
                   <Button
                     className="w-full hero-button py-3 gap-2"
-                    onClick={() => window.open("https://app.agentpro.com.br", "_blank")}
+                    onClick={() => window.open("https://agentprocrm.com.br", "_blank")}
                   >
                     Acessar meu CRM
                     <ExternalLink className="h-4 w-4" />

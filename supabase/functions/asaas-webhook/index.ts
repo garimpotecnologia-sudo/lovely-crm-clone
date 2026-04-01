@@ -61,7 +61,7 @@ serve(async (req) => {
           `<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
             <h1 style="color: #2e7d32;">Pagamento confirmado!</h1>
             <p>Seu plano <strong>${trial.plan}</strong> foi ativado com sucesso.</p>
-            <a href="https://app.agentpro.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Acessar meu CRM</a>
+            <a href="https://agentprocrm.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Acessar meu CRM</a>
           </div>`
         );
 

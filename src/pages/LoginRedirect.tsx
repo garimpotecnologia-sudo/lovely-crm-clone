@@ -29,7 +29,7 @@ const LoginRedirect = () => {
             <Button
               className="w-full hero-button py-4 gap-2 text-base"
               onClick={() =>
-                window.open("https://app.agentpro.com.br", "_blank")
+                window.open("https://agentprocrm.com.br", "_blank")
               }
             >
               Entrar no CRM

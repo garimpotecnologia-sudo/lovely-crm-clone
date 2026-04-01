@@ -244,9 +244,9 @@ serve(async (req) => {
               <p>Seu trial grátis do plano <strong>${body.plan}</strong> foi ativado.</p>
               <div style="background: #f8f4ff; border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #6a01b9;">
                 <p><strong>Trial válido até:</strong> ${trialEndDate.toLocaleDateString("pt-BR")}</p>
-                <p><strong>Acesso:</strong> <a href="https://app.agentpro.com.br">app.agentpro.com.br</a></p>
+                <p><strong>Acesso:</strong> <a href="https://agentprocrm.com.br">agentprocrm.com.br</a></p>
               </div>
-              <a href="https://app.agentpro.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Acessar meu CRM</a>
+              <a href="https://agentprocrm.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Acessar meu CRM</a>
             </div>
           `,
         }),
@@ -261,7 +261,7 @@ serve(async (req) => {
         asaasCustomerId,
         asaasSubscriptionId,
         trialEndDate: trialEndDate.toISOString(),
-        loginUrl: "https://app.agentpro.com.br",
+        loginUrl: "https://agentprocrm.com.br",
         loginEmail: body.contactEmail,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }

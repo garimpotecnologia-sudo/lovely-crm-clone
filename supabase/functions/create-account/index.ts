@@ -200,7 +200,7 @@ serve(async (req) => {
         companyId: helenaCompanyId,
         token: helenaToken,
         asaasCustomerId,
-        loginUrl: "https://app.agentpro.com.br",
+        loginUrl: "https://agentprocrm.com.br",
         loginEmail: body.contactEmail,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }

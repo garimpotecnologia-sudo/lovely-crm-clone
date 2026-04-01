@@ -124,14 +124,14 @@ function sendTrialWelcomeEmail(email: string, plan: string, endDate: string): Pr
         <p style="margin: 0; color: #333; font-size: 14px;">
           <strong>Trial válido até:</strong> ${endDate}<br/>
           <strong>Plano:</strong> ${plan}<br/>
-          <strong>Acesso:</strong> <a href="https://app.agentpro.com.br" style="color: #6a01b9;">app.agentpro.com.br</a>
+          <strong>Acesso:</strong> <a href="https://agentprocrm.com.br" style="color: #6a01b9;">agentprocrm.com.br</a>
         </p>
       </div>
       <p style="color: #666; font-size: 14px;">
         Aproveite todos os recursos disponíveis durante o período de teste.
         Após 7 dias, você poderá escolher um plano para continuar utilizando.
       </p>
-      <a href="https://app.agentpro.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px;">
+      <a href="https://agentprocrm.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px;">
         Acessar meu CRM
       </a>
     </div>
@@ -198,7 +198,7 @@ function sendPaymentConfirmedEmail(email: string, plan: string): Promise<void> {
         Seu plano <strong>${plan}</strong> foi ativado com sucesso.
         Agora você tem acesso completo ao CRM AGENTPRO.
       </p>
-      <a href="https://app.agentpro.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px;">
+      <a href="https://agentprocrm.com.br" style="display: inline-block; background: #6a01b9; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px;">
         Acessar meu CRM
       </a>
     </div>

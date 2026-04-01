@@ -31,7 +31,7 @@ export async function createTrialAccount(
       asaasCustomerId: "cus_mock_" + Math.random().toString(36).slice(2, 10),
       asaasSubscriptionId: "sub_mock_" + Math.random().toString(36).slice(2, 10),
       trialEndDate: trialEnd.toISOString(),
-      loginUrl: "https://app.agentpro.com.br",
+      loginUrl: "https://agentprocrm.com.br",
       loginEmail: data.contactPerson.email,
     };
   }

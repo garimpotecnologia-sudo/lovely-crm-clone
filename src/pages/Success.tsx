@@ -32,7 +32,7 @@ const Success = () => {
             <Button
               className="w-full hero-button py-3 gap-2"
               onClick={() =>
-                window.open("https://app.agentpro.com.br", "_blank")
+                window.open("https://agentprocrm.com.br", "_blank")
               }
             >
               Acessar meu CRM
