@@ -25,7 +25,7 @@ const SocialProofSection = () => {
               <img src={logoAngioclinica} alt="Angioclínica" className="h-12 md:h-16 whitespace-nowrap" />
               <img src={logoClimma} alt="Climma" className="h-12 md:h-16 whitespace-nowrap" />
               <img src={logoClinicare} alt="Clinicare" className="h-12 md:h-16 whitespace-nowrap" />
-              <img src={logoRacaoFacil} alt="Ração Fácil" className="h-12 md:h-16 whitespace-nowrap" />
+              
               <img src={logoUbarana} alt="Hospital Ubarana" className="h-12 md:h-16 whitespace-nowrap" />
               <img src={logoClinicaOlhos} alt="Clínica de Olhos" className="h-12 md:h-16 whitespace-nowrap" />
               <img src={logoClinicaViddas} alt="Clínica Viddas" className="h-12 md:h-16 whitespace-nowrap" />
