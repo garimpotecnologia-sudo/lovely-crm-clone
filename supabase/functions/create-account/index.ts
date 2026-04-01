@@ -57,6 +57,11 @@ serve(async (req) => {
     console.log("[create-account] Request:", JSON.stringify({ companyName: body.companyName, plan: body.plan }));
 
     // 1. Create company in Helena
+    const cleanDoc = body.cpfCnpj.replace(/\D/g, "");
+    const docType = cleanDoc.length <= 11 ? "CPF" : "CNPJ";
+    const companyType = cleanDoc.length <= 11 ? "INDIVIDUAL" : "LIMITED";
+    const phoneClean = body.phone.replace(/\D/g, "");
+
     const companyRes = await fetch(`${HELENA_API_URL}/company`, {
       method: "POST",
       headers: {
@@ -65,12 +70,31 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         name: body.companyName,
-        cpfCnpj: body.cpfCnpj,
+        legalName: body.companyName,
+        documentType: docType,
+        documentId: cleanDoc,
+        category: "COMERCIO",
+        type: companyType,
         email: body.email,
-        phone: body.phone,
+        phoneNumber: `+55|${phoneClean}`,
+        address: {
+          country: "br",
+          state: body.address.state?.toLowerCase() || null,
+          city: body.address.city || null,
+          neighborhood: body.address.neighborhood || null,
+          zipcode: body.address.zipCode?.replace(/\D/g, "") || null,
+          number: body.address.number || null,
+          address1: body.address.street || null,
+          address2: body.address.complement || null,
+        },
       }),
     });
     const company = await safeJson(companyRes, "Helena CreateCompany");
+
+    // Helena returns error: true even with an ID when creation fails
+    if (company.error === true) {
+      throw new Error(`Helena erro ao criar empresa: ${company.text || company.key || JSON.stringify(company)}`);
+    }
 
     // Helena returns id as object {value, shortValue} or string
     const rawId = company.id;
