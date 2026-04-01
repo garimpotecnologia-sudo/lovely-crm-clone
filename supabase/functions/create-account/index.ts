@@ -36,23 +36,46 @@ interface CreateAccountRequest {
 
 function getPlanConfig(plan: string) {
   const configs: Record<string, any> = {
+    // Essential: 3 users, WhatsApp only, 2 chatbots atend, 1 automação, sem funis, 10 etiquetas
     Essential: { session: 1000, agents: 3, panels: 0, chatBots: 2, chatbotAutomations: 1, whatsAppChannels: 1, instagramChannels: 0, messengerChannels: 0, sequences: 1, aiAgents: 0 },
+    // Pro: 5 users, WA+Insta+Messenger, 3 chatbots, 2 automação, 2 funis, etiq ilimitado, campanhas
     Pro: { session: 1000, agents: 5, panels: 2, chatBots: 3, chatbotAutomations: 2, whatsAppChannels: 1, instagramChannels: 1, messengerChannels: 1, sequences: 2, aiAgents: 0 },
+    // Plus+: 10 users, todos canais, 5 chatbots, 3 automação, 5 funis, webhook, API, carteiras
     "Plus+": { session: 1000, agents: 10, panels: 5, chatBots: 5, chatbotAutomations: 3, whatsAppChannels: 2, instagramChannels: 1, messengerChannels: 1, sequences: 2, aiAgents: 0 },
+    // Advanced: 20 users, todos canais, 10 chatbots, 4 automação, 10 funis, suporte 24/7
     Advanced: { session: 1000, agents: 20, panels: 10, chatBots: 10, chatbotAutomations: 4, whatsAppChannels: 3, instagramChannels: 1, messengerChannels: 1, sequences: 4, aiAgents: 0 },
   };
   return configs[plan] || configs.Pro;
 }
 
 function getPlanApps(plan: string): string[] {
-  const base = ["DIALOG"];
-  if (plan === "Pro" || plan === "Plus+" || plan === "Advanced") {
-    base.push("CAMPAIGN", "PANEL");
+  // Essential: atendimento básico apenas
+  if (plan === "Essential") {
+    return ["DIALOG", "SEQUENCE"];
   }
-  if (plan === "Plus+" || plan === "Advanced") {
-    base.push("WEBHOOK", "SEQUENCE");
+  // Pro: + campanhas, painel CRM, distribuição
+  if (plan === "Pro") {
+    return ["DIALOG", "SEQUENCE", "CAMPAIGN", "PANEL", "SESSION_DISTRIBUTION"];
   }
-  return base;
+  // Plus+: + webhook, pagamentos, carteiras, agendamento
+  if (plan === "Plus+") {
+    return ["DIALOG", "SEQUENCE", "CAMPAIGN", "PANEL", "SESSION_DISTRIBUTION", "WEBHOOK", "PAYMENT", "CONTACT_PORTFOLIO", "SCHEDULED_MESSAGE"];
+  }
+  // Advanced: tudo
+  return ["DIALOG", "SEQUENCE", "CAMPAIGN", "PANEL", "SESSION_DISTRIBUTION", "WEBHOOK", "PAYMENT", "CONTACT_PORTFOLIO", "SCHEDULED_MESSAGE", "AI_AGENT", "TRANSCRIPTION", "GROUP"];
+}
+
+function getPlanResourcers(plan: string): string[] {
+  // Essential: sem recursos extras
+  if (plan === "Essential") {
+    return [];
+  }
+  // Pro: campos personalizados + canais Instagram/Messenger
+  if (plan === "Pro") {
+    return ["CUSTOM_FIELDS", "INSTA_MESSENGER_CHANNELS"];
+  }
+  // Plus+ e Advanced: + webhook/API
+  return ["CUSTOM_FIELDS", "INSTA_MESSENGER_CHANNELS", "WEBHOOK_API"];
 }
 
 async function safeJson(response: Response, label: string): Promise<any> {
@@ -97,7 +120,7 @@ serve(async (req) => {
           phoneNumber: `+55${phoneClean}`,
         },
         apps: getPlanApps(body.plan),
-        resourcers: [],
+        resourcers: getPlanResourcers(body.plan),
         config: getPlanConfig(body.plan),
         address: {
           country: "br",

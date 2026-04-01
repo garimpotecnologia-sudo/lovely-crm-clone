@@ -13,6 +13,29 @@ const ASAAS_TOKEN = Deno.env.get("ASAAS_TOKEN") || "";
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") || "";
 const IS_MOCK = Deno.env.get("MOCK_MODE") === "true";
 
+function getPlanConfig(plan: string) {
+  const configs: Record<string, any> = {
+    Essential: { session: 1000, agents: 3, panels: 0, chatBots: 2, chatbotAutomations: 1, whatsAppChannels: 1, instagramChannels: 0, messengerChannels: 0, sequences: 1, aiAgents: 0 },
+    Pro: { session: 1000, agents: 5, panels: 2, chatBots: 3, chatbotAutomations: 2, whatsAppChannels: 1, instagramChannels: 1, messengerChannels: 1, sequences: 2, aiAgents: 0 },
+    "Plus+": { session: 1000, agents: 10, panels: 5, chatBots: 5, chatbotAutomations: 3, whatsAppChannels: 2, instagramChannels: 1, messengerChannels: 1, sequences: 2, aiAgents: 0 },
+    Advanced: { session: 1000, agents: 20, panels: 10, chatBots: 10, chatbotAutomations: 4, whatsAppChannels: 3, instagramChannels: 1, messengerChannels: 1, sequences: 4, aiAgents: 0 },
+  };
+  return configs[plan] || configs.Pro;
+}
+
+function getPlanApps(plan: string): string[] {
+  if (plan === "Essential") return ["DIALOG", "SEQUENCE"];
+  if (plan === "Pro") return ["DIALOG", "SEQUENCE", "CAMPAIGN", "PANEL", "SESSION_DISTRIBUTION"];
+  if (plan === "Plus+") return ["DIALOG", "SEQUENCE", "CAMPAIGN", "PANEL", "SESSION_DISTRIBUTION", "WEBHOOK", "PAYMENT", "CONTACT_PORTFOLIO", "SCHEDULED_MESSAGE"];
+  return ["DIALOG", "SEQUENCE", "CAMPAIGN", "PANEL", "SESSION_DISTRIBUTION", "WEBHOOK", "PAYMENT", "CONTACT_PORTFOLIO", "SCHEDULED_MESSAGE", "AI_AGENT", "TRANSCRIPTION", "GROUP"];
+}
+
+function getPlanResourcers(plan: string): string[] {
+  if (plan === "Essential") return [];
+  if (plan === "Pro") return ["CUSTOM_FIELDS", "INSTA_MESSENGER_CHANNELS"];
+  return ["CUSTOM_FIELDS", "INSTA_MESSENGER_CHANNELS", "WEBHOOK_API"];
+}
+
 interface CreateTrialRequest {
   companyName: string;
   cpfCnpj: string;
@@ -76,20 +99,9 @@ serve(async (req) => {
             email: body.contactEmail,
             phoneNumber: `+55${phoneClean}`,
           },
-          apps: ["DIALOG"],
-          resourcers: [],
-          config: {
-            session: 1000,
-            agents: 3,
-            panels: 0,
-            chatBots: 2,
-            chatbotAutomations: 1,
-            whatsAppChannels: 1,
-            instagramChannels: 0,
-            messengerChannels: 0,
-            sequences: 1,
-            aiAgents: 0,
-          },
+          apps: getPlanApps(body.plan),
+          resourcers: getPlanResourcers(body.plan),
+          config: getPlanConfig(body.plan),
           address: {
             country: "br",
             state: (body.address?.state || "").toLowerCase(),
