@@ -66,7 +66,8 @@ serve(async (req) => {
         }),
       });
       const company = await companyRes.json();
-      helenaCompanyId = company.id;
+      const rawId = company.id;
+      helenaCompanyId = typeof rawId === "object" && rawId?.value ? rawId.value : String(rawId);
 
       // Activate company
       await fetch(`${HELENA_API_URL}/company/${helenaCompanyId}/active`, {
